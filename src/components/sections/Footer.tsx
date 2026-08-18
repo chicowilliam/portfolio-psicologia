@@ -2,6 +2,7 @@ import { lazy, Suspense, useCallback, useState } from 'react'
 import { Globe, Share2 } from 'lucide-react'
 import { PrivacyPolicyContent } from '@/components/PrivacyPolicyContent'
 import { useScrollTo } from '@/hooks/useScrollTo'
+import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
 import { SITE } from '@/lib/constants'
 
 const Modal = lazy(() =>
@@ -20,10 +21,15 @@ const FOOTER_LINKS = [
 export function Footer() {
   const [showPrivacyModal, setShowPrivacyModal] = useState(false)
   const scrollTo = useScrollTo()
+  const { openBooking } = useBookingDialog()
   const closePrivacyModal = useCallback(() => setShowPrivacyModal(false), [])
 
   function handleAnchor(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
     event.preventDefault()
+    if (href === '#agendamento') {
+      openBooking()
+      return
+    }
     scrollTo(href)
   }
 

@@ -6,10 +6,12 @@ import { LivingPortrait } from '@/components/ui/LivingPortrait'
 import { SITE } from '@/lib/constants'
 import { POSE_A_PORTRAIT_IMAGES } from '@/lib/portrait-images'
 import { useScrollTo } from '@/hooks/useScrollTo'
+import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
 import { fadeInUp } from '@/lib/motion'
 
 export function Hero() {
   const scrollTo = useScrollTo()
+  const { openBooking } = useBookingDialog()
   const prefersReducedMotion = useReducedMotion()
 
   return (
@@ -52,7 +54,7 @@ export function Hero() {
           <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:items-center">
             <Button
               size="lg"
-              onClick={() => scrollTo('#agendamento')}
+              onClick={() => openBooking()}
               className="gap-2"
             >
               <Calendar className="size-5" aria-hidden="true" />

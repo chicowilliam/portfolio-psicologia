@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react'
 import { Dialog } from 'radix-ui'
 import { Button } from '@/components/ui/Button'
 import { NAV_LINKS, SITE } from '@/lib/constants'
+import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { easeOut, staggerContainer } from '@/lib/motion'
@@ -33,6 +34,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const scrollTo = useScrollTo()
+  const { openBooking } = useBookingDialog()
   const activeSection = useScrollSpy(SECTION_IDS)
 
   useEffect(() => {
@@ -49,6 +51,11 @@ export function Header() {
   }, [])
 
   function handleNavClick(href: string) {
+    if (href === '#agendamento') {
+      openBooking()
+      setIsMobileOpen(false)
+      return
+    }
     scrollTo(href)
     setIsMobileOpen(false)
   }
@@ -130,7 +137,7 @@ export function Header() {
           <Button
             size="sm"
             className="hidden sm:inline-flex"
-            onClick={() => handleNavClick('#agendamento')}
+            onClick={() => openBooking()}
           >
             Agendar consulta
           </Button>
@@ -249,7 +256,7 @@ export function Header() {
                 <div className="mobile-menu-footer px-4 py-5">
                   <Button
                     className="w-full"
-                    onClick={() => handleNavClick('#agendamento')}
+                    onClick={() => openBooking()}
                   >
                     Agendar consulta
                   </Button>

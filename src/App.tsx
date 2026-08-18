@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
+import { PatternBackground } from '@/components/ui/PatternBackground'
 import { SectionDivider } from '@/components/ui/SectionDivider'
 import { EmergencyNotice } from '@/components/EmergencyNotice'
 import { SeoStructuredData } from '@/components/SeoStructuredData'
@@ -43,6 +44,7 @@ export default function App() {
   return (
     <>
       <SeoStructuredData />
+      <PatternBackground />
       <GrainOverlay />
 
       <a
