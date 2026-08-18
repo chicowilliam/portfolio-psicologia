@@ -1,0 +1,237 @@
+import { useState } from 'react'
+import { useForm, Controller } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { MessageCircle } from 'lucide-react'
+import { ScrollReveal } from '@/components/ui/ScrollReveal'
+import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Button } from '@/components/ui/Button'
+import { Input } from '@/components/ui/Input'
+import { Textarea } from '@/components/ui/Textarea'
+import { Checkbox } from '@/components/ui/Checkbox'
+import { RadioGroup, MultiSelect } from '@/components/ui/RadioGroup'
+import { Modal } from '@/components/ui/Modal'
+import { AnimatedCheck } from '@/components/ui/AnimatedCheck'
+import { PrivacyPolicyContent } from '@/components/PrivacyPolicyContent'
+import {
+  MODALITY_LABELS,
+  SITE,
+  TIME_PREFERENCE_LABELS,
+  WHATSAPP_URL,
+} from '@/lib/constants'
+import { bookingSchema, type BookingSchema } from '@/lib/validation'
+import { formatPhone, submitBookingRequest } from '@/lib/utils'
+
+interface BookingFormProps {
+  onSuccess?: () => void
+}
+
+export function BookingForm({ onSuccess }: BookingFormProps) {
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  const [showPrivacyModal, setShowPrivacyModal] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<BookingSchema>({
+    resolver: zodResolver(bookingSchema),
+    defaultValues: {
+      fullName: '',
+      email: '',
+      phone: '',
+      modality: 'presencial',
+      timePreferences: [],
+      message: '',
+      lgpdConsent: undefined,
+    },
+  })
+
+  async function onSubmit(data: BookingSchema) {
+    await submitBookingRequest(data)
+    reset()
+    setShowSuccessModal(true)
+    onSuccess?.()
+  }
+
+  return (
+    <>
+      <section
+        id="agendamento"
+        className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+      >
+        <div className="mx-auto max-w-2xl">
+          <ScrollReveal>
+            <SectionHeading
+              align="center"
+              eyebrow="Agendamento"
+              title="Solicite seu horário de consulta"
+              description="Preencha o formulário abaixo. Entrarei em contato para confirmar disponibilidade — não é uma reserva automática."
+            />
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.1}>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="mt-10 space-y-6 rounded-3xl border border-border bg-card p-6 shadow-card sm:p-8"
+              noValidate
+            >
+              <Input
+                label="Nome completo"
+                placeholder="Seu nome"
+                error={errors.fullName?.message}
+                {...register('fullName')}
+              />
+
+              <Input
+                label="E-mail"
+                type="email"
+                placeholder="seu@email.com"
+                autoComplete="email"
+                error={errors.email?.message}
+                {...register('email')}
+              />
+
+              <Controller
+                name="phone"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    label="Telefone / WhatsApp"
+                    type="tel"
+                    placeholder="(31) 99999-9999"
+                    autoComplete="tel"
+                    value={field.value}
+                    onChange={(e) => field.onChange(formatPhone(e.target.value))}
+                    error={errors.phone?.message}
+                  />
+                )}
+              />
+
+              <Controller
+                name="modality"
+                control={control}
+                render={({ field }) => (
+                  <RadioGroup
+                    name="modality"
+                    label="Modalidade preferida"
+                    options={[
+                      { value: 'presencial', label: MODALITY_LABELS.presencial },
+                      { value: 'online', label: MODALITY_LABELS.online },
+                    ]}
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={errors.modality?.message}
+                  />
+                )}
+              />
+
+              <Controller
+                name="timePreferences"
+                control={control}
+                render={({ field }) => (
+                  <MultiSelect
+                    label="Períodos de preferência"
+                    options={[
+                      { value: 'manha', label: TIME_PREFERENCE_LABELS.manha },
+                      { value: 'tarde', label: TIME_PREFERENCE_LABELS.tarde },
+                      { value: 'noite', label: TIME_PREFERENCE_LABELS.noite },
+                    ]}
+                    values={field.value}
+                    onChange={field.onChange}
+                    error={errors.timePreferences?.message}
+                  />
+                )}
+              />
+
+              <Textarea
+                label="Mensagem (opcional)"
+                placeholder="Alguma observação sobre disponibilidade ou preferências?"
+                hint="Não é necessário descrever sintomas ou motivos clínicos neste formulário."
+                error={errors.message?.message}
+                {...register('message')}
+              />
+
+              <Controller
+                name="lgpdConsent"
+                control={control}
+                render={({ field }) => (
+                  <Checkbox
+                    label={
+                      <>
+                        Concordo com o tratamento dos meus dados conforme a{' '}
+                        <button
+                          type="button"
+                          onClick={() => setShowPrivacyModal(true)}
+                          className="font-medium text-primary underline-offset-2 hover:underline"
+                        >
+                          Política de Privacidade
+                        </button>
+                        .
+                      </>
+                    }
+                    checked={field.value === true}
+                    onChange={(e) => field.onChange(e.target.checked)}
+                    error={errors.lgpdConsent?.message}
+                  />
+                )}
+              />
+
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full"
+                isLoading={isSubmitting}
+              >
+                Enviar solicitação
+              </Button>
+            </form>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <Modal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        title="Solicitação recebida"
+      >
+        <div className="flex flex-col items-center text-center">
+          <AnimatedCheck />
+          <h3 className="mt-4 font-display text-xl font-semibold text-foreground">
+            Recebemos sua solicitação!
+          </h3>
+          <p className="mt-3 text-muted-foreground">
+            Entrarei em contato em até {SITE.responseTimeHours} horas úteis pelo
+            WhatsApp ou e-mail informado.
+          </p>
+          <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
+            <Button
+              variant="secondary"
+              className="flex-1"
+              onClick={() => setShowSuccessModal(false)}
+            >
+              Fechar
+            </Button>
+            <Button
+              className="flex-1 gap-2"
+              onClick={() => window.open(WHATSAPP_URL, '_blank', 'noopener')}
+            >
+              <MessageCircle className="size-4" aria-hidden="true" />
+              Falar agora pelo WhatsApp
+            </Button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={showPrivacyModal}
+        onClose={() => setShowPrivacyModal(false)}
+        title="Política de Privacidade"
+        size="lg"
+      >
+        <PrivacyPolicyContent />
+      </Modal>
+    </>
+  )
+}

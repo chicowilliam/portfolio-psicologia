@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Manrope", system-ui, sans-serif;
+
+  --color-background: #f5f1ea;
+  --color-foreground: #2c3330;
+  --color-muted: #eef0eb;
+  --color-muted-foreground: #5c6560;
+  --color-primary: #3d6b6e;
+  --color-primary-foreground: #f5f1ea;
+  --color-primary-light: #a8c5a0;
+  --color-accent: #c4a882;
+  --color-accent-foreground: #2c3330;
+  --color-card: #faf8f4;
+  --color-card-foreground: #2c3330;
+  --color-border: #ddd8cf;
+  --color-ring: #3d6b6e;
+  --color-success: #4a7c59;
+  --color-error: #b54a4a;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
+
+  --shadow-soft: 0 4px 24px -4px rgb(44 51 48 / 0.08);
+  --shadow-card: 0 8px 32px -8px rgb(44 51 48 / 0.1);
+  --shadow-elevated: 0 16px 48px -12px rgb(44 51 48 / 0.14);
+}
+
+.dark {
+  --color-background: #1a1f1e;
+  --color-foreground: #eef0eb;
+  --color-muted: #252b29;
+  --color-muted-foreground: #9aa39e;
+  --color-primary: #7aabae;
+  --color-primary-foreground: #1a1f1e;
+  --color-primary-light: #5a8a5e;
+  --color-accent: #d4bc98;
+  --color-accent-foreground: #1a1f1e;
+  --color-card: #222827;
+  --color-card-foreground: #eef0eb;
+  --color-border: #3a423f;
+  --color-ring: #7aabae;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-primary-light) 40%, transparent);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
