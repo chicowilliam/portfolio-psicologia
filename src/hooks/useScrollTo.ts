@@ -1,12 +1,23 @@
 import { useCallback } from 'react'
+import { useLenis } from '@/components/providers/LenisProvider'
 
 export function useScrollTo() {
-  return useCallback((href: string) => {
-    const id = href.replace('#', '')
-    const element = document.getElementById(id)
+  const lenis = useLenis()
 
-    if (element) {
+  return useCallback(
+    (href: string) => {
+      const id = href.replace('#', '')
+      const element = document.getElementById(id)
+
+      if (!element) return
+
+      if (lenis) {
+        lenis.scrollTo(element, { offset: -88, duration: 1.1 })
+        return
+      }
+
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }, [])
+    },
+    [lenis],
+  )
 }

@@ -1,7 +1,41 @@
+import { memo } from 'react'
 import { Monitor, MapPin } from 'lucide-react'
-import { ScrollReveal } from '@/components/ui/ScrollReveal'
+import { ScrollReveal, ScrollRevealGroup } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { GlassCard } from '@/components/ui/GlassCard'
 import { PROCESS_STEPS } from '@/lib/constants'
+import type { ProcessStep } from '@/types'
+
+interface StepCardProps {
+  step: ProcessStep
+  index: number
+  total: number
+}
+
+const StepCard = memo(function StepCard({ step, index, total }: StepCardProps) {
+  return (
+    <article className="relative h-full">
+      {index < total - 1 && (
+        <div
+          className="absolute left-1/2 top-12 hidden h-px w-full bg-border/70 lg:block"
+          aria-hidden="true"
+        />
+      )}
+
+      <GlassCard className="relative p-6">
+        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold text-primary-foreground">
+          {step.step}
+        </div>
+        <h3 className="font-display text-lg font-semibold text-foreground">
+          {step.title}
+        </h3>
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+          {step.description}
+        </p>
+      </GlassCard>
+    </article>
+  )
+})
 
 export function HowItWorks() {
   return (
@@ -16,43 +50,29 @@ export function HowItWorks() {
           />
         </ScrollReveal>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm text-muted-foreground">
-            <MapPin className="size-4 text-primary" aria-hidden="true" />
-            Presencial na Savassi
+        <ScrollReveal delay={0.05}>
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
+            <div className="glass-card inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm text-muted-foreground">
+              <MapPin className="size-4 text-primary" aria-hidden="true" />
+              Presencial na Savassi
+            </div>
+            <div className="glass-card inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm text-muted-foreground">
+              <Monitor className="size-4 text-primary" aria-hidden="true" />
+              Online por videoconferência
+            </div>
           </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm text-muted-foreground">
-            <Monitor className="size-4 text-primary" aria-hidden="true" />
-            Online por videoconferência
-          </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <ScrollRevealGroup className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {PROCESS_STEPS.map((step, index) => (
-            <ScrollReveal key={step.step} delay={index * 0.08}>
-              <article className="relative h-full">
-                {index < PROCESS_STEPS.length - 1 && (
-                  <div
-                    className="absolute left-1/2 top-12 hidden h-px w-full bg-border lg:block"
-                    aria-hidden="true"
-                  />
-                )}
-
-                <div className="relative rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
-                  <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold text-primary-foreground">
-                    {step.step}
-                  </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground">
-                    {step.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {step.description}
-                  </p>
-                </div>
-              </article>
-            </ScrollReveal>
+            <StepCard
+              key={step.step}
+              step={step}
+              index={index}
+              total={PROCESS_STEPS.length}
+            />
           ))}
-        </div>
+        </ScrollRevealGroup>
       </div>
     </section>
   )

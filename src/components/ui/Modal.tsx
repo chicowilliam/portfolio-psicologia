@@ -1,9 +1,10 @@
 import { useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from '@/lib/motion-react'
 import { X } from 'lucide-react'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { cn } from '@/lib/utils'
+import { fadeIn, scaleIn } from '@/lib/motion'
 
 interface ModalProps {
   isOpen: boolean
@@ -21,6 +22,7 @@ export function Modal({
   size = 'md',
 }: ModalProps) {
   const containerRef = useFocusTrap(isOpen)
+  const prefersReducedMotion = useReducedMotion()
   useBodyScrollLock(isOpen)
 
   useEffect(() => {
@@ -35,6 +37,9 @@ export function Modal({
     return () => document.removeEventListener('keydown', handleEscape)
   }, [isOpen, onClose])
 
+  const overlayVariants = prefersReducedMotion ? fadeIn : fadeIn
+  const dialogVariants = prefersReducedMotion ? fadeIn : scaleIn
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -42,11 +47,11 @@ export function Modal({
           <motion.button
             type="button"
             aria-label="Fechar modal"
-            className="absolute inset-0 bg-foreground/20 backdrop-blur-sm"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            className="absolute inset-0 bg-foreground/25 backdrop-blur-sm"
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
             onClick={onClose}
           />
 
@@ -56,16 +61,16 @@ export function Modal({
             aria-modal="true"
             aria-labelledby="modal-title"
             className={cn(
-              'relative z-10 max-h-[90vh] w-full overflow-y-auto rounded-2xl bg-card shadow-elevated',
+              'glass-card relative z-10 max-h-[90vh] w-full overflow-y-auto shadow-elevated',
               size === 'md' && 'max-w-md',
               size === 'lg' && 'max-w-2xl',
             )}
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            variants={dialogVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
           >
-            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-card px-6 py-4">
+            <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border/60 bg-card/80 px-6 py-4 backdrop-blur-md">
               <h2 id="modal-title" className="font-display text-xl font-semibold text-foreground">
                 {title}
               </h2>

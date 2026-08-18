@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { lazy, Suspense, useCallback, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { MessageCircle } from 'lucide-react'
@@ -9,8 +9,7 @@ import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Checkbox } from '@/components/ui/Checkbox'
 import { RadioGroup, MultiSelect } from '@/components/ui/RadioGroup'
-import { Modal } from '@/components/ui/Modal'
-import { AnimatedCheck } from '@/components/ui/AnimatedCheck'
+import { MeshBackground } from '@/components/ui/MeshBackground'
 import { PrivacyPolicyContent } from '@/components/PrivacyPolicyContent'
 import {
   MODALITY_LABELS,
@@ -21,6 +20,16 @@ import {
 import { bookingSchema, type BookingSchema } from '@/lib/validation'
 import { formatPhone, submitBookingRequest } from '@/lib/utils'
 
+const Modal = lazy(() =>
+  import('@/components/ui/Modal').then((module) => ({ default: module.Modal })),
+)
+
+const AnimatedCheck = lazy(() =>
+  import('@/components/ui/AnimatedCheck').then((module) => ({
+    default: module.AnimatedCheck,
+  })),
+)
+
 interface BookingFormProps {
   onSuccess?: () => void
 }
@@ -28,6 +37,9 @@ interface BookingFormProps {
 export function BookingForm({ onSuccess }: BookingFormProps) {
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [showPrivacyModal, setShowPrivacyModal] = useState(false)
+
+  const closeSuccessModal = useCallback(() => setShowSuccessModal(false), [])
+  const closePrivacyModal = useCallback(() => setShowPrivacyModal(false), [])
 
   const {
     register,
@@ -59,9 +71,11 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
     <>
       <section
         id="agendamento"
-        className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+        className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
       >
-        <div className="mx-auto max-w-2xl">
+        <MeshBackground variant="cta" />
+
+        <div className="relative mx-auto max-w-2xl">
           <ScrollReveal>
             <SectionHeading
               align="center"
@@ -71,10 +85,10 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
             />
           </ScrollReveal>
 
-          <ScrollReveal delay={0.1}>
+          <ScrollReveal delay={0.08}>
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="mt-10 space-y-6 rounded-3xl border border-border bg-card p-6 shadow-card sm:p-8"
+              className="glass-card mt-10 space-y-6 rounded-3xl p-6 shadow-card sm:p-8"
               noValidate
             >
               <Input
@@ -182,6 +196,7 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                 type="submit"
                 size="lg"
                 className="w-full"
+                magnetic
                 isLoading={isSubmitting}
               >
                 Enviar solicitação
@@ -191,47 +206,54 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
         </div>
       </section>
 
-      <Modal
-        isOpen={showSuccessModal}
-        onClose={() => setShowSuccessModal(false)}
-        title="Solicitação recebida"
-      >
-        <div className="flex flex-col items-center text-center">
-          <AnimatedCheck />
-          <h3 className="mt-4 font-display text-xl font-semibold text-foreground">
-            Recebemos sua solicitação!
-          </h3>
-          <p className="mt-3 text-muted-foreground">
-            Entrarei em contato em até {SITE.responseTimeHours} horas úteis pelo
-            WhatsApp ou e-mail informado.
-          </p>
-          <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
-            <Button
-              variant="secondary"
-              className="flex-1"
-              onClick={() => setShowSuccessModal(false)}
-            >
-              Fechar
-            </Button>
-            <Button
-              className="flex-1 gap-2"
-              onClick={() => window.open(WHATSAPP_URL, '_blank', 'noopener')}
-            >
-              <MessageCircle className="size-4" aria-hidden="true" />
-              Falar agora pelo WhatsApp
-            </Button>
-          </div>
-        </div>
-      </Modal>
+      <Suspense fallback={null}>
+        {showSuccessModal && (
+          <Modal
+            isOpen={showSuccessModal}
+            onClose={closeSuccessModal}
+            title="Solicitação recebida"
+          >
+            <div className="flex flex-col items-center text-center">
+              <AnimatedCheck />
+              <h3 className="mt-4 font-display text-xl font-semibold text-foreground">
+                Recebemos sua solicitação!
+              </h3>
+              <p className="mt-3 text-muted-foreground">
+                Entrarei em contato em até {SITE.responseTimeHours} horas úteis pelo
+                WhatsApp ou e-mail informado.
+              </p>
+              <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
+                <Button
+                  variant="secondary"
+                  className="flex-1"
+                  onClick={closeSuccessModal}
+                >
+                  Fechar
+                </Button>
+                <Button
+                  className="flex-1 gap-2"
+                  magnetic
+                  onClick={() => window.open(WHATSAPP_URL, '_blank', 'noopener')}
+                >
+                  <MessageCircle className="size-4" aria-hidden="true" />
+                  Falar agora pelo WhatsApp
+                </Button>
+              </div>
+            </div>
+          </Modal>
+        )}
 
-      <Modal
-        isOpen={showPrivacyModal}
-        onClose={() => setShowPrivacyModal(false)}
-        title="Política de Privacidade"
-        size="lg"
-      >
-        <PrivacyPolicyContent />
-      </Modal>
+        {showPrivacyModal && (
+          <Modal
+            isOpen={showPrivacyModal}
+            onClose={closePrivacyModal}
+            title="Política de Privacidade"
+            size="lg"
+          >
+            <PrivacyPolicyContent />
+          </Modal>
+        )}
+      </Suspense>
     </>
   )
 }

@@ -16,7 +16,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <label htmlFor={textareaId} className="block text-sm font-medium text-foreground">
           {label}
         </label>
-        {hint && <p className="text-sm text-muted-foreground">{hint}</p>}
+        {hint && (
+          <p id={`${textareaId}-hint`} className="text-sm text-muted-foreground">
+            {hint}
+          </p>
+        )}
         <textarea
           ref={ref}
           id={textareaId}
@@ -30,7 +34,9 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           )}
           aria-invalid={error ? 'true' : undefined}
           aria-describedby={
-            error ? `${textareaId}-error` : hint ? `${textareaId}-hint` : undefined
+            [hint ? `${textareaId}-hint` : null, error ? `${textareaId}-error` : null]
+              .filter(Boolean)
+              .join(' ') || undefined
           }
           {...props}
         />

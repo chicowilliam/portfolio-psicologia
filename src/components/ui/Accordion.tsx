@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, useReducedMotion } from '@/lib/motion-react'
 import { ChevronDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import type { FAQItem } from '@/types'
 
 interface AccordionProps {
@@ -10,6 +9,7 @@ interface AccordionProps {
 
 export function Accordion({ items }: AccordionProps) {
   const [openId, setOpenId] = useState<string | null>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   function toggle(id: string) {
     setOpenId((current) => (current === id ? null : id))
@@ -23,7 +23,7 @@ export function Accordion({ items }: AccordionProps) {
         return (
           <div
             key={item.id}
-            className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft"
+            className="glass-card overflow-hidden rounded-2xl shadow-soft"
           >
             <button
               type="button"
@@ -31,34 +31,31 @@ export function Accordion({ items }: AccordionProps) {
               aria-expanded={isOpen}
               aria-controls={`faq-panel-${item.id}`}
               onClick={() => toggle(item.id)}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-muted/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-muted/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
             >
               <span className="font-medium text-foreground">{item.question}</span>
               <motion.span
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={{ duration: 0.2 }}
+                animate={{ rotate: prefersReducedMotion ? 0 : isOpen ? 180 : 0 }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.22 }}
               >
                 <ChevronDown className="size-5 shrink-0 text-muted-foreground" />
               </motion.span>
             </button>
 
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={`faq-panel-${item.id}`}
-                  role="region"
-                  aria-labelledby={`faq-trigger-${item.id}`}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                >
-                  <div className={cn('border-t border-border px-6 py-5')}>
-                    <p className="leading-relaxed text-muted-foreground">{item.answer}</p>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            <div
+              id={`faq-panel-${item.id}`}
+              role="region"
+              aria-labelledby={`faq-trigger-${item.id}`}
+              className="accordion-panel"
+              data-open={isOpen ? 'true' : 'false'}
+              hidden={Boolean(prefersReducedMotion && !isOpen)}
+            >
+              <div className="overflow-hidden">
+                <div className="border-t border-border px-6 py-5">
+                  <p className="leading-relaxed text-muted-foreground">{item.answer}</p>
+                </div>
+              </div>
+            </div>
           </div>
         )
       })}
