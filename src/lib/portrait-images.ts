@@ -2,6 +2,7 @@ type GlobModule = Record<string, string>
 
 function sortGlobUrls(modules: GlobModule): string[] {
   return Object.keys(modules)
+    .filter((key) => !key.includes('-source.'))
     .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
     .map((key) => modules[key])
 }
