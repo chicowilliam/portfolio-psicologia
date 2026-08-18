@@ -1,7 +1,7 @@
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Accordion } from '@/components/ui/Accordion'
-import { FAQ_ITEMS } from '@/lib/constants'
+import { SITE, FAQ_ITEMS } from '@/lib/constants'
 
 export function FAQ() {
   return (
@@ -14,14 +14,18 @@ export function FAQ() {
           <SectionHeading
             align="center"
             eyebrow="Perguntas frequentes"
-            title="Dúvidas comuns sobre o atendimento"
-            description="Respostas transparentes para você tomar sua decisão com tranquilidade."
+            title="O que muita gente"
+            titleAccent="quer saber antes de agendar"
+            description="Respostas diretas, sem rodeios — para você decidir com mais segurança."
           />
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
           <div className="mt-12">
             <Accordion items={FAQ_ITEMS} />
+            <p className="mt-8 text-center text-sm leading-relaxed text-muted-foreground">
+              {SITE.voice.faqClosing}
+            </p>
           </div>
         </ScrollReveal>
       </div>

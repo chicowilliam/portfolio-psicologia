@@ -34,7 +34,7 @@ const SpecialtyCard = memo(function SpecialtyCard({
   Icon,
 }: SpecialtyCardProps) {
   return (
-    <GlassCard as="article" className="group h-full p-6">
+    <GlassCard as="article" className="specialty-card-accent group h-full pl-7 pr-6 py-6">
       <AnimatedIcon
         icon={Icon}
         containerClassName="mb-4 size-11 rounded-xl bg-primary/10 text-primary transition-[background-color,color] duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
@@ -61,8 +61,9 @@ export function Specialties() {
           <SectionHeading
             align="center"
             eyebrow="Áreas de atuação"
-            title="Especialidades e demandas atendidas"
-            description="Acompanhamento terapêutico para diferentes momentos e necessidades da vida."
+            title="Demandas que acompanho"
+            titleAccent="no consultório e online"
+            description="Cada pessoa traz uma história. Estas são algumas das vivências em que mais trabalho — sem que uma demanda defina quem você é."
           />
         </ScrollReveal>
 

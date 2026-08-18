@@ -83,9 +83,13 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
             <SectionHeading
               align="center"
               eyebrow="Agendamento"
-              title="Solicite seu horário de consulta"
-              description="Preencha o formulário abaixo. Entrarei em contato para confirmar disponibilidade — não é uma reserva automática."
+              title="Vamos encontrar"
+              titleAccent="um horário que funcione"
+              description={`Preencha o formulário — em até ${SITE.responseTimeHours} horas úteis respondo pelo WhatsApp ou e-mail. É uma solicitação, não uma reserva automática.`}
             />
+            <p className="mx-auto mt-4 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
+              {SITE.voice.bookingReassurance}
+            </p>
           </ScrollReveal>
 
           <ScrollReveal delay={0.08}>

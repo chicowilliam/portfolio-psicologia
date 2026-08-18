@@ -17,10 +17,22 @@ export const SITE: SiteConfig = {
     crp: '04/38921',
     approach: 'Terapia Cognitivo-Comportamental (TCC)',
     tagline:
-      'Um espaço seguro para você se escutar, compreender suas emoções e construir caminhos possíveis — no seu ritmo.',
+      'Um espaço seguro para você se escutar, compreender suas emoções e construir caminhos possíveis — no seu ritmo, sem pressa de “resolver tudo”.',
     bio: 'Sou psicóloga clínica formada pela Universidade Federal de Minas Gerais (UFMG), com especialização em Terapia Cognitivo-Comportamental e experiência em atendimento adulto e adolescente. Acredito que a terapia é um processo de autoconhecimento e cuidado, não uma promessa de resultado rápido. Meu trabalho é oferecer escuta qualificada, baseada em evidências científicas, respeitando a singularidade de cada pessoa.',
     photoAlt:
       'Dra. Helena Vasconcelos, psicóloga clínica, em ambiente acolhedor do consultório',
+    welcomeLine: 'Olá — fico feliz que você esteja aqui.',
+  },
+  voice: {
+    heroQuote: 'Cuidar de si também é um ato de coragem.',
+    aboutPullQuote:
+      'Na terapia, não buscamos perfeição — buscamos um lugar onde você possa ser inteira, com o que pesa e o que espera.',
+    credentialsNote:
+      'Transparência faz parte do cuidado: você pode verificar meu registro e formação antes de agendar.',
+    bookingReassurance:
+      'Levo alguns minutos para ler cada mensagem com atenção. Não é robô, não é reserva automática — é um primeiro contato humano.',
+    faqClosing:
+      'Se ainda ficou alguma dúvida, escreva. Responder com clareza também faz parte do acolhimento.',
   },
   contact: {
     email: 'contato@helenavasconcelos.com.br',

@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from '@/lib/motion-react'
 import { ScrollReveal, ScrollRevealGroup } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { PullQuote } from '@/components/ui/PullQuote'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { LivingPortrait } from '@/components/ui/LivingPortrait'
 import { SITE, TIMELINE } from '@/lib/constants'
@@ -41,8 +42,9 @@ export function About() {
         <ScrollReveal>
           <SectionHeading
             eyebrow="Sobre mim"
-            title="Quem acompanha você nesse processo"
-            description="Conheça minha trajetória, formação e abordagem terapêutica."
+            title="Quem acompanha você"
+            titleAccent="neste processo"
+            description="Formação, trajetória e a forma como conduzo cada sessão — com escuta, evidência e respeito ao seu tempo."
           />
         </ScrollReveal>
 
@@ -70,6 +72,12 @@ export function About() {
 
           <ScrollReveal delay={0.08}>
             <div className="space-y-6">
+              <PullQuote
+                quote={SITE.voice.aboutPullQuote}
+                attribution={SITE.psychologist.name}
+                className="mb-6"
+              />
+
               <p className="leading-relaxed text-muted-foreground">
                 {SITE.psychologist.bio}
               </p>
@@ -109,8 +117,8 @@ export function About() {
                         : 'lg:col-start-2'
                     }`}
                   >
-                    <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-card text-sm font-semibold text-primary">
-                      {index + 1}
+                    <div className="relative z-10 flex size-10 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-card text-xs font-semibold text-primary">
+                      {item.year}
                     </div>
                     <div className={index % 2 === 0 ? 'lg:text-right' : ''}>
                       <p className="text-sm font-semibold text-primary">{item.year}</p>

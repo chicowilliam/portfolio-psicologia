@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
+import { SectionDivider } from '@/components/ui/SectionDivider'
 import { EmergencyNotice } from '@/components/EmergencyNotice'
 import { SeoStructuredData } from '@/components/SeoStructuredData'
 import { Header } from '@/components/sections/Header'
@@ -55,12 +56,18 @@ export default function App() {
 
       <main id="conteudo-principal">
         <Hero />
+        <SectionDivider />
         <Credentials />
+        <SectionDivider />
         <Suspense fallback={<SectionFallback />}>
           <About />
+          <SectionDivider />
           <Specialties />
+          <SectionDivider />
           <HowItWorks />
+          <SectionDivider />
           <FAQ />
+          <SectionDivider />
           <BookingForm />
           <Contact />
         </Suspense>

@@ -23,9 +23,9 @@ const StepCard = memo(function StepCard({ step, index, total }: StepCardProps) {
       )}
 
       <GlassCard className="relative p-6">
-        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-primary font-display text-lg font-semibold text-primary-foreground">
-          {step.step}
-        </div>
+        <p className="step-badge mb-3">
+          Passo {String(step.step).padStart(2, '0')}
+        </p>
         <h3 className="font-display text-lg font-semibold text-foreground">
           {step.title}
         </h3>
@@ -45,8 +45,9 @@ export function HowItWorks() {
           <SectionHeading
             align="center"
             eyebrow="Como funciona"
-            title="Do primeiro contato ao acompanhamento"
-            description="Um processo claro e acolhedor, disponível presencialmente ou online."
+            title="Do primeiro contato"
+            titleAccent="ao acompanhamento contínuo"
+            description="Um caminho claro, sem burocracia excessiva — presencial na Savassi ou online, no mesmo cuidado."
           />
         </ScrollReveal>
 

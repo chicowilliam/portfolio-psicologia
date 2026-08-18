@@ -112,6 +112,17 @@
   h3,
   h4 {
     @apply font-display;
+    font-feature-settings: 'kern', 'liga', 'calt';
+    font-variation-settings: 'SOFT' 48, 'WONK' 0.8;
+  }
+
+  .section-title {
+    text-wrap: balance;
+    font-variation-settings: 'SOFT' 42, 'WONK' 1;
+  }
+
+  .pull-quote-text {
+    font-variation-settings: 'SOFT' 55, 'WONK' 1;
   }
 
   ::selection {
@@ -122,6 +133,79 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .editorial-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+  }
+
+  .section-heading-center .editorial-eyebrow {
+    justify-content: center;
+  }
+
+  .editorial-eyebrow-line {
+    height: 1px;
+    width: 2rem;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-primary) 70%, transparent)
+    );
+  }
+
+  .section-heading-center .editorial-eyebrow-line {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--color-primary) 70%, transparent),
+      transparent
+    );
+    width: 3rem;
+  }
+
+  .pull-quote-mark {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
+  }
+
+  .pull-quote-text {
+    padding-left: 0.25rem;
+  }
+
+  .specialty-card-accent {
+    position: relative;
+  }
+
+  .specialty-card-accent::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.25rem;
+    bottom: 1.25rem;
+    width: 3px;
+    border-radius: 9999px;
+    background: linear-gradient(
+      180deg,
+      var(--color-primary-light),
+      color-mix(in srgb, var(--color-primary) 65%, transparent)
+    );
+    opacity: 0.85;
+  }
+
+  .step-badge {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
   }
 
   .glass-card {

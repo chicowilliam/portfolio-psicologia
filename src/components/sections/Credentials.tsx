@@ -11,7 +11,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { AnimatedIcon } from '@/components/ui/AnimatedIcon'
 import { MeshBackground } from '@/components/ui/MeshBackground'
-import { CREDENTIALS } from '@/lib/constants'
+import { CREDENTIALS, SITE } from '@/lib/constants'
 import type { Credential } from '@/types'
 
 const iconMap = {
@@ -70,9 +70,10 @@ export function Credentials() {
         <ScrollReveal>
           <SectionHeading
             align="center"
-            eyebrow="Profissionalismo e confiança"
-            title="Compromisso com a ética e a qualidade do cuidado"
-            description="Informações verificáveis que demonstram minha formação, registro profissional e experiência clínica."
+            eyebrow="Profissionalismo"
+            title="Informações que você pode"
+            titleAccent="verificar com tranquilidade"
+            description={SITE.voice.credentialsNote}
           />
         </ScrollReveal>
 

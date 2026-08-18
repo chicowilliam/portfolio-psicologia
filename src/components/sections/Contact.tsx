@@ -44,8 +44,9 @@ export function Contact() {
           <SectionHeading
             align="center"
             eyebrow="Contato"
-            title="Localização e horários"
-            description="Estou à disposição para esclarecer dúvidas sobre o atendimento."
+            title="O consultório e"
+            titleAccent="como falar comigo"
+            description="Horários, localização e canais diretos — sem formulários intermediários se preferir conversar primeiro."
           />
         </ScrollReveal>
 

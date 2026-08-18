@@ -61,6 +61,14 @@ export interface SiteConfig {
     tagline: string
     bio: string
     photoAlt: string
+    welcomeLine: string
+  }
+  voice: {
+    heroQuote: string
+    aboutPullQuote: string
+    credentialsNote: string
+    bookingReassurance: string
+    faqClosing: string
   }
   contact: {
     email: string

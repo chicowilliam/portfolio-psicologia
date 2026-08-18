@@ -26,6 +26,9 @@ export function Hero() {
           initial={prefersReducedMotion ? undefined : 'hidden'}
           animate={prefersReducedMotion ? undefined : 'visible'}
         >
+          <p className="welcome-line mb-3 text-sm font-medium text-accent sm:text-base">
+            {SITE.psychologist.welcomeLine}
+          </p>
           <p className="mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-primary/15 bg-primary/10 px-3.5 py-1.5 text-xs font-medium text-primary backdrop-blur-sm sm:mb-4 sm:px-4 sm:text-sm">
             <span className="size-1.5 rounded-full bg-primary" />
             {SITE.psychologist.approach}
@@ -99,8 +102,11 @@ export function Hero() {
             />
 
             <div className="glass-quote absolute bottom-4 left-4 right-4 rounded-xl p-3 shadow-soft sm:bottom-6 sm:left-6 sm:right-6 sm:rounded-2xl sm:p-4">
-              <p className="text-xs font-medium text-foreground sm:text-sm">
-                &ldquo;Cuidar de si também é um ato de coragem.&rdquo;
+              <p className="font-display text-xs font-medium italic leading-snug text-foreground sm:text-sm">
+                &ldquo;{SITE.voice.heroQuote}&rdquo;
+              </p>
+              <p className="mt-1.5 text-[11px] text-muted-foreground sm:text-xs">
+                {SITE.psychologist.name}
               </p>
             </div>
           </div>
