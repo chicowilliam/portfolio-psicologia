@@ -70,6 +70,41 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-primary) 42%, var(--color-border))
+      color-mix(in srgb, var(--color-muted) 88%, var(--color-background));
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--color-primary) 38%, var(--color-border))
+      transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: color-mix(in srgb, var(--color-muted) 55%, transparent);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--color-primary) 48%, var(--color-border));
+    border: 2px solid color-mix(in srgb, var(--color-muted) 55%, transparent);
+    border-radius: 9999px;
+    transition: background-color 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--color-primary) 72%, var(--color-border));
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: transparent;
   }
 
   h1,
@@ -358,6 +393,82 @@
   .dialog-sheet[data-state='closed'] {
     animation: dialog-sheet-out 0.24s ease-in forwards;
   }
+
+  .mobile-menu-overlay {
+    background: color-mix(in srgb, var(--color-foreground) 46%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .mobile-menu-panel {
+    position: relative;
+    isolation: isolate;
+    background: var(--color-card);
+    border-left: 1px solid var(--color-border);
+    box-shadow: -12px 0 48px -12px rgb(44 51 48 / 0.18);
+  }
+
+  .mobile-menu-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto auto 0;
+    z-index: 1;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--color-primary) 0%,
+      color-mix(in srgb, var(--color-primary-light) 75%, var(--color-primary)) 55%,
+      var(--color-accent) 100%
+    );
+  }
+
+  .mobile-menu-header {
+    position: relative;
+    z-index: 2;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+    background: color-mix(in srgb, var(--color-muted) 72%, var(--color-card));
+  }
+
+  .mobile-menu-footer {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+    background: color-mix(in srgb, var(--color-muted) 55%, var(--color-card));
+  }
+
+  .mobile-menu-link {
+    border: 1px solid transparent;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .mobile-menu-link:hover {
+      background: color-mix(in srgb, var(--color-muted) 85%, var(--color-card));
+      border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
+    }
+  }
+
+  .mobile-menu-link-active {
+    background: color-mix(in srgb, var(--color-primary) 10%, var(--color-card));
+    border-color: color-mix(in srgb, var(--color-primary) 22%, transparent);
+    color: var(--color-primary);
+  }
+
+  .mobile-menu-trigger {
+    border: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
+    background: color-mix(in srgb, var(--color-card) 92%, var(--color-background));
+    box-shadow: var(--shadow-soft);
+  }
+
+  .mobile-menu-trigger-open {
+    border-color: color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
+    background: color-mix(in srgb, var(--color-primary) 8%, var(--color-card));
+    color: var(--color-primary);
+  }
 }
 
 @keyframes btn-spin {
@@ -487,6 +598,10 @@
 @media (prefers-reduced-motion: reduce) {
   .mesh-blob {
     animation: none !important;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    transition: none;
   }
 
   .interactive-card {

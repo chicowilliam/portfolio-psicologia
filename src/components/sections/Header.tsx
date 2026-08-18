@@ -139,17 +139,22 @@ export function Header() {
             <Dialog.Trigger asChild>
               <button
                 type="button"
-                className="relative inline-flex size-11 items-center justify-center rounded-xl text-foreground transition-colors hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
+                className={cn(
+                  'mobile-menu-trigger relative inline-flex size-11 items-center justify-center rounded-full transition-colors duration-200 lg:hidden',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                  isMobileOpen && 'mobile-menu-trigger-open',
+                )}
                 aria-label={isMobileOpen ? 'Fechar menu' : 'Abrir menu'}
+                aria-expanded={isMobileOpen}
               >
                 <AnimatePresence mode="wait" initial={false}>
                   {isMobileOpen ? (
                     <motion.span
                       key="close"
-                      initial={{ opacity: 0, rotate: -90, scale: 0.85 }}
-                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                      exit={{ opacity: 0, rotate: 90, scale: 0.85 }}
-                      transition={{ duration: 0.2, ease: easeOut }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.18, ease: easeOut }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
                       <X className="size-5" aria-hidden="true" />
@@ -157,10 +162,10 @@ export function Header() {
                   ) : (
                     <motion.span
                       key="menu"
-                      initial={{ opacity: 0, rotate: 90, scale: 0.85 }}
-                      animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                      exit={{ opacity: 0, rotate: -90, scale: 0.85 }}
-                      transition={{ duration: 0.2, ease: easeOut }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.18, ease: easeOut }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
                       <Menu className="size-5" aria-hidden="true" />
@@ -171,33 +176,43 @@ export function Header() {
             </Dialog.Trigger>
 
             <Dialog.Portal>
-              <Dialog.Overlay className="dialog-overlay fixed inset-0 z-50 bg-foreground/25 backdrop-blur-sm lg:hidden" />
+              <Dialog.Overlay className="mobile-menu-overlay dialog-overlay fixed inset-0 z-50 lg:hidden" />
               <Dialog.Content
                 className={cn(
-                  'dialog-panel fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border bg-card/95 shadow-elevated outline-none backdrop-blur-xl lg:hidden',
+                  'mobile-menu-panel dialog-panel fixed inset-y-0 right-0 z-50 flex w-[min(100%,21rem)] flex-col outline-none lg:hidden',
                   prefersReducedMotion && 'dialog-panel-reduced',
                 )}
-                aria-describedby={undefined}
+                aria-describedby="mobile-menu-description"
               >
-                <div className="flex items-center justify-between border-b border-border/60 px-5 py-4">
-                  <Dialog.Title className="font-display text-lg font-semibold text-foreground">
-                    Menu
-                  </Dialog.Title>
-                  <Dialog.Close asChild>
-                    <button
-                      type="button"
-                      className="inline-flex size-11 items-center justify-center rounded-xl text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                      aria-label="Fechar menu"
-                    >
-                      <X className="size-5" aria-hidden="true" />
-                    </button>
-                  </Dialog.Close>
+                <div className="mobile-menu-header px-5 pb-5 pt-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="min-w-0 pr-2">
+                      <Dialog.Title className="font-display text-xl font-semibold leading-tight text-foreground">
+                        {SITE.psychologist.name}
+                      </Dialog.Title>
+                      <Dialog.Description
+                        id="mobile-menu-description"
+                        className="mt-1 text-sm text-muted-foreground"
+                      >
+                        {SITE.psychologist.title} · CRP {SITE.psychologist.crp}
+                      </Dialog.Description>
+                    </div>
+                    <Dialog.Close asChild>
+                      <button
+                        type="button"
+                        className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                        aria-label="Fechar menu"
+                      >
+                        <X className="size-4" aria-hidden="true" />
+                      </button>
+                    </Dialog.Close>
+                  </div>
                 </div>
 
                 <motion.nav
-                  className="flex flex-1 flex-col gap-1 overflow-y-auto p-5"
+                  className="flex flex-1 flex-col gap-1.5 overflow-y-auto px-4 py-5"
                   aria-label="Navegação mobile"
-                  variants={prefersReducedMotion ? undefined : staggerContainer(0.06)}
+                  variants={prefersReducedMotion ? undefined : staggerContainer(0.05)}
                   initial="hidden"
                   animate="visible"
                 >
@@ -217,11 +232,11 @@ export function Header() {
                           }}
                           aria-current={active ? 'page' : undefined}
                           className={cn(
-                            'flex min-h-11 items-center rounded-xl px-4 py-3 text-base font-medium transition-colors',
-                            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                            'mobile-menu-link flex min-h-12 items-center rounded-2xl px-4 text-[15px] font-medium',
+                            'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card',
                             active
-                              ? 'bg-primary/10 text-primary'
-                              : 'text-foreground hover:bg-muted hover:text-primary',
+                              ? 'mobile-menu-link-active font-semibold'
+                              : 'text-foreground/90',
                           )}
                         >
                           {link.label}
@@ -229,19 +244,19 @@ export function Header() {
                       </motion.div>
                     )
                   })}
-
-                  <motion.div
-                    className="mt-4 pt-2"
-                    variants={prefersReducedMotion ? undefined : navLinkVariants}
-                  >
-                    <Button
-                      className="min-h-11 w-full"
-                      onClick={() => handleNavClick('#agendamento')}
-                    >
-                      Agendar consulta
-                    </Button>
-                  </motion.div>
                 </motion.nav>
+
+                <div className="mobile-menu-footer px-4 py-5">
+                  <Button
+                    className="w-full"
+                    onClick={() => handleNavClick('#agendamento')}
+                  >
+                    Agendar consulta
+                  </Button>
+                  <p className="mt-3 text-center text-xs text-muted-foreground">
+                    Atendimento presencial e online
+                  </p>
+                </div>
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>
