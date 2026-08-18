@@ -9,9 +9,11 @@ import type {
 } from '@/types'
 
 export const SITE: SiteConfig = {
+  url: 'https://portfolio-psicologia-theta.vercel.app',
   psychologist: {
     name: 'Dra. Helena Vasconcelos',
     title: 'Psicóloga Clínica',
+    headline: 'Psicóloga clínica em Belo Horizonte',
     crp: '04/38921',
     approach: 'Terapia Cognitivo-Comportamental (TCC)',
     tagline:
@@ -29,6 +31,16 @@ export const SITE: SiteConfig = {
     neighborhood: 'Savassi',
     city: 'Belo Horizonte — MG',
     schedule: 'Segunda a sexta, das 8h às 20h',
+    mapsQuery: 'Rua dos Inconfidentes, 842, Savassi, Belo Horizonte, MG',
+  },
+  crpVerifyUrl: 'https://cadastro.cfp.org.br/',
+  social: {
+    instagram: '',
+    linkedin: '',
+  },
+  emergency: {
+    cvv: '188',
+    samu: '192',
   },
   responseTimeHours: 24,
 }
@@ -47,6 +59,7 @@ export const CREDENTIALS: Credential[] = [
     icon: 'badge',
     label: 'Registro profissional',
     value: `CRP ${SITE.psychologist.crp}`,
+    href: SITE.crpVerifyUrl,
   },
   {
     icon: 'graduation',
@@ -202,6 +215,12 @@ export const FAQ_ITEMS: FAQItem[] = [
     answer:
       'Geralmente semanalmente, especialmente no início. Conforme o processo avança, podemos ajustar para quinzenal ou mensal, sempre em acordo conjunto.',
   },
+  {
+    id: 'urgencia',
+    question: 'Este site atende urgências ou crises?',
+    answer:
+      'Não. Este canal é para agendamento e informações sobre psicoterapia e não substitui atendimento de urgência. Em situação de crise ou risco imediato, ligue 188 (CVV — Centro de Valorização da Vida), 192 (SAMU) ou dirija-se ao serviço de emergência mais próximo.',
+  },
 ]
 
 export const TIME_PREFERENCE_LABELS = {
@@ -214,6 +233,8 @@ export const MODALITY_LABELS = {
   presencial: 'Presencial',
   online: 'Online',
 } as const
+
+export const MAPS_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.contact.mapsQuery)}&z=16&output=embed`
 
 export const WHATSAPP_URL = `https://wa.me/${SITE.contact.whatsapp}?text=${encodeURIComponent(
   'Olá, gostaria de solicitar informações sobre agendamento de consulta.',

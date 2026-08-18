@@ -40,16 +40,30 @@ const CredentialCard = memo(function CredentialCard({
       <p className="text-sm font-medium text-muted-foreground">
         {credential.label}
       </p>
-      <p className="mt-1 font-display text-lg font-semibold text-foreground">
-        {credential.value}
-      </p>
+      {credential.href ? (
+        <a
+          href={credential.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-1 inline-block font-display text-lg font-semibold text-foreground underline-offset-2 transition-colors hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {credential.value}
+        </a>
+      ) : (
+        <p className="mt-1 font-display text-lg font-semibold text-foreground">
+          {credential.value}
+        </p>
+      )}
     </GlassCard>
   )
 })
 
 export function Credentials() {
   return (
-    <section className="relative border-y border-border bg-muted/40 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+    <section
+      id="credenciais"
+      className="relative border-y border-border bg-muted/40 px-4 py-16 sm:px-6 lg:px-8 lg:py-20"
+    >
       <MeshBackground variant="subtle" />
 
       <div className="relative mx-auto max-w-6xl">

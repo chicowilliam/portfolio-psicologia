@@ -32,6 +32,7 @@ export interface Credential {
   icon: string
   label: string
   value: string
+  href?: string
 }
 
 export type Modality = 'presencial' | 'online'
@@ -50,9 +51,11 @@ export interface BookingFormData {
 }
 
 export interface SiteConfig {
+  url: string
   psychologist: {
     name: string
     title: string
+    headline: string
     crp: string
     approach: string
     tagline: string
@@ -68,6 +71,16 @@ export interface SiteConfig {
     neighborhood: string
     city: string
     schedule: string
+    mapsQuery: string
+  }
+  crpVerifyUrl: string
+  social: {
+    instagram: string
+    linkedin: string
+  }
+  emergency: {
+    cvv: string
+    samu: string
   }
   responseTimeHours: number
 }

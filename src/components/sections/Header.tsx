@@ -16,6 +16,7 @@ const SECTION_IDS = [
   'especialidades',
   'como-funciona',
   'duvidas',
+  'agendamento',
   'contato',
 ]
 

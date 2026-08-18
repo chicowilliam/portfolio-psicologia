@@ -38,7 +38,7 @@ export function Accordion({ items }: AccordionProps) {
                 animate={{ rotate: prefersReducedMotion ? 0 : isOpen ? 180 : 0 }}
                 transition={{ duration: prefersReducedMotion ? 0 : 0.22 }}
               >
-                <ChevronDown className="size-5 shrink-0 text-muted-foreground" />
+                <ChevronDown className="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
               </motion.span>
             </button>
 

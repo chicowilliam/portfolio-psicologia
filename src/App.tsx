@@ -1,18 +1,47 @@
+import { lazy, Suspense } from 'react'
 import { GrainOverlay } from '@/components/ui/GrainOverlay'
+import { EmergencyNotice } from '@/components/EmergencyNotice'
+import { SeoStructuredData } from '@/components/SeoStructuredData'
 import { Header } from '@/components/sections/Header'
 import { Hero } from '@/components/sections/Hero'
 import { Credentials } from '@/components/sections/Credentials'
-import { About } from '@/components/sections/About'
-import { Specialties } from '@/components/sections/Specialties'
-import { HowItWorks } from '@/components/sections/HowItWorks'
-import { FAQ } from '@/components/sections/FAQ'
-import { BookingForm } from '@/components/sections/BookingForm'
-import { Contact } from '@/components/sections/Contact'
-import { Footer } from '@/components/sections/Footer'
+
+const About = lazy(() =>
+  import('@/components/sections/About').then((module) => ({ default: module.About })),
+)
+const Specialties = lazy(() =>
+  import('@/components/sections/Specialties').then((module) => ({
+    default: module.Specialties,
+  })),
+)
+const HowItWorks = lazy(() =>
+  import('@/components/sections/HowItWorks').then((module) => ({
+    default: module.HowItWorks,
+  })),
+)
+const FAQ = lazy(() =>
+  import('@/components/sections/FAQ').then((module) => ({ default: module.FAQ })),
+)
+const BookingForm = lazy(() =>
+  import('@/components/sections/BookingForm').then((module) => ({
+    default: module.BookingForm,
+  })),
+)
+const Contact = lazy(() =>
+  import('@/components/sections/Contact').then((module) => ({ default: module.Contact })),
+)
+const Footer = lazy(() =>
+  import('@/components/sections/Footer').then((module) => ({ default: module.Footer })),
+)
+
+function SectionFallback() {
+  return <div className="min-h-24" aria-hidden="true" />
+}
 
 export default function App() {
   return (
     <>
+      <SeoStructuredData />
       <GrainOverlay />
 
       <a
@@ -27,15 +56,21 @@ export default function App() {
       <main id="conteudo-principal">
         <Hero />
         <Credentials />
-        <About />
-        <Specialties />
-        <HowItWorks />
-        <FAQ />
-        <BookingForm />
-        <Contact />
+        <Suspense fallback={<SectionFallback />}>
+          <About />
+          <Specialties />
+          <HowItWorks />
+          <FAQ />
+          <BookingForm />
+          <Contact />
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
+
+      <EmergencyNotice />
     </>
   )
 }

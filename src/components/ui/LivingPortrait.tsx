@@ -257,8 +257,7 @@ export function LivingPortrait({
         aria-label={ariaLabel}
       >
         <span className="px-6 text-center text-sm text-muted-foreground">
-          Adicione fotos em{' '}
-          <code className="text-xs">src/assets/psicologa/</code>
+          Retrato profissional em breve
         </span>
       </figure>
     )

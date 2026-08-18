@@ -2,10 +2,9 @@ import { memo } from 'react'
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { Button } from '@/components/ui/Button'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { MeshBackground } from '@/components/ui/MeshBackground'
-import { SITE, WHATSAPP_URL } from '@/lib/constants'
+import { MAPS_EMBED_URL, SITE, WHATSAPP_URL } from '@/lib/constants'
 
 interface ContactCardProps {
   icon: React.ReactNode
@@ -49,7 +48,26 @@ export function Contact() {
           />
         </ScrollReveal>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-2">
+        <ScrollReveal delay={0.04}>
+          <div
+            className="mt-8 rounded-2xl border border-accent/25 bg-accent/8 px-4 py-4 text-sm leading-relaxed text-muted-foreground sm:px-5"
+            role="note"
+          >
+            <strong className="font-medium text-foreground">Importante:</strong> este
+            canal não substitui atendimento de urgência. Em crise ou risco imediato,
+            ligue{' '}
+            <a href={`tel:${SITE.emergency.cvv}`} className="font-medium text-primary hover:underline">
+              {SITE.emergency.cvv} (CVV)
+            </a>{' '}
+            ou{' '}
+            <a href={`tel:${SITE.emergency.samu}`} className="font-medium text-primary hover:underline">
+              {SITE.emergency.samu} (SAMU)
+            </a>
+            .
+          </div>
+        </ScrollReveal>
+
+        <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <ScrollReveal delay={0.05}>
             <div className="space-y-6">
               <ContactCard
@@ -60,6 +78,10 @@ export function Contact() {
                   {SITE.contact.address}
                   <br />
                   {SITE.contact.neighborhood} — {SITE.contact.city}
+                </p>
+                <p className="mt-2 text-xs text-muted-foreground/80">
+                  Prédio comercial com acesso por elevador. Entrada acessível mediante
+                  combinação prévia.
                 </p>
               </ContactCard>
 
@@ -76,17 +98,22 @@ export function Contact() {
                 icon={<Phone className="size-5" aria-hidden="true" />}
                 title="WhatsApp"
               >
-                <p className="mt-1 text-sm text-muted-foreground">
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 block text-sm font-medium text-primary hover:underline"
+                >
                   {SITE.contact.whatsappDisplay}
-                </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mt-3"
-                  onClick={() => window.open(WHATSAPP_URL, '_blank', 'noopener')}
+                </a>
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex min-h-11 items-center rounded-xl border-2 border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 >
                   Enviar mensagem
-                </Button>
+                </a>
               </ContactCard>
 
               <ContactCard
@@ -105,16 +132,15 @@ export function Contact() {
 
           <ScrollReveal delay={0.08}>
             <GlassCard hover={false} className="overflow-hidden">
-              <div className="flex aspect-[4/3] items-center justify-center bg-muted/60">
-                <div className="px-6 text-center">
-                  <MapPin className="mx-auto size-10 text-primary/40" aria-hidden="true" />
-                  <p className="mt-4 text-sm text-muted-foreground">
-                    Mapa interativo — substitua pelo embed do Google Maps
-                  </p>
-                  <p className="mt-2 text-xs text-muted-foreground/70">
-                    {SITE.contact.address}, {SITE.contact.neighborhood}
-                  </p>
-                </div>
+              <div className="aspect-[4/3] w-full">
+                <iframe
+                  title={`Mapa do consultório — ${SITE.contact.neighborhood}, ${SITE.contact.city}`}
+                  src={MAPS_EMBED_URL}
+                  className="size-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
             </GlassCard>
           </ScrollReveal>

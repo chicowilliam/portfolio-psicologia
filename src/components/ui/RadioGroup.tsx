@@ -57,7 +57,7 @@ export function RadioGroup<T extends string>({
         })}
       </div>
       {error && (
-        <p className="text-sm text-error" role="alert">
+        <p className="field-error-animate text-sm text-error" role="alert">
           {error}
         </p>
       )}
@@ -91,7 +91,7 @@ export function MultiSelect<T extends string>({
   return (
     <fieldset className="space-y-3">
       <legend className="text-sm font-medium text-foreground">{label}</legend>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3" role="group" aria-label={label}>
         {options.map((option) => {
           const isSelected = values.includes(option.value)
 
@@ -101,8 +101,9 @@ export function MultiSelect<T extends string>({
               type="button"
               onClick={() => toggle(option.value)}
               aria-pressed={isSelected}
+              aria-label={`${option.label}${isSelected ? ', selecionado' : ''}`}
               className={cn(
-                'rounded-xl border px-4 py-2.5 text-sm transition-all duration-200',
+                'min-h-11 rounded-xl border px-4 py-2.5 text-sm transition-all duration-200',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                 'hover:scale-[1.02] active:scale-[0.98]',
                 isSelected
@@ -116,7 +117,7 @@ export function MultiSelect<T extends string>({
         })}
       </div>
       {error && (
-        <p className="text-sm text-error" role="alert">
+        <p className="field-error-animate text-sm text-error" role="alert">
           {error}
         </p>
       )}
