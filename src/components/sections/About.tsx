@@ -2,7 +2,9 @@ import { motion, useReducedMotion } from '@/lib/motion-react'
 import { ScrollReveal, ScrollRevealGroup } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { GlassCard } from '@/components/ui/GlassCard'
+import { LivingPortrait } from '@/components/ui/LivingPortrait'
 import { SITE, TIMELINE } from '@/lib/constants'
+import { POSE_B_PORTRAIT_IMAGES } from '@/lib/portrait-images'
 
 function TimelineConnector() {
   const prefersReducedMotion = useReducedMotion()
@@ -47,8 +49,13 @@ export function About() {
         <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
           <ScrollReveal delay={0.05}>
             <div className="glass-card relative aspect-[4/5] overflow-hidden rounded-3xl shadow-card">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/15 to-primary-light/25" />
-              <div className="absolute inset-0 flex items-end p-8">
+              <LivingPortrait
+                images={POSE_B_PORTRAIT_IMAGES}
+                ariaLabel={SITE.psychologist.photoAlt}
+                variant="expressive"
+                className="absolute inset-0"
+              />
+              <div className="absolute inset-0 flex items-end bg-gradient-to-t from-foreground/35 via-transparent to-transparent p-8">
                 <div className="glass-quote rounded-2xl px-5 py-4 shadow-soft">
                   <p className="font-display text-lg font-semibold text-foreground">
                     {SITE.psychologist.name}

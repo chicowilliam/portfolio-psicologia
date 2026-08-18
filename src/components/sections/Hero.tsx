@@ -3,7 +3,9 @@ import { ArrowRight, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { MeshBackground } from '@/components/ui/MeshBackground'
 import { MagneticWrapper } from '@/components/ui/MagneticWrapper'
+import { LivingPortrait } from '@/components/ui/LivingPortrait'
 import { SITE } from '@/lib/constants'
+import { POSE_A_PORTRAIT_IMAGES } from '@/lib/portrait-images'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { fadeInUp } from '@/lib/motion'
 
@@ -78,42 +80,15 @@ export function Hero() {
           transition={prefersReducedMotion ? undefined : { delay: 0.12 }}
         >
           <div className="glass-card relative aspect-[4/5] overflow-hidden rounded-3xl shadow-card">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-primary-light/20 to-accent/15" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary-light/15 to-accent/10" />
 
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <motion.div
-                  className="mx-auto mb-4 flex size-24 items-center justify-center rounded-full glass-quote shadow-soft"
-                  initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.9 }}
-                  animate={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.25, duration: 0.5 }}
-                >
-                  <svg viewBox="0 0 64 64" className="size-12 text-primary" aria-hidden="true">
-                    <motion.circle
-                      cx="32"
-                      cy="24"
-                      r="12"
-                      fill="currentColor"
-                      opacity="0.3"
-                      initial={prefersReducedMotion ? false : { pathLength: 0 }}
-                      animate={prefersReducedMotion ? undefined : { pathLength: 1 }}
-                      transition={{ duration: 0.6 }}
-                    />
-                    <motion.path
-                      d="M12 56c4-14 10-20 20-20s16 6 20 20"
-                      fill="currentColor"
-                      opacity="0.2"
-                      initial={prefersReducedMotion ? false : { pathLength: 0 }}
-                      animate={prefersReducedMotion ? undefined : { pathLength: 1 }}
-                      transition={{ duration: 0.7, delay: 0.15 }}
-                    />
-                  </svg>
-                </motion.div>
-                <p className="px-8 text-sm text-muted-foreground">
-                  Ilustração representativa — substitua pela foto profissional
-                </p>
-              </div>
-            </div>
+            <LivingPortrait
+              images={POSE_A_PORTRAIT_IMAGES}
+              ariaLabel={`Foto de ${SITE.psychologist.name}, ${SITE.psychologist.title.toLowerCase()}`}
+              variant="subtle"
+              priority
+              className="absolute inset-0"
+            />
 
             <div className="glass-quote absolute bottom-6 left-6 right-6 rounded-2xl p-4 shadow-soft">
               <p className="text-sm font-medium text-foreground">
