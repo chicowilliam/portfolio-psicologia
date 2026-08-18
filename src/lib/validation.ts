@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { isBefore, startOfDay } from 'date-fns'
 import { isValidPhone } from '@/lib/utils'
 
 export const bookingSchema = z.object({
@@ -17,6 +18,14 @@ export const bookingSchema = z.object({
   modality: z.enum(['presencial', 'online'], {
     message: 'Selecione a modalidade preferida',
   }),
+  preferredDate: z
+    .date({ message: 'Selecione uma data preferida' })
+    .refine((date) => !isBefore(startOfDay(date), startOfDay(new Date())), {
+      message: 'A data deve ser hoje ou no futuro',
+    })
+    .refine((date) => date.getDay() !== 0, {
+      message: 'Não atendemos aos domingos',
+    }),
   timePreferences: z
     .array(z.enum(['manha', 'tarde', 'noite']))
     .min(1, 'Selecione ao menos um período de preferência'),

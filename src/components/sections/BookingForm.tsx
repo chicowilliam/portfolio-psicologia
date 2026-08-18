@@ -1,14 +1,16 @@
 import { lazy, Suspense, useCallback, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { MessageCircle } from 'lucide-react'
+import { Mail, MessageSquare, Phone, User, MessageCircle } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Checkbox } from '@/components/ui/Checkbox'
-import { RadioGroup, MultiSelect } from '@/components/ui/RadioGroup'
+import { MultiSelect } from '@/components/ui/RadioGroup'
+import { SegmentedControl } from '@/components/ui/SegmentedControl'
+import { DatePickerField } from '@/components/ui/DatePickerField'
 import { MeshBackground } from '@/components/ui/MeshBackground'
 import { PrivacyPolicyContent } from '@/components/PrivacyPolicyContent'
 import {
@@ -54,6 +56,7 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
       email: '',
       phone: '',
       modality: 'presencial',
+      preferredDate: undefined,
       timePreferences: [],
       message: '',
       lgpdConsent: undefined,
@@ -94,6 +97,7 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
               <Input
                 label="Nome completo"
                 placeholder="Seu nome"
+                icon={User}
                 error={errors.fullName?.message}
                 {...register('fullName')}
               />
@@ -103,6 +107,7 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                 type="email"
                 placeholder="seu@email.com"
                 autoComplete="email"
+                icon={Mail}
                 error={errors.email?.message}
                 {...register('email')}
               />
@@ -116,6 +121,7 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                     type="tel"
                     placeholder="(31) 99999-9999"
                     autoComplete="tel"
+                    icon={Phone}
                     value={field.value}
                     onChange={(e) => field.onChange(formatPhone(e.target.value))}
                     error={errors.phone?.message}
@@ -127,7 +133,7 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                 name="modality"
                 control={control}
                 render={({ field }) => (
-                  <RadioGroup
+                  <SegmentedControl
                     name="modality"
                     label="Modalidade preferida"
                     options={[
@@ -137,6 +143,19 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                     value={field.value}
                     onChange={field.onChange}
                     error={errors.modality?.message}
+                  />
+                )}
+              />
+
+              <Controller
+                name="preferredDate"
+                control={control}
+                render={({ field }) => (
+                  <DatePickerField
+                    label="Data preferida"
+                    value={field.value}
+                    onChange={field.onChange}
+                    error={errors.preferredDate?.message}
                   />
                 )}
               />
@@ -163,6 +182,7 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                 label="Mensagem (opcional)"
                 placeholder="Alguma observação sobre disponibilidade ou preferências?"
                 hint="Não é necessário descrever sintomas ou motivos clínicos neste formulário."
+                icon={MessageSquare}
                 error={errors.message?.message}
                 {...register('message')}
               />

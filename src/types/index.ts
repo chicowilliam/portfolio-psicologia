@@ -43,6 +43,7 @@ export interface BookingFormData {
   email: string
   phone: string
   modality: Modality
+  preferredDate: Date
   timePreferences: TimePreference[]
   message?: string
   lgpdConsent: boolean

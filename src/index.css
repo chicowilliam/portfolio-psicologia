@@ -203,6 +203,43 @@
     color: var(--color-primary);
     font-weight: 600;
   }
+
+  .field-error-animate {
+    animation: field-error-in 0.28s ease-out;
+  }
+
+  .field-error-shake {
+    animation: field-error-shake 0.38s ease-out;
+  }
+
+  .dialog-overlay[data-state='open'] {
+    animation: dialog-overlay-in 0.28s ease-out forwards;
+  }
+
+  .dialog-overlay[data-state='closed'] {
+    animation: dialog-overlay-out 0.22s ease-in forwards;
+  }
+
+  .dialog-panel[data-state='open'] {
+    animation: dialog-panel-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .dialog-panel[data-state='closed'] {
+    animation: dialog-panel-out 0.24s ease-in forwards;
+  }
+
+  .dialog-panel-reduced[data-state='open'],
+  .dialog-panel-reduced[data-state='closed'] {
+    animation: none;
+  }
+
+  .dialog-sheet[data-state='open'] {
+    animation: dialog-sheet-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .dialog-sheet[data-state='closed'] {
+    animation: dialog-sheet-out 0.24s ease-in forwards;
+  }
 }
 
 @keyframes mesh-drift-1 {
@@ -232,6 +269,94 @@
   }
   50% {
     transform: translate3d(-12px, 12px, 0) scale(1.08);
+  }
+}
+
+@keyframes field-error-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes field-error-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes dialog-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialog-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialog-panel-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes dialog-panel-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes dialog-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dialog-sheet-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
   }
 }
 
