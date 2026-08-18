@@ -3,7 +3,6 @@ import { AnimatePresence, motion, useReducedMotion } from '@/lib/motion-react'
 import { Menu, X } from 'lucide-react'
 import { Dialog } from 'radix-ui'
 import { Button } from '@/components/ui/Button'
-import { MagneticWrapper } from '@/components/ui/MagneticWrapper'
 import { NAV_LINKS, SITE } from '@/lib/constants'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
@@ -128,16 +127,13 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <MagneticWrapper className="hidden sm:inline-flex">
-            <Button
-              size="sm"
-              magnetic={false}
-              className="shadow-soft"
-              onClick={() => handleNavClick('#agendamento')}
-            >
-              Agendar consulta
-            </Button>
-          </MagneticWrapper>
+          <Button
+            size="sm"
+            className="hidden sm:inline-flex"
+            onClick={() => handleNavClick('#agendamento')}
+          >
+            Agendar consulta
+          </Button>
 
           <Dialog.Root open={isMobileOpen} onOpenChange={setIsMobileOpen}>
             <Dialog.Trigger asChild>
@@ -240,7 +236,6 @@ export function Header() {
                   >
                     <Button
                       className="min-h-11 w-full"
-                      magnetic={false}
                       onClick={() => handleNavClick('#agendamento')}
                     >
                       Agendar consulta

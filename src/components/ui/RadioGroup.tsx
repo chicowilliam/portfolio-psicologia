@@ -35,11 +35,10 @@ export function RadioGroup<T extends string>({
               key={option.value}
               htmlFor={id}
               className={cn(
-                'flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-3 text-sm transition-all duration-200',
-                'hover:shadow-soft',
+                'flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 py-3 text-sm transition-colors duration-200',
                 isSelected
-                  ? 'border-primary bg-primary/5 text-primary shadow-soft'
-                  : 'border-border bg-card text-foreground',
+                  ? 'border-primary bg-primary/8 text-primary'
+                  : 'border-border bg-card text-foreground hover:border-primary/25 hover:bg-muted/40',
               )}
             >
               <input
@@ -103,12 +102,11 @@ export function MultiSelect<T extends string>({
               aria-pressed={isSelected}
               aria-label={`${option.label}${isSelected ? ', selecionado' : ''}`}
               className={cn(
-                'min-h-11 rounded-xl border px-4 py-2.5 text-sm transition-all duration-200',
+                'min-h-11 rounded-full border px-4 py-2.5 text-sm transition-colors duration-200',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                'hover:scale-[1.02] active:scale-[0.98]',
                 isSelected
-                  ? 'border-primary bg-primary text-primary-foreground shadow-soft'
-                  : 'border-border bg-card text-foreground hover:shadow-soft',
+                  ? 'border-primary bg-primary text-primary-foreground'
+                  : 'border-border bg-card text-foreground hover:border-primary/30 hover:bg-muted/50',
               )}
             >
               {option.label}

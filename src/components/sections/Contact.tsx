@@ -2,6 +2,7 @@ import { memo } from 'react'
 import { Clock, Mail, MapPin, Phone } from 'lucide-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { Button } from '@/components/ui/Button'
 import { GlassCard } from '@/components/ui/GlassCard'
 import { MeshBackground } from '@/components/ui/MeshBackground'
 import { MAPS_EMBED_URL, SITE, WHATSAPP_URL } from '@/lib/constants'
@@ -106,14 +107,15 @@ export function Contact() {
                 >
                   {SITE.contact.whatsappDisplay}
                 </a>
-                <a
+                <Button
                   href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex min-h-11 items-center rounded-xl border-2 border-primary px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  external
+                  variant="outline"
+                  size="sm"
+                  className="mt-3"
                 >
                   Enviar mensagem
-                </a>
+                </Button>
               </ContactCard>
 
               <ContactCard

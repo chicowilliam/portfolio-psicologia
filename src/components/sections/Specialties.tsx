@@ -37,7 +37,7 @@ const SpecialtyCard = memo(function SpecialtyCard({
     <GlassCard as="article" className="group h-full p-6">
       <AnimatedIcon
         icon={Icon}
-        containerClassName="mb-4 size-11 rounded-xl bg-primary/10 text-primary transition-[transform,background-color,color] duration-300 group-hover:scale-110 group-hover:bg-primary group-hover:text-primary-foreground"
+        containerClassName="mb-4 size-11 rounded-xl bg-primary/10 text-primary transition-[background-color,color] duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
         className="size-5"
       />
       <h3 className="font-display text-xl font-semibold text-foreground">

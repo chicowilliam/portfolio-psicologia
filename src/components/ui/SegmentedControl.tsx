@@ -1,4 +1,3 @@
-import { motion } from '@/lib/motion-react'
 import { cn } from '@/lib/utils'
 
 interface SegmentedOption<T extends string> {
@@ -29,7 +28,7 @@ export function SegmentedControl<T extends string>({
       <div
         role="radiogroup"
         aria-label={label}
-        className="flex rounded-xl border border-border bg-muted/40 p-1"
+        className="flex rounded-full border border-border bg-muted/40 p-1"
       >
         {options.map((option) => {
           const isSelected = value === option.value
@@ -43,20 +42,14 @@ export function SegmentedControl<T extends string>({
               name={name}
               onClick={() => onChange(option.value)}
               className={cn(
-                'relative min-h-11 flex-1 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors',
+                'min-h-11 flex-1 rounded-full px-4 py-2.5 text-sm font-medium transition-colors duration-200',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-                isSelected ? 'text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
+                isSelected
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
               )}
             >
-              {isSelected && (
-                <motion.span
-                  layoutId={`${name}-segment-pill`}
-                  className="absolute inset-0 rounded-lg bg-primary shadow-soft"
-                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                  aria-hidden="true"
-                />
-              )}
-              <span className="relative z-10">{option.label}</span>
+              {option.label}
             </button>
           )
         })}

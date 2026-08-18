@@ -2,7 +2,6 @@ import { motion, useReducedMotion } from '@/lib/motion-react'
 import { ArrowRight, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { MeshBackground } from '@/components/ui/MeshBackground'
-import { MagneticWrapper } from '@/components/ui/MagneticWrapper'
 import { LivingPortrait } from '@/components/ui/LivingPortrait'
 import { SITE } from '@/lib/constants'
 import { POSE_A_PORTRAIT_IMAGES } from '@/lib/portrait-images'
@@ -48,29 +47,23 @@ export function Hero() {
           </p>
 
           <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:items-center">
-            <MagneticWrapper>
-              <Button
-                size="lg"
-                magnetic={false}
-                onClick={() => scrollTo('#agendamento')}
-                className="gap-2"
-              >
-                <Calendar className="size-5" aria-hidden="true" />
-                Agendar consulta
-              </Button>
-            </MagneticWrapper>
-            <MagneticWrapper>
-              <Button
-                variant="outline"
-                size="lg"
-                magnetic={false}
-                onClick={() => scrollTo('#sobre')}
-                className="gap-2"
-              >
-                Conhecer o trabalho
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </Button>
-            </MagneticWrapper>
+            <Button
+              size="lg"
+              onClick={() => scrollTo('#agendamento')}
+              className="gap-2"
+            >
+              <Calendar className="size-5" aria-hidden="true" />
+              Agendar consulta
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => scrollTo('#sobre')}
+              className="gap-2"
+            >
+              Conhecer o trabalho
+              <ArrowRight className="size-4" aria-hidden="true" />
+            </Button>
           </div>
 
           <p className="mt-4 text-sm text-muted-foreground sm:mt-5">

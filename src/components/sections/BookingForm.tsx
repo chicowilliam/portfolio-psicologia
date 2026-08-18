@@ -216,7 +216,6 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                 type="submit"
                 size="lg"
                 className="w-full"
-                magnetic
                 isLoading={isSubmitting}
               >
                 Enviar solicitação
@@ -252,8 +251,8 @@ export function BookingForm({ onSuccess }: BookingFormProps) {
                 </Button>
                 <Button
                   className="flex-1 gap-2"
-                  magnetic
-                  onClick={() => window.open(WHATSAPP_URL, '_blank', 'noopener')}
+                  href={WHATSAPP_URL}
+                  external
                 >
                   <MessageCircle className="size-4" aria-hidden="true" />
                   Falar agora pelo WhatsApp
