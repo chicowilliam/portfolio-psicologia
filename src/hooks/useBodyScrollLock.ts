@@ -1,14 +1,33 @@
 import { useEffect } from 'react'
+import { useLenis } from '@/components/providers/LenisProvider'
+
+let lockCount = 0
+let previousBodyOverflow = ''
+let previousHtmlOverflow = ''
 
 export function useBodyScrollLock(isLocked: boolean) {
+  const lenis = useLenis()
+
   useEffect(() => {
     if (!isLocked) return
 
-    const originalOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    if (lockCount === 0) {
+      previousBodyOverflow = document.body.style.overflow
+      previousHtmlOverflow = document.documentElement.style.overflow
+      document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+      lenis?.stop()
+    }
+
+    lockCount += 1
 
     return () => {
-      document.body.style.overflow = originalOverflow
+      lockCount = Math.max(0, lockCount - 1)
+      if (lockCount === 0) {
+        document.body.style.overflow = previousBodyOverflow
+        document.documentElement.style.overflow = previousHtmlOverflow
+        lenis?.start()
+      }
     }
-  }, [isLocked])
+  }, [isLocked, lenis])
 }

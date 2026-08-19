@@ -6,6 +6,7 @@ import { Dialog } from 'radix-ui'
 import { Button } from '@/components/ui/Button'
 import { NAV_LINKS, SITE } from '@/lib/constants'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
+import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { useHideOnScroll } from '@/hooks/useHideOnScroll'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
@@ -36,9 +37,10 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const scrollTo = useScrollTo()
-  const { openBooking } = useBookingDialog()
+  const { openBooking, isOpen: isBookingOpen } = useBookingDialog()
   const activeSection = useScrollSpy(SECTION_IDS)
-  const navHidden = useHideOnScroll(isMobileOpen)
+  const navHidden = useHideOnScroll(isMobileOpen || isBookingOpen)
+  useBodyScrollLock(isMobileOpen)
 
   useEffect(() => {
     const hero = document.getElementById('inicio')
@@ -192,6 +194,7 @@ export function Header() {
                   'mobile-menu-panel dialog-panel fixed inset-y-0 right-0 z-50 flex w-[min(100%,21rem)] flex-col outline-none lg:hidden',
                   prefersReducedMotion && 'dialog-panel-reduced',
                 )}
+                data-lenis-prevent
                 aria-describedby="mobile-menu-description"
               >
                 <div className="mobile-menu-header px-5 pb-5 pt-6">

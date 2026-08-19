@@ -100,7 +100,10 @@ export function DatePickerField({
           <Dialog.Trigger asChild>{triggerButton}</Dialog.Trigger>
           <Dialog.Portal>
             <Dialog.Overlay className="dialog-overlay fixed inset-0 z-50 bg-foreground/25 backdrop-blur-sm" />
-            <Dialog.Content className="dialog-sheet fixed inset-x-0 bottom-0 z-50 max-h-[90dvh] overflow-y-auto rounded-t-3xl border border-border bg-card p-6 shadow-elevated outline-none">
+            <Dialog.Content
+              className="dialog-sheet fixed inset-x-0 bottom-0 z-50 max-h-[90dvh] overflow-y-auto rounded-t-3xl border border-border bg-card p-6 shadow-elevated outline-none"
+              data-lenis-prevent
+            >
               <Dialog.Title className="font-display text-lg font-semibold text-foreground">
                 {label}
               </Dialog.Title>

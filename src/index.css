@@ -527,9 +527,40 @@
     opacity: 0.24;
   }
 
+  .hero-mobile-sketch {
+    opacity: 0.22;
+    filter: blur(0.15px);
+  }
+
+  .hero-mobile-sketch-stem {
+    stroke: color-mix(in srgb, var(--color-primary) 24%, transparent);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+  }
+
+  .hero-mobile-sketch-leaf {
+    fill: color-mix(in srgb, var(--color-primary-light) 18%, transparent);
+    stroke: color-mix(in srgb, var(--color-primary) 22%, transparent);
+    stroke-width: 1;
+  }
+
+  .hero-mobile-sketch-leaf-soft {
+    fill: color-mix(in srgb, var(--color-accent) 14%, transparent);
+    stroke: color-mix(in srgb, var(--color-accent) 22%, transparent);
+    stroke-width: 1;
+  }
+
   @media (max-width: 767px) {
     .mesh-blob-3 {
       display: none;
+    }
+
+    .mesh-blob-1 {
+      opacity: 0.2;
+    }
+
+    .mesh-blob-2 {
+      opacity: 0.18;
     }
   }
 
@@ -707,22 +738,65 @@
     -webkit-backdrop-filter: blur(10px);
   }
 
-  .booking-dialog-content {
+  .booking-dialog-shell {
+    position: fixed;
+    inset: 0;
     z-index: 210;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .booking-dialog-panel {
+    pointer-events: auto;
+    position: relative;
     isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    width: min(100%, 42rem);
+    max-height: min(92dvh, 100%);
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     background: var(--color-card);
     border: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
     box-shadow: var(--shadow-elevated);
+    border-radius: 1.5rem 1.5rem 0 0;
+    border-bottom: none;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  .booking-dialog-content::before {
+  @media (min-width: 640px) {
+    .booking-dialog-shell {
+      align-items: center;
+      padding: 1.5rem;
+    }
+
+    .booking-dialog-panel {
+      border-radius: 1.5rem;
+      border-bottom: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
+    }
+  }
+
+  .booking-dialog-header {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+    background: color-mix(in srgb, var(--color-muted) 72%, var(--color-card));
+  }
+
+  .booking-dialog-header::before {
     content: '';
     position: absolute;
     inset: 0 auto auto 0;
     z-index: 1;
     width: 100%;
     height: 3px;
-    border-radius: inherit;
     background: linear-gradient(
       90deg,
       var(--color-primary) 0%,
@@ -731,43 +805,17 @@
     );
   }
 
-  @media (max-width: 639px) {
-    .booking-dialog-content {
-      border-radius: 1.5rem 1.5rem 0 0;
-      border-bottom: none;
-    }
-  }
-
-  .booking-dialog-header {
-    position: relative;
-    z-index: 2;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
-    background: color-mix(in srgb, var(--color-muted) 72%, var(--color-card));
-  }
-
   .booking-dialog-body {
     position: relative;
     z-index: 2;
   }
 
-  @media (max-width: 639px) {
-    .booking-dialog-content[data-state='open'] {
-      animation: dialog-sheet-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    .booking-dialog-content[data-state='closed'] {
-      animation: dialog-sheet-out 0.24s ease-in forwards;
-    }
+  .booking-dialog-shell[data-state='open'] .booking-dialog-panel {
+    animation: booking-panel-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  @media (min-width: 640px) {
-    .booking-dialog-content[data-state='open'] {
-      animation: dialog-modal-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-
-    .booking-dialog-content[data-state='closed'] {
-      animation: dialog-modal-out 0.24s ease-in forwards;
-    }
+  .booking-dialog-shell[data-state='closed'] .booking-dialog-panel {
+    animation: booking-panel-out 0.22s ease-in both;
   }
 
   .mobile-menu-overlay {
@@ -949,6 +997,28 @@
   }
 }
 
+@keyframes booking-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes booking-panel-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+}
+
 @keyframes dialog-sheet-in {
   from {
     opacity: 0;
@@ -1040,8 +1110,8 @@
 
   .dialog-sheet[data-state='open'],
   .dialog-sheet[data-state='closed'],
-  .booking-dialog-content[data-state='open'],
-  .booking-dialog-content[data-state='closed'] {
+  .booking-dialog-shell[data-state='open'] .booking-dialog-panel,
+  .booking-dialog-shell[data-state='closed'] .booking-dialog-panel {
     animation: none;
   }
 }

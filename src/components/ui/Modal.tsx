@@ -65,6 +65,7 @@ export function Modal({
               size === 'md' && 'max-w-md',
               size === 'lg' && 'max-w-2xl',
             )}
+            data-lenis-prevent
             variants={dialogVariants}
             initial="hidden"
             animate="visible"

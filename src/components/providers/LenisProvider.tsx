@@ -27,6 +27,8 @@ export function LenisProvider({ children }: LenisProviderProps) {
       lerp: 0.085,
       smoothWheel: true,
       wheelMultiplier: 0.9,
+      prevent: (node) =>
+        node instanceof Element && Boolean(node.closest('[data-lenis-prevent]')),
     })
 
     setLenis(instance)

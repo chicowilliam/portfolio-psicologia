@@ -93,14 +93,41 @@ export function Hero() {
           animate={prefersReducedMotion ? undefined : 'visible'}
           transition={prefersReducedMotion ? undefined : { delay: 0.12 }}
         >
+          <svg
+            className="hero-mobile-sketch pointer-events-none absolute -left-3 -right-3 -top-3 z-0 h-[104%] w-[calc(100%+1.5rem)] sm:hidden"
+            viewBox="0 0 420 560"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
+          >
+            <path
+              className="hero-mobile-sketch-stem"
+              d="M18 70 C 64 130, 44 234, 74 302 C 100 364, 64 430, 86 508"
+            />
+            <path className="hero-mobile-sketch-leaf" d="M58 146 C 86 136, 102 168, 78 182 C 58 192, 42 170, 58 146 Z" />
+            <path className="hero-mobile-sketch-leaf-soft" d="M34 228 C 66 214, 88 250, 58 268 C 36 278, 14 252, 34 228 Z" />
+            <path className="hero-mobile-sketch-leaf" d="M76 322 C 104 308, 126 342, 94 362 C 72 374, 50 344, 76 322 Z" />
+
+            <path
+              className="hero-mobile-sketch-stem"
+              d="M404 86 C 352 154, 384 250, 332 318 C 298 366, 342 440, 312 512"
+            />
+            <path className="hero-mobile-sketch-leaf-soft" d="M334 174 C 360 158, 384 188, 358 206 C 336 220, 314 194, 334 174 Z" />
+            <path className="hero-mobile-sketch-leaf" d="M352 272 C 382 258, 406 290, 374 310 C 352 324, 326 298, 352 272 Z" />
+            <path className="hero-mobile-sketch-leaf-soft" d="M318 370 C 346 356, 370 388, 338 410 C 314 424, 290 396, 318 370 Z" />
+          </svg>
+
           <div className="paper-frame relative aspect-[4/5] max-h-[min(68vh,34rem)] w-full lg:max-h-[min(72vh,36rem)]">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary-light/15 to-accent/10" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_12%,rgba(255,255,255,0.42),transparent_38%)]" />
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/35" aria-hidden="true" />
 
             <LivingPortrait
               images={POSE_A_PORTRAIT_IMAGES}
               ariaLabel={`Foto de ${SITE.psychologist.name}, ${SITE.psychologist.title.toLowerCase()}`}
               variant="subtle"
               priority
+              imageClassName="object-[center_16%] sm:object-[center_18%]"
               className="absolute inset-0"
             />
 
@@ -112,6 +139,11 @@ export function Hero() {
                 {SITE.psychologist.name}
               </p>
             </div>
+          </div>
+
+          <div className="mt-3 flex items-center justify-center gap-2 sm:hidden">
+            <span className="paper-chip text-xs">CRP {SITE.psychologist.crp}</span>
+            <span className="paper-chip text-xs">+10 anos de atuação</span>
           </div>
         </motion.div>
       </div>
