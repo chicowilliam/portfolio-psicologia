@@ -26,7 +26,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             aria-describedby={error ? `${checkboxId}-error` : undefined}
             {...props}
           />
-          <label htmlFor={checkboxId} className="text-sm leading-relaxed text-foreground">
+          <label htmlFor={checkboxId} className="text-sm leading-[1.7] text-foreground/92">
             {label}
           </label>
         </div>

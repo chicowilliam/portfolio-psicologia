@@ -59,10 +59,10 @@ export function Footer() {
         <div className="relative mx-auto max-w-6xl">
           <div className="grid gap-10 md:grid-cols-3">
             <div>
-              <p className="font-display text-xl font-semibold">
+              <p className="font-display text-[1.38rem] font-semibold leading-tight tracking-[-0.01em]">
                 {SITE.psychologist.name}
               </p>
-              <p className="mt-1 text-sm text-primary-foreground/75">
+              <p className="mt-1 text-sm leading-relaxed text-primary-foreground/75">
                 {SITE.psychologist.title}
               </p>
               <a
@@ -76,10 +76,10 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/75">
+              <h3 className="text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-primary-foreground/75">
                 Navegação
               </h3>
-              <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:grid-cols-1">
+              <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm sm:grid-cols-1">
                 {FOOTER_LINKS.map((link) => (
                   <li key={link.href}>
                     <a
@@ -104,7 +104,7 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-primary-foreground/75">
+              <h3 className="text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-primary-foreground/75">
                 {socialLinks.length > 0 ? 'Redes sociais' : 'Contato'}
               </h3>
               {socialLinks.length > 0 ? (
@@ -138,7 +138,7 @@ export function Footer() {
           </div>
 
           <div className="mt-10 border-t border-primary-foreground/10 pt-8">
-            <p className="text-center text-xs leading-relaxed text-primary-foreground/70">
+            <p className="mx-auto max-w-[72ch] text-center text-xs leading-[1.75] text-primary-foreground/70">
               O sigilo profissional é garantido pelo Código de Ética Profissional
               do Psicólogo (Resolução CFP nº 010/2005). As informações compartilhadas
               neste site não substituem avaliação clínica individual. Publicidade

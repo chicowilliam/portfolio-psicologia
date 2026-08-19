@@ -16,7 +16,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="group space-y-2">
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-foreground transition-[color,font-weight] duration-200 group-focus-within:text-primary group-focus-within:font-semibold"
+          className="block text-[0.82rem] font-semibold uppercase tracking-[0.06em] text-foreground/88 transition-[color] duration-200 group-focus-within:text-primary"
         >
           {label}
         </label>
@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             className={cn(
-              'w-full rounded-xl border border-border bg-card py-3 text-foreground',
+              'w-full rounded-xl border border-border bg-card py-3 text-[0.98rem] leading-relaxed text-foreground sm:text-[1rem]',
               Icon ? 'pl-11 pr-4' : 'px-4',
               'placeholder:text-muted-foreground/70',
               'transition-colors duration-200',
