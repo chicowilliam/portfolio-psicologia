@@ -56,10 +56,9 @@ export interface TrustSeal {
 }
 
 export interface ConsultorioPhoto {
-  id: string
+  id: 'sala-atendimento' | 'detalhe-ambiente' | 'recepcao-corredor'
   alt: string
   caption: string
-  placeholder: 'sala' | 'detalhe' | 'recepcao'
 }
 
 export interface BlogPost {

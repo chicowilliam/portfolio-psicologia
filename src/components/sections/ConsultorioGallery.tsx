@@ -1,46 +1,27 @@
 import { memo } from 'react'
-import { ArmchairIcon } from '@phosphor-icons/react/Armchair'
-import { PlantIcon } from '@phosphor-icons/react/Plant'
-import { DoorIcon } from '@phosphor-icons/react/Door'
 import { ScrollReveal, ScrollRevealGroup } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { CONSULTORIO_GALLERY } from '@/lib/constants'
+import { CONSULTORIO_IMAGES } from '@/lib/consultorio-images'
 import type { ConsultorioPhoto } from '@/types'
-import { cn } from '@/lib/utils'
-
-const placeholderStyles: Record<
-  ConsultorioPhoto['placeholder'],
-  string
-> = {
-  sala: 'from-primary/18 via-primary-light/12 to-accent/10',
-  detalhe: 'from-accent/16 via-muted/40 to-primary-light/14',
-  recepcao: 'from-muted/50 via-card to-primary/8',
-}
-
-const placeholderIcons = {
-  sala: ArmchairIcon,
-  detalhe: PlantIcon,
-  recepcao: DoorIcon,
-} as const
 
 const GalleryItem = memo(function GalleryItem({ photo }: { photo: ConsultorioPhoto }) {
-  const Icon = placeholderIcons[photo.placeholder]
+  const src = CONSULTORIO_IMAGES[photo.id]
 
   return (
     <figure className="paper-frame group overflow-hidden">
-      <div
-        className={cn(
-          'relative aspect-[4/3] bg-gradient-to-br',
-          placeholderStyles[photo.placeholder],
-        )}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.35),transparent_45%)]" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center">
-          <Icon className="size-8 text-primary/70" weight="duotone" aria-hidden="true" />
-          <p className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground/80">
-            Foto em breve
-          </p>
-        </div>
+      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+        <img
+          src={src}
+          alt={photo.alt}
+          loading="lazy"
+          decoding="async"
+          className="size-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-foreground/10 via-transparent to-transparent"
+          aria-hidden="true"
+        />
       </div>
       <figcaption className="border-t border-border/60 bg-card/90 px-4 py-3">
         <p className="font-display text-sm font-semibold text-foreground">{photo.caption}</p>
@@ -65,9 +46,10 @@ export function ConsultorioGallery() {
             titleAccent="para acolher"
             description={
               <>
-                Atendimento presencial na <strong className="font-semibold text-foreground">Savassi</strong>,
-                com sala reservada, luz natural e acesso por elevador. Conheça o espaço antes da
-                primeira conversa.
+                Atendimento presencial na{' '}
+                <strong className="font-semibold text-foreground">Savassi</strong>, com sala
+                reservada, luz natural e acesso por elevador. Conheça o espaço antes da primeira
+                conversa.
               </>
             }
           />

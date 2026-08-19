@@ -187,21 +187,18 @@ export const TRUST_SEALS: TrustSeal[] = [
 export const CONSULTORIO_GALLERY: ConsultorioPhoto[] = [
   {
     id: 'sala-atendimento',
-    alt: 'Sala de atendimento psicológico com poltrona, luminária e luz natural suave',
+    alt: 'Sala de atendimento psicológico com poltronas, luminária e luz natural suave',
     caption: 'Sala de atendimento',
-    placeholder: 'sala',
   },
   {
     id: 'detalhe-ambiente',
     alt: 'Detalhe do consultório com plantas, livros e tons neutros acolhedores',
     caption: 'Ambiente acolhedor',
-    placeholder: 'detalhe',
   },
   {
     id: 'recepcao-corredor',
-    alt: 'Recepção ou corredor do consultório com iluminação calma e acesso por elevador',
+    alt: 'Recepção do consultório com iluminação calma e acesso por elevador',
     caption: 'Recepção · Savassi',
-    placeholder: 'recepcao',
   },
 ]
 
