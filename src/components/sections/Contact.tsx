@@ -1,33 +1,33 @@
 import { memo } from 'react'
-import { Clock, Mail, MapPin, Phone } from 'lucide-react'
+import { ClockIcon } from '@phosphor-icons/react/Clock'
+import { EnvelopeSimpleIcon } from '@phosphor-icons/react/EnvelopeSimple'
+import { MapPinIcon } from '@phosphor-icons/react/MapPin'
+import { WhatsappLogoIcon } from '@phosphor-icons/react/WhatsappLogo'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
-import { GlassCard } from '@/components/ui/GlassCard'
 import { MeshBackground } from '@/components/ui/MeshBackground'
 import { MAPS_EMBED_URL, SITE, WHATSAPP_URL } from '@/lib/constants'
 
-interface ContactCardProps {
+interface ContactRowProps {
   icon: React.ReactNode
   title: string
   children: React.ReactNode
 }
 
-const ContactCard = memo(function ContactCard({
+const ContactRow = memo(function ContactRow({
   icon,
   title,
   children,
-}: ContactCardProps) {
+}: ContactRowProps) {
   return (
-    <GlassCard as="article" hover className="flex gap-4 p-6">
-      <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-        {icon}
-      </div>
-      <div>
+    <article className="paper-ledger-row flex gap-4 px-5 py-5 sm:px-6">
+      <div className="mt-0.5 shrink-0 text-primary">{icon}</div>
+      <div className="min-w-0">
         <h3 className="font-medium text-foreground">{title}</h3>
         {children}
       </div>
-    </GlassCard>
+    </article>
   )
 })
 
@@ -52,7 +52,7 @@ export function Contact() {
 
         <ScrollReveal delay={0.04}>
           <div
-            className="mt-8 rounded-2xl border border-accent/25 bg-accent/8 px-4 py-4 text-sm leading-relaxed text-muted-foreground sm:px-5"
+            className="mt-8 rounded-sm border-0 bg-accent/8 px-4 py-4 text-sm leading-relaxed text-muted-foreground sm:px-5"
             role="note"
           >
             <strong className="font-medium text-foreground">Importante:</strong> este
@@ -71,9 +71,9 @@ export function Contact() {
 
         <div className="mt-10 grid gap-8 lg:grid-cols-2">
           <ScrollReveal delay={0.05}>
-            <div className="space-y-6">
-              <ContactCard
-                icon={<MapPin className="size-5" aria-hidden="true" />}
+            <div className="paper-card paper-ledger">
+              <ContactRow
+                icon={<MapPinIcon className="size-5" weight="duotone" aria-hidden="true" />}
                 title="Consultório"
               >
                 <p className="mt-1 text-sm text-muted-foreground">
@@ -85,19 +85,19 @@ export function Contact() {
                   Prédio comercial com acesso por elevador. Entrada acessível mediante
                   combinação prévia.
                 </p>
-              </ContactCard>
+              </ContactRow>
 
-              <ContactCard
-                icon={<Clock className="size-5" aria-hidden="true" />}
+              <ContactRow
+                icon={<ClockIcon className="size-5" weight="duotone" aria-hidden="true" />}
                 title="Horário de atendimento"
               >
                 <p className="mt-1 text-sm text-muted-foreground">
                   {SITE.contact.schedule}
                 </p>
-              </ContactCard>
+              </ContactRow>
 
-              <ContactCard
-                icon={<Phone className="size-5" aria-hidden="true" />}
+              <ContactRow
+                icon={<WhatsappLogoIcon className="size-5" weight="duotone" aria-hidden="true" />}
                 title="WhatsApp"
               >
                 <a
@@ -117,10 +117,10 @@ export function Contact() {
                 >
                   Enviar mensagem
                 </Button>
-              </ContactCard>
+              </ContactRow>
 
-              <ContactCard
-                icon={<Mail className="size-5" aria-hidden="true" />}
+              <ContactRow
+                icon={<EnvelopeSimpleIcon className="size-5" weight="duotone" aria-hidden="true" />}
                 title="E-mail"
               >
                 <a
@@ -129,12 +129,12 @@ export function Contact() {
                 >
                   {SITE.contact.email}
                 </a>
-              </ContactCard>
+              </ContactRow>
             </div>
           </ScrollReveal>
 
           <ScrollReveal delay={0.08}>
-            <GlassCard hover={false} className="overflow-hidden">
+            <div className="paper-frame">
               <div className="aspect-[4/3] w-full">
                 <iframe
                   title={`Mapa do consultório — ${SITE.contact.neighborhood}, ${SITE.contact.city}`}
@@ -145,7 +145,7 @@ export function Contact() {
                   allowFullScreen
                 />
               </div>
-            </GlassCard>
+            </div>
           </ScrollReveal>
         </div>
       </div>

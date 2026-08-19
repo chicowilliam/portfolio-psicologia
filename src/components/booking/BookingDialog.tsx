@@ -1,25 +1,31 @@
-import { Calendar, X } from 'lucide-react'
+import { CalendarIcon } from '@phosphor-icons/react/Calendar'
+import { XIcon } from '@phosphor-icons/react/X'
 import { Dialog } from 'radix-ui'
 import { BookingFormContent } from '@/components/booking/BookingFormContent'
-import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
+import { useBookingDialog } from '@/components/providers/booking-dialog-context'
 import { SITE } from '@/lib/constants'
 
 export function BookingDialog() {
   const { isOpen, closeBooking } = useBookingDialog()
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={(open) => !open && closeBooking()}>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(open) => {
+        if (!open) closeBooking()
+      }}
+    >
       <Dialog.Portal>
-        <Dialog.Overlay className="booking-dialog-overlay dialog-overlay fixed inset-0 z-[60]" />
+        <Dialog.Overlay className="booking-dialog-overlay dialog-overlay fixed inset-0" />
         <Dialog.Content
-          className="booking-dialog-content dialog-sheet fixed inset-x-0 bottom-0 z-[70] flex max-h-[min(94dvh,100%)] flex-col outline-none sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:w-[min(100%,42rem)] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-3xl"
+          className="booking-dialog-content fixed inset-x-0 bottom-0 flex max-h-[min(94dvh,100%)] w-full flex-col outline-none sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:w-[min(calc(100%-2rem),42rem)] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-3xl"
           aria-describedby="booking-dialog-description"
         >
           <div className="booking-dialog-header shrink-0 px-5 pb-4 pt-5 sm:px-8 sm:pt-7">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
                 <div className="mb-2 inline-flex items-center gap-2 text-primary">
-                  <Calendar className="size-4" aria-hidden="true" />
+                  <CalendarIcon className="size-4" weight="duotone" aria-hidden="true" />
                   <span className="text-xs font-semibold uppercase tracking-wider">
                     Agendamento
                   </span>
@@ -41,7 +47,7 @@ export function BookingDialog() {
                   className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   aria-label="Fechar formulário"
                 >
-                  <X className="size-4" aria-hidden="true" />
+                  <XIcon className="size-4" aria-hidden="true" />
                 </button>
               </Dialog.Close>
             </div>

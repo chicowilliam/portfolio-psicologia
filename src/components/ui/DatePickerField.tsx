@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { DayPicker } from '@daypicker/react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
-import { CalendarDays } from 'lucide-react'
+import { CalendarBlankIcon } from '@phosphor-icons/react/CalendarBlank'
 import { Dialog, Popover } from 'radix-ui'
 import { Button } from '@/components/ui/Button'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
@@ -76,7 +76,7 @@ export function DatePickerField({
         !value && 'text-muted-foreground',
       )}
     >
-      <CalendarDays
+      <CalendarBlankIcon
         className="size-4 shrink-0 text-muted-foreground transition-colors group-focus-visible:text-primary"
         aria-hidden="true"
       />

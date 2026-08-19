@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from '@/lib/motion-react'
-import { ArrowRight, Calendar } from 'lucide-react'
+import { ArrowRightIcon } from '@phosphor-icons/react/ArrowRight'
+import { CalendarIcon } from '@phosphor-icons/react/Calendar'
 import { Button } from '@/components/ui/Button'
 import { MeshBackground } from '@/components/ui/MeshBackground'
 import { LivingPortrait } from '@/components/ui/LivingPortrait'
@@ -57,7 +58,7 @@ export function Hero() {
               onClick={() => openBooking()}
               className="gap-2"
             >
-              <Calendar className="size-5" aria-hidden="true" />
+              <CalendarIcon className="size-5" weight="duotone" aria-hidden="true" />
               Agendar consulta
             </Button>
             <Button
@@ -67,7 +68,7 @@ export function Hero() {
               className="gap-2"
             >
               Conhecer o trabalho
-              <ArrowRight className="size-4" aria-hidden="true" />
+              <ArrowRightIcon className="size-4" aria-hidden="true" />
             </Button>
           </div>
 
@@ -92,7 +93,7 @@ export function Hero() {
           animate={prefersReducedMotion ? undefined : 'visible'}
           transition={prefersReducedMotion ? undefined : { delay: 0.12 }}
         >
-          <div className="glass-card relative aspect-[4/5] max-h-[min(68vh,34rem)] w-full overflow-hidden rounded-2xl shadow-card sm:rounded-3xl lg:max-h-[min(72vh,36rem)]">
+          <div className="paper-frame relative aspect-[4/5] max-h-[min(68vh,34rem)] w-full lg:max-h-[min(72vh,36rem)]">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary-light/15 to-accent/10" />
 
             <LivingPortrait

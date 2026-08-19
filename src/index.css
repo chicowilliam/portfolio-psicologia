@@ -180,39 +180,158 @@
     padding-left: 0.25rem;
   }
 
-  .specialty-card-accent {
-    position: relative;
-  }
-
-  .specialty-card-accent::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 1.25rem;
-    bottom: 1.25rem;
-    width: 3px;
-    border-radius: 9999px;
-    background: linear-gradient(
-      180deg,
-      var(--color-primary-light),
-      color-mix(in srgb, var(--color-primary) 65%, transparent)
-    );
-    opacity: 0.85;
-  }
-
   .step-badge {
-    font-size: 0.6875rem;
+    font-family: var(--font-display);
+    font-size: 0.8125rem;
     font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
     color: var(--color-primary);
   }
 
+  .paper-card,
   .glass-card {
-    background: var(--color-glass);
-    border-color: color-mix(in srgb, var(--color-border) 55%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    position: relative;
+    isolation: isolate;
+    background: var(--color-card);
+    border: 0;
+    border-radius: 0.2rem 0.85rem 0.85rem 0.2rem;
+    box-shadow:
+      0 1px 0 color-mix(in srgb, var(--color-border) 70%, transparent),
+      0 14px 32px -22px rgb(44 51 48 / 0.16);
+  }
+
+  .paper-card::after,
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='80' height='80' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    mix-blend-mode: multiply;
+  }
+
+  @media (max-width: 639px) {
+    .paper-card::after,
+    .glass-card::after {
+      display: none;
+    }
+  }
+
+  .paper-card > *,
+  .glass-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .paper-note {
+    padding-left: 2rem;
+  }
+
+  .paper-note::before {
+    content: '';
+    position: absolute;
+    left: 1.05rem;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 1px;
+    background: color-mix(in srgb, var(--color-accent) 42%, transparent);
+  }
+
+  .paper-card[data-tone='sage'] {
+    background: color-mix(in srgb, var(--color-primary) 7%, var(--color-card));
+  }
+
+  .paper-card[data-tone='linen'] {
+    background: color-mix(in srgb, var(--color-accent) 10%, var(--color-card));
+  }
+
+  .paper-card[data-tone='mist'] {
+    background: color-mix(in srgb, var(--color-primary-light) 14%, var(--color-card));
+  }
+
+  .paper-card[data-tone='clay'] {
+    background: color-mix(in srgb, var(--color-accent) 16%, var(--color-card));
+  }
+
+  .paper-card[data-tone='ink'] {
+    background: color-mix(in srgb, var(--color-muted) 55%, var(--color-card));
+  }
+
+  .paper-card[data-tone='leaf'] {
+    background: color-mix(in srgb, var(--color-primary-light) 22%, var(--color-card));
+  }
+
+  .paper-ledger {
+    overflow: hidden;
+  }
+
+  .paper-ledger-row + .paper-ledger-row {
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-border) 75%, transparent);
+  }
+
+  .paper-ledger-grid > * {
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+  }
+
+  .paper-ledger-grid > *:last-child {
+    border-bottom: none;
+  }
+
+  @media (min-width: 640px) {
+    .paper-ledger-grid.cols-2 {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .paper-ledger-grid.cols-2 > *:nth-child(odd) {
+      border-right: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+    }
+
+    .paper-ledger-grid.cols-2 > *:nth-last-child(-n + 2) {
+      border-bottom: none;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .paper-ledger-grid.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .paper-ledger-grid.cols-4 > * {
+      border-bottom: none;
+      border-right: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+    }
+
+    .paper-ledger-grid.cols-4 > *:nth-child(odd) {
+      border-right: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+    }
+
+    .paper-ledger-grid.cols-4 > *:last-child {
+      border-right: none;
+    }
+  }
+
+  .paper-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 0.2rem 0.7rem 0.7rem 0.2rem;
+    background: var(--color-card);
+    padding: 0.45rem 0.95rem;
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-border) 70%, transparent);
+  }
+
+  .paper-frame {
+    background: var(--color-card);
+    overflow: hidden;
+    border-radius: 0.75rem 1.25rem 1.25rem 0.75rem;
+    box-shadow: 0 18px 40px -24px rgb(44 51 48 / 0.2);
   }
 
   .glass-header {
@@ -231,15 +350,15 @@
 
   .interactive-card {
     transition:
-      border-color 0.22s ease,
       background-color 0.22s ease,
       box-shadow 0.22s ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
     .interactive-card:hover {
-      border-color: color-mix(in srgb, var(--color-primary) 22%, var(--color-border));
-      box-shadow: var(--shadow-soft);
+      box-shadow:
+        0 1px 0 color-mix(in srgb, var(--color-primary) 18%, var(--color-border)),
+        0 16px 36px -20px rgb(44 51 48 / 0.18);
     }
   }
 
@@ -356,8 +475,10 @@
     animation: btn-spin 0.7s linear infinite;
   }
 
-  .magnetic-wrapper {
-    display: inline-flex;
+  .site-header {
+    background: color-mix(in srgb, var(--color-background) 18%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .mesh-background {
@@ -482,6 +603,78 @@
     isolation: isolate;
   }
 
+  .ambient-drawing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ambient-window {
+    opacity: 0.9;
+  }
+
+  .ambient-light-start {
+    stop-color: color-mix(in srgb, var(--color-accent) 22%, transparent);
+  }
+
+  .ambient-light-end {
+    stop-color: transparent;
+  }
+
+  .ambient-stem {
+    stroke: color-mix(in srgb, var(--color-primary) 28%, transparent);
+    stroke-width: 1.35;
+    stroke-linecap: round;
+  }
+
+  .ambient-leaf ellipse {
+    fill: color-mix(in srgb, var(--color-primary-light) 22%, transparent);
+    stroke: color-mix(in srgb, var(--color-primary) 26%, transparent);
+    stroke-width: 1.1;
+  }
+
+  .ambient-branch-right .ambient-leaf ellipse {
+    fill: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    stroke: color-mix(in srgb, var(--color-accent) 32%, transparent);
+  }
+
+  .ambient-sprig {
+    opacity: 0.7;
+  }
+
+  @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+    .ambient-branch-left,
+    .ambient-branch-right {
+      transform-box: fill-box;
+    }
+
+    .ambient-branch-left {
+      transform-origin: 40px 0;
+      animation: ambient-sway-left 32s ease-in-out infinite;
+    }
+
+    .ambient-branch-right {
+      transform-origin: 1160px 40px;
+      animation: ambient-sway-right 38s ease-in-out infinite;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .ambient-branch-right,
+    .ambient-sprig {
+      display: none;
+    }
+
+    .ambient-branch-left {
+      opacity: 0.55;
+    }
+
+    .ambient-window {
+      opacity: 0.55;
+    }
+  }
+
   .pattern-dot {
     fill: color-mix(in srgb, var(--color-primary) 22%, transparent);
   }
@@ -508,13 +701,14 @@
   }
 
   .booking-dialog-overlay {
+    z-index: 200;
     background: color-mix(in srgb, var(--color-foreground) 46%, transparent);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
   }
 
   .booking-dialog-content {
-    position: relative;
+    z-index: 210;
     isolation: isolate;
     background: var(--color-card);
     border: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
@@ -554,6 +748,16 @@
   .booking-dialog-body {
     position: relative;
     z-index: 2;
+  }
+
+  @media (max-width: 639px) {
+    .booking-dialog-content[data-state='open'] {
+      animation: dialog-sheet-in 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .booking-dialog-content[data-state='closed'] {
+      animation: dialog-sheet-out 0.24s ease-in forwards;
+    }
   }
 
   @media (min-width: 640px) {
@@ -789,7 +993,29 @@
   }
 }
 
+@keyframes ambient-sway-left {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1.35deg);
+  }
+}
+
+@keyframes ambient-sway-right {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-1.15deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .ambient-branch-left,
+  .ambient-branch-right,
   .mesh-blob {
     animation: none !important;
   }

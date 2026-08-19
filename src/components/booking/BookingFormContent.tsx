@@ -1,7 +1,11 @@
 import { lazy, Suspense, useCallback, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Mail, MessageSquare, Phone, User, MessageCircle } from 'lucide-react'
+import { ChatTextIcon } from '@phosphor-icons/react/ChatText'
+import { EnvelopeSimpleIcon } from '@phosphor-icons/react/EnvelopeSimple'
+import { PhoneIcon } from '@phosphor-icons/react/Phone'
+import { UserIcon } from '@phosphor-icons/react/User'
+import { WhatsappLogoIcon } from '@phosphor-icons/react/WhatsappLogo'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
@@ -18,7 +22,7 @@ import {
 } from '@/lib/constants'
 import { bookingSchema, type BookingSchema } from '@/lib/validation'
 import { formatPhone, submitBookingRequest } from '@/lib/utils'
-import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
+import { useBookingDialog } from '@/components/providers/booking-dialog-context'
 
 const Modal = lazy(() =>
   import('@/components/ui/Modal').then((module) => ({ default: module.Modal })),
@@ -87,7 +91,7 @@ export function BookingFormContent({
         <Input
           label="Nome completo"
           placeholder="Seu nome"
-          icon={User}
+          icon={UserIcon}
           error={errors.fullName?.message}
           {...register('fullName')}
         />
@@ -97,7 +101,7 @@ export function BookingFormContent({
           type="email"
           placeholder="seu@email.com"
           autoComplete="email"
-          icon={Mail}
+          icon={EnvelopeSimpleIcon}
           error={errors.email?.message}
           {...register('email')}
         />
@@ -111,7 +115,7 @@ export function BookingFormContent({
               type="tel"
               placeholder="(31) 99999-9999"
               autoComplete="tel"
-              icon={Phone}
+              icon={PhoneIcon}
               value={field.value}
               onChange={(e) => field.onChange(formatPhone(e.target.value))}
               error={errors.phone?.message}
@@ -172,7 +176,7 @@ export function BookingFormContent({
           label="Mensagem (opcional)"
           placeholder="Alguma observação sobre disponibilidade ou preferências?"
           hint="Não é necessário descrever sintomas ou motivos clínicos neste formulário."
-          icon={MessageSquare}
+          icon={ChatTextIcon}
           error={errors.message?.message}
           {...register('message')}
         />
@@ -228,7 +232,7 @@ export function BookingFormContent({
                   Fechar
                 </Button>
                 <Button className="flex-1 gap-2" href={WHATSAPP_URL} external>
-                  <MessageCircle className="size-4" aria-hidden="true" />
+                  <WhatsappLogoIcon className="size-4" weight="fill" aria-hidden="true" />
                   Falar agora pelo WhatsApp
                 </Button>
               </div>

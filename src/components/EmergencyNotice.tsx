@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { AlertTriangle, X } from 'lucide-react'
+import { WarningIcon } from '@phosphor-icons/react/Warning'
+import { XIcon } from '@phosphor-icons/react/X'
 import { SITE } from '@/lib/constants'
 import { cn } from '@/lib/utils'
 
@@ -29,8 +30,9 @@ export function EmergencyNotice() {
       aria-label="Aviso sobre atendimento de urgência"
     >
       <div className="mx-auto flex gap-3 sm:max-w-none">
-        <AlertTriangle
+        <WarningIcon
           className="mt-0.5 size-5 shrink-0 text-accent"
+          weight="duotone"
           aria-hidden="true"
         />
         <div className="min-w-0 flex-1">
@@ -55,7 +57,7 @@ export function EmergencyNotice() {
           className="inline-flex size-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="Fechar aviso"
         >
-          <X className="size-4" aria-hidden="true" />
+          <XIcon className="size-4" aria-hidden="true" />
         </button>
       </div>
     </aside>

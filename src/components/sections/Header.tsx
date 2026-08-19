@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from '@/lib/motion-react'
-import { Menu, X } from 'lucide-react'
+import { ListIcon } from '@phosphor-icons/react/List'
+import { XIcon } from '@phosphor-icons/react/X'
 import { Dialog } from 'radix-ui'
 import { Button } from '@/components/ui/Button'
 import { NAV_LINKS, SITE } from '@/lib/constants'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
+import { useHideOnScroll } from '@/hooks/useHideOnScroll'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { easeOut, staggerContainer } from '@/lib/motion'
@@ -36,6 +38,7 @@ export function Header() {
   const scrollTo = useScrollTo()
   const { openBooking } = useBookingDialog()
   const activeSection = useScrollSpy(SECTION_IDS)
+  const navHidden = useHideOnScroll(isMobileOpen)
 
   useEffect(() => {
     const hero = document.getElementById('inicio')
@@ -50,10 +53,14 @@ export function Header() {
     return () => observer.disconnect()
   }, [])
 
+  function handleOpenBooking() {
+    setIsMobileOpen(false)
+    window.setTimeout(() => openBooking(), 80)
+  }
+
   function handleNavClick(href: string) {
     if (href === '#agendamento') {
-      openBooking()
-      setIsMobileOpen(false)
+      handleOpenBooking()
       return
     }
     scrollTo(href)
@@ -66,19 +73,19 @@ export function Header() {
 
   return (
     <motion.header
-      className="sticky top-0 z-40 border-b backdrop-blur-xl"
+      className="site-header fixed inset-x-0 top-0 z-40 border-b"
       initial={false}
       animate={{
+        y: navHidden ? '-100%' : '0%',
         backgroundColor: scrolled
-          ? 'color-mix(in srgb, var(--color-background) 72%, transparent)'
-          : 'color-mix(in srgb, var(--color-background) 48%, transparent)',
+          ? 'color-mix(in srgb, var(--color-background) 42%, transparent)'
+          : 'color-mix(in srgb, var(--color-background) 18%, transparent)',
         borderColor: scrolled
-          ? 'color-mix(in srgb, var(--color-border) 55%, transparent)'
+          ? 'color-mix(in srgb, var(--color-border) 40%, transparent)'
           : 'transparent',
         boxShadow: scrolled ? 'var(--shadow-soft)' : '0 0 0 0 transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'blur(14px)',
       }}
-      transition={{ duration: 0.35, ease: easeOut }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: easeOut }}
     >
       <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
         <a
@@ -134,11 +141,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Button
-            size="sm"
-            className="hidden sm:inline-flex"
-            onClick={() => openBooking()}
-          >
+          <Button size="sm" onClick={handleOpenBooking}>
             Agendar consulta
           </Button>
 
@@ -164,7 +167,7 @@ export function Header() {
                       transition={{ duration: 0.18, ease: easeOut }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <X className="size-5" aria-hidden="true" />
+                      <XIcon className="size-5" aria-hidden="true" />
                     </motion.span>
                   ) : (
                     <motion.span
@@ -175,7 +178,7 @@ export function Header() {
                       transition={{ duration: 0.18, ease: easeOut }}
                       className="absolute inset-0 flex items-center justify-center"
                     >
-                      <Menu className="size-5" aria-hidden="true" />
+                      <ListIcon className="size-5" aria-hidden="true" />
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -210,7 +213,7 @@ export function Header() {
                         className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-border bg-card text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                         aria-label="Fechar menu"
                       >
-                        <X className="size-4" aria-hidden="true" />
+                        <XIcon className="size-4" aria-hidden="true" />
                       </button>
                     </Dialog.Close>
                   </div>
@@ -254,10 +257,7 @@ export function Header() {
                 </motion.nav>
 
                 <div className="mobile-menu-footer px-4 py-5">
-                  <Button
-                    className="w-full"
-                    onClick={() => openBooking()}
-                  >
+                  <Button className="w-full" onClick={handleOpenBooking}>
                     Agendar consulta
                   </Button>
                   <p className="mt-3 text-center text-xs text-muted-foreground">

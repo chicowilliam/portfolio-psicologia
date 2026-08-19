@@ -1,27 +1,9 @@
+import { useCallback, useMemo, useState, type ReactNode } from 'react'
+import { BookingDialog } from '@/components/booking/BookingDialog'
 import {
-  createContext,
-  lazy,
-  Suspense,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from 'react'
-
-interface BookingDialogContextValue {
-  isOpen: boolean
-  openBooking: () => void
-  closeBooking: () => void
-}
-
-const BookingDialogContext = createContext<BookingDialogContextValue | null>(null)
-
-const BookingDialog = lazy(() =>
-  import('@/components/booking/BookingDialog').then((module) => ({
-    default: module.BookingDialog,
-  })),
-)
+  BookingDialogContext,
+  type BookingDialogContextValue,
+} from '@/components/providers/booking-dialog-context'
 
 export function BookingDialogProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,7 +11,7 @@ export function BookingDialogProvider({ children }: { children: ReactNode }) {
   const openBooking = useCallback(() => setIsOpen(true), [])
   const closeBooking = useCallback(() => setIsOpen(false), [])
 
-  const value = useMemo(
+  const value = useMemo<BookingDialogContextValue>(
     () => ({ isOpen, openBooking, closeBooking }),
     [isOpen, openBooking, closeBooking],
   )
@@ -37,17 +19,9 @@ export function BookingDialogProvider({ children }: { children: ReactNode }) {
   return (
     <BookingDialogContext.Provider value={value}>
       {children}
-      <Suspense fallback={null}>
-        <BookingDialog />
-      </Suspense>
+      <BookingDialog />
     </BookingDialogContext.Provider>
   )
 }
 
-export function useBookingDialog() {
-  const context = useContext(BookingDialogContext)
-  if (!context) {
-    throw new Error('useBookingDialog must be used within BookingDialogProvider')
-  }
-  return context
-}
+export { useBookingDialog } from '@/components/providers/booking-dialog-context'

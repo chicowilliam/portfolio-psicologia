@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from '@/lib/motion-react'
-import { X } from 'lucide-react'
+import { XIcon } from '@phosphor-icons/react/X'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { cn } from '@/lib/utils'
@@ -61,7 +61,7 @@ export function Modal({
             aria-modal="true"
             aria-labelledby="modal-title"
             className={cn(
-              'glass-card relative z-10 max-h-[90vh] w-full overflow-y-auto shadow-elevated',
+              'paper-card relative z-10 max-h-[90vh] w-full overflow-y-auto',
               size === 'md' && 'max-w-md',
               size === 'lg' && 'max-w-2xl',
             )}
@@ -80,7 +80,7 @@ export function Modal({
                 className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Fechar"
               >
-                <X className="size-5" aria-hidden="true" />
+                <XIcon className="size-5" aria-hidden="true" />
               </button>
             </div>
             <div className="px-6 py-6">{children}</div>

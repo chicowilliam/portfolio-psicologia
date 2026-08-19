@@ -50,7 +50,7 @@ export function About() {
 
         <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
           <ScrollReveal delay={0.05}>
-            <div className="glass-card relative aspect-[4/5] overflow-hidden rounded-3xl shadow-card">
+            <div className="paper-frame relative aspect-[4/5] overflow-hidden">
               <LivingPortrait
                 images={POSE_B_PORTRAIT_IMAGES}
                 ariaLabel={SITE.psychologist.photoAlt}
@@ -82,7 +82,7 @@ export function About() {
                 {SITE.psychologist.bio}
               </p>
 
-              <GlassCard hover={false} className="p-6">
+              <GlassCard hover={false} variant="note" className="p-6">
                 <h3 className="font-display text-lg font-semibold text-foreground">
                   Abordagem terapêutica
                 </h3>

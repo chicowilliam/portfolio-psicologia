@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, useReducedMotion } from '@/lib/motion-react'
-import { ChevronDown } from 'lucide-react'
+import { CaretDownIcon } from '@phosphor-icons/react/CaretDown'
 import type { FAQItem } from '@/types'
 
 interface AccordionProps {
@@ -23,7 +23,7 @@ export function Accordion({ items }: AccordionProps) {
         return (
           <div
             key={item.id}
-            className="glass-card overflow-hidden rounded-2xl shadow-soft"
+            className="paper-card overflow-hidden"
           >
             <button
               type="button"
@@ -38,7 +38,7 @@ export function Accordion({ items }: AccordionProps) {
                 animate={{ rotate: prefersReducedMotion ? 0 : isOpen ? 180 : 0 }}
                 transition={{ duration: prefersReducedMotion ? 0 : 0.22 }}
               >
-                <ChevronDown className="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
+                <CaretDownIcon className="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
               </motion.span>
             </button>
 

@@ -1,24 +1,26 @@
 import { motion, useReducedMotion } from '@/lib/motion-react'
-import type { LucideIcon } from 'lucide-react'
+import type { IconComponent, IconWeight } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 
 interface AnimatedIconProps {
-  icon: LucideIcon
+  icon: IconComponent
   className?: string
   containerClassName?: string
+  weight?: IconWeight
 }
 
 export function AnimatedIcon({
   icon: Icon,
   className,
   containerClassName,
+  weight = 'duotone',
 }: AnimatedIconProps) {
   const prefersReducedMotion = useReducedMotion()
 
   if (prefersReducedMotion) {
     return (
       <div className={cn('flex items-center justify-center', containerClassName)}>
-        <Icon className={className} aria-hidden="true" />
+        <Icon className={className} weight={weight} aria-hidden="true" />
       </div>
     )
   }
@@ -52,7 +54,7 @@ export function AnimatedIcon({
           transition={{ duration: 0.8, ease: 'easeOut' }}
         />
       </motion.svg>
-      <Icon className={cn('relative z-10', className)} aria-hidden="true" />
+      <Icon className={cn('relative z-10', className)} weight={weight} aria-hidden="true" />
     </motion.div>
   )
 }

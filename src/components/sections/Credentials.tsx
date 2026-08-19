@@ -1,43 +1,39 @@
 import { memo } from 'react'
-import {
-  Award,
-  Calendar,
-  GraduationCap,
-  Heart,
-  type LucideIcon,
-} from 'lucide-react'
-import { ScrollReveal, ScrollRevealGroup } from '@/components/ui/ScrollReveal'
+import { CalendarIcon } from '@phosphor-icons/react/Calendar'
+import { GraduationCapIcon } from '@phosphor-icons/react/GraduationCap'
+import { HeartIcon } from '@phosphor-icons/react/Heart'
+import { SealCheckIcon } from '@phosphor-icons/react/SealCheck'
+import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { GlassCard } from '@/components/ui/GlassCard'
-import { AnimatedIcon } from '@/components/ui/AnimatedIcon'
 import { MeshBackground } from '@/components/ui/MeshBackground'
 import { CREDENTIALS, SITE } from '@/lib/constants'
+import type { IconComponent } from '@/lib/icons'
 import type { Credential } from '@/types'
 
 const iconMap = {
-  badge: Award,
-  graduation: GraduationCap,
-  calendar: Calendar,
-  heart: Heart,
+  badge: SealCheckIcon,
+  graduation: GraduationCapIcon,
+  calendar: CalendarIcon,
+  heart: HeartIcon,
 } as const
 
-interface CredentialCardProps {
+interface CredentialCellProps {
   credential: Credential
-  Icon: LucideIcon
+  Icon: IconComponent
 }
 
-const CredentialCard = memo(function CredentialCard({
+const CredentialCell = memo(function CredentialCell({
   credential,
   Icon,
-}: CredentialCardProps) {
+}: CredentialCellProps) {
   return (
-    <GlassCard as="article" className="group h-full p-6">
-      <AnimatedIcon
-        icon={Icon}
-        containerClassName="mb-4 size-12 rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground"
-        className="size-6"
+    <article className="p-5 sm:p-6">
+      <Icon
+        className="size-6 text-primary"
+        weight="duotone"
+        aria-hidden="true"
       />
-      <p className="text-sm font-medium text-muted-foreground">
+      <p className="mt-4 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
         {credential.label}
       </p>
       {credential.href ? (
@@ -45,16 +41,16 @@ const CredentialCard = memo(function CredentialCard({
           href={credential.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-1 inline-block font-display text-lg font-semibold text-foreground underline-offset-2 transition-colors hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="mt-2 inline-block font-display text-lg font-semibold leading-snug text-foreground underline-offset-2 transition-colors hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           {credential.value}
         </a>
       ) : (
-        <p className="mt-1 font-display text-lg font-semibold text-foreground">
+        <p className="mt-2 font-display text-lg font-semibold leading-snug text-foreground">
           {credential.value}
         </p>
       )}
-    </GlassCard>
+    </article>
   )
 })
 
@@ -77,15 +73,23 @@ export function Credentials() {
           />
         </ScrollReveal>
 
-        <ScrollRevealGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {CREDENTIALS.map((credential) => {
-            const Icon = iconMap[credential.icon as keyof typeof iconMap]
+        <ScrollReveal delay={0.06}>
+          <div className="paper-card paper-ledger mt-12">
+            <div className="paper-ledger-grid cols-2 cols-4 grid">
+              {CREDENTIALS.map((credential) => {
+                const Icon = iconMap[credential.icon as keyof typeof iconMap]
 
-            return (
-              <CredentialCard key={credential.label} credential={credential} Icon={Icon} />
-            )
-          })}
-        </ScrollRevealGroup>
+                return (
+                  <CredentialCell
+                    key={credential.label}
+                    credential={credential}
+                    Icon={Icon}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   )

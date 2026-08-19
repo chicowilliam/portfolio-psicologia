@@ -55,6 +55,7 @@ export default function App() {
       </a>
 
       <Header />
+      <div className="h-16" aria-hidden="true" />
 
       <main id="conteudo-principal">
         <Hero />

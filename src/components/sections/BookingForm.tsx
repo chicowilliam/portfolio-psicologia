@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Calendar } from 'lucide-react'
+import { CalendarIcon } from '@phosphor-icons/react/Calendar'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
@@ -40,7 +40,7 @@ export function BookingForm() {
         <ScrollReveal delay={0.06}>
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button size="lg" className="gap-2" onClick={openBooking}>
-              <Calendar className="size-5" aria-hidden="true" />
+              <CalendarIcon className="size-5" weight="duotone" aria-hidden="true" />
               Abrir formulário de agendamento
             </Button>
             <p className="text-center text-xs text-muted-foreground sm:text-left">
@@ -50,7 +50,7 @@ export function BookingForm() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <div className="glass-card mt-10 rounded-3xl p-6 shadow-card sm:p-8">
+          <div className="paper-card mt-10 p-6 sm:p-8">
             <Suspense
               fallback={
                 <div className="py-8 text-center text-sm text-muted-foreground">

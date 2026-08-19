@@ -1,12 +1,12 @@
 import { forwardRef } from 'react'
-import type { LucideIcon } from 'lucide-react'
+import type { IconComponent } from '@/lib/icons'
 import { cn } from '@/lib/utils'
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string
   error?: string
   hint?: string
-  icon?: LucideIcon
+  icon?: IconComponent
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(

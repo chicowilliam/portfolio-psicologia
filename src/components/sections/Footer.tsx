@@ -1,5 +1,6 @@
 import { lazy, Suspense, useCallback, useState } from 'react'
-import { Globe, Share2 } from 'lucide-react'
+import { InstagramLogoIcon } from '@phosphor-icons/react/InstagramLogo'
+import { LinkedinLogoIcon } from '@phosphor-icons/react/LinkedinLogo'
 import { PrivacyPolicyContent } from '@/components/PrivacyPolicyContent'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
@@ -37,17 +38,17 @@ export function Footer() {
     SITE.social.instagram && {
       href: SITE.social.instagram,
       label: 'Instagram',
-      icon: Share2,
+      icon: InstagramLogoIcon,
     },
     SITE.social.linkedin && {
       href: SITE.social.linkedin,
       label: 'LinkedIn',
-      icon: Globe,
+      icon: LinkedinLogoIcon,
     },
   ].filter(Boolean) as Array<{
     href: string
     label: string
-    icon: typeof Share2
+    icon: typeof InstagramLogoIcon
   }>
 
   return (
@@ -117,7 +118,7 @@ export function Footer() {
                       className="flex size-10 items-center justify-center rounded-xl bg-primary-foreground/10 transition-colors hover:bg-primary-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light"
                       aria-label={label}
                     >
-                      <Icon className="size-5" aria-hidden="true" />
+                      <Icon className="size-5" weight="duotone" aria-hidden="true" />
                     </a>
                   ))}
                 </div>
