@@ -2,7 +2,8 @@ import { getDefaultClassNames, type Matcher } from '@daypicker/react'
 import { startOfDay } from 'date-fns'
 import { cn } from '@/lib/utils'
 
-export function getCalendarClassNames() {
+export function getCalendarClassNames(options?: { mobile?: boolean }) {
+  const mobile = options?.mobile ?? false
   const defaults = getDefaultClassNames()
 
   return {
@@ -20,11 +21,13 @@ export function getCalendarClassNames() {
     nav: cn(defaults.nav, 'absolute inset-x-0 top-0 flex items-center justify-between'),
     button_previous: cn(
       defaults.button_previous,
-      'inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+      'inline-flex size-10 touch-manipulation items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+      mobile && 'size-11',
     ),
     button_next: cn(
       defaults.button_next,
-      'inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+      'inline-flex size-10 touch-manipulation items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+      mobile && 'size-11',
     ),
     chevron: cn(defaults.chevron, 'size-4 fill-primary'),
     month_grid: cn(defaults.month_grid, 'w-full border-collapse'),
@@ -32,15 +35,18 @@ export function getCalendarClassNames() {
     weekday: cn(
       defaults.weekday,
       'w-10 text-center text-xs font-medium uppercase tracking-wide text-muted-foreground',
+      mobile && 'w-11',
     ),
     week: cn(defaults.week, 'mt-1 flex w-full'),
     day: cn(
       defaults.day,
-      'relative flex size-10 flex-1 items-center justify-center p-0 text-sm',
+      'relative flex flex-1 items-center justify-center p-0 text-sm',
+      mobile ? 'size-11' : 'size-10',
     ),
     day_button: cn(
       defaults.day_button,
-      'inline-flex size-9 items-center justify-center rounded-lg font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+      'inline-flex touch-manipulation items-center justify-center rounded-lg font-medium text-foreground transition-colors hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+      mobile ? 'size-10 min-h-10 min-w-10 text-base' : 'size-9',
     ),
     selected: cn(
       defaults.selected,
