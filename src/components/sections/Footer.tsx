@@ -11,7 +11,7 @@ const Modal = lazy(() =>
 )
 
 const FOOTER_LINKS = [
-  { label: 'Sobre', href: '#sobre' },
+  { label: 'Quem sou eu', href: '#sobre' },
   { label: 'Especialidades', href: '#especialidades' },
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Dúvidas', href: '#duvidas' },
@@ -130,8 +130,6 @@ export function Footer() {
                   >
                     {SITE.contact.email}
                   </a>
-                  <br />
-                  <span className="mt-2 inline-block">{SITE.contact.whatsappDisplay}</span>
                 </p>
               )}
             </div>

@@ -108,23 +108,21 @@ export function Contact() {
                 icon={<WhatsappLogoIcon className="size-5" weight="duotone" aria-hidden="true" />}
                 title="WhatsApp"
               >
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 block text-sm font-medium text-primary hover:underline"
-                >
-                  {SITE.contact.whatsappDisplay}
-                </a>
-                <Button
-                  href={WHATSAPP_URL}
-                  external
-                  variant="outline"
-                  size="sm"
-                  className="mt-3"
-                >
-                  Enviar mensagem
-                </Button>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Mensagem direta para agendamento e dúvidas iniciais.
+                </p>
+                {WHATSAPP_URL ? (
+                  <Button
+                    href={WHATSAPP_URL}
+                    external
+                    variant="outline"
+                    size="sm"
+                    className="mt-3 gap-2"
+                  >
+                    <WhatsappLogoIcon className="size-4" weight="fill" aria-hidden="true" />
+                    Chamar no WhatsApp
+                  </Button>
+                ) : null}
               </ContactRow>
 
               <ContactRow

@@ -49,7 +49,7 @@ export function About() {
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
           <SectionHeading
-            eyebrow="Sobre mim"
+            eyebrow="Quem sou eu"
             title="Quem acompanha você"
             titleAccent="neste processo"
             description={
@@ -85,16 +85,6 @@ export function About() {
                   Consultório em {SITE.contact.neighborhood}
                 </div>
 
-                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-foreground/42 via-foreground/8 to-transparent p-5 sm:p-8">
-                  <div className="glass-quote rounded-2xl px-4 py-3 shadow-soft sm:px-5 sm:py-4">
-                    <p className="font-display text-base font-semibold text-foreground sm:text-lg">
-                      {SITE.psychologist.name}
-                    </p>
-                    <p className="text-xs text-primary sm:text-sm">
-                      CRP {SITE.psychologist.crp}
-                    </p>
-                  </div>
-                </div>
               </div>
 
               <GlassCard
@@ -135,16 +125,18 @@ export function About() {
                   <Button size="md" className="w-full" onClick={() => openBooking()}>
                     Agendar consulta
                   </Button>
-                  <Button
-                    variant="outline"
-                    size="md"
-                    className="w-full gap-2"
-                    href={WHATSAPP_URL}
-                    external
-                  >
-                    <WhatsappLogoIcon className="size-4" weight="duotone" aria-hidden="true" />
-                    Tirar uma dúvida no WhatsApp
-                  </Button>
+                  {WHATSAPP_URL ? (
+                    <Button
+                      variant="outline"
+                      size="md"
+                      className="w-full gap-2"
+                      href={WHATSAPP_URL}
+                      external
+                    >
+                      <WhatsappLogoIcon className="size-4" weight="duotone" aria-hidden="true" />
+                      Tirar uma dúvida no WhatsApp
+                    </Button>
+                  ) : null}
                 </div>
               </GlassCard>
             </div>

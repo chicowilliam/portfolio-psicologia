@@ -870,8 +870,8 @@
     position: relative;
     isolation: isolate;
     background: var(--color-card);
-    border-left: 1px solid var(--color-border);
-    box-shadow: -12px 0 48px -12px rgb(44 51 48 / 0.18);
+    border-right: 1px solid var(--color-border);
+    box-shadow: 12px 0 48px -12px rgb(44 51 48 / 0.18);
   }
 
   .mobile-menu-panel::before {
@@ -929,6 +929,7 @@
     background: color-mix(in srgb, var(--color-card) 92%, var(--color-background));
     color: var(--color-foreground);
     box-shadow: var(--shadow-soft);
+    -webkit-tap-highlight-color: transparent;
   }
 
   .mobile-menu-trigger-open {

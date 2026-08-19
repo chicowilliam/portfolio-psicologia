@@ -231,10 +231,12 @@ export function BookingFormContent({
                 <Button variant="secondary" className="flex-1" onClick={closeSuccessModal}>
                   Fechar
                 </Button>
-                <Button className="flex-1 gap-2" href={WHATSAPP_URL} external>
-                  <WhatsappLogoIcon className="size-4" weight="fill" aria-hidden="true" />
-                  Falar agora pelo WhatsApp
-                </Button>
+                {WHATSAPP_URL ? (
+                  <Button className="flex-1 gap-2" href={WHATSAPP_URL} external>
+                    <WhatsappLogoIcon className="size-4" weight="fill" aria-hidden="true" />
+                    Falar agora pelo WhatsApp
+                  </Button>
+                ) : null}
               </div>
             </div>
           </Modal>

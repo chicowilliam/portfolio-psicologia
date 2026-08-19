@@ -73,8 +73,6 @@ export interface SiteConfig {
   contact: {
     email: string
     phone: string
-    whatsapp: string
-    whatsappDisplay: string
     address: string
     neighborhood: string
     city: string

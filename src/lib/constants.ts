@@ -36,9 +36,7 @@ export const SITE: SiteConfig = {
   },
   contact: {
     email: 'contato@helenavasconcelos.com.br',
-    phone: '+5531987654321',
-    whatsapp: '5531987654321',
-    whatsappDisplay: '(31) 98765-4321',
+    phone: import.meta.env.VITE_CONTACT_PHONE?.trim() ?? '',
     address: 'Rua dos Inconfidentes, 842, Sala 304',
     neighborhood: 'Savassi',
     city: 'Belo Horizonte, MG',
@@ -59,7 +57,7 @@ export const SITE: SiteConfig = {
 
 export const NAV_LINKS: NavLink[] = [
   { label: 'Início', href: '#inicio' },
-  { label: 'Sobre', href: '#sobre' },
+  { label: 'Quem sou eu', href: '#sobre' },
   { label: 'Especialidades', href: '#especialidades' },
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Dúvidas', href: '#duvidas' },
@@ -248,6 +246,10 @@ export const MODALITY_LABELS = {
 
 export const MAPS_EMBED_URL = `https://maps.google.com/maps?q=${encodeURIComponent(SITE.contact.mapsQuery)}&z=16&output=embed`
 
-export const WHATSAPP_URL = `https://wa.me/${SITE.contact.whatsapp}?text=${encodeURIComponent(
-  'Olá, gostaria de solicitar informações sobre agendamento de consulta.',
-)}`
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER?.replace(/\D/g, '') ?? ''
+
+export const WHATSAPP_URL = WHATSAPP_NUMBER
+  ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      'Olá, gostaria de solicitar informações sobre agendamento de consulta.',
+    )}`
+  : null

@@ -26,7 +26,7 @@ export function SeoStructuredData() {
         description: SITE.psychologist.tagline,
         url: SITE.url,
         image: `${SITE.url}/og-cover.svg`,
-        telephone: SITE.contact.phone,
+        ...(SITE.contact.phone ? { telephone: SITE.contact.phone } : {}),
         email: SITE.contact.email,
         address: {
           '@type': 'PostalAddress',
