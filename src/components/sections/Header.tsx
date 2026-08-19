@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 import { CalendarIcon } from '@phosphor-icons/react/Calendar'
 import { XIcon } from '@phosphor-icons/react/X'
 import { Button } from '@/components/ui/Button'
-import { NAV_LINKS, SITE } from '@/lib/constants'
+import { BOOKING_CTA, NAV_LINKS, SITE } from '@/lib/constants'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
@@ -17,8 +17,13 @@ import { cn } from '@/lib/utils'
 const SECTION_IDS = [
   'inicio',
   'sobre',
+  'para-quem',
+  'abordagem',
   'especialidades',
   'como-funciona',
+  'consultorio',
+  'atendimento-online',
+  'conteudo',
   'duvidas',
   'agendamento',
   'contato',
@@ -204,7 +209,7 @@ function MobileMenu({
                 </p>
                 <Button className="mt-4 w-full gap-2" onClick={onOpenBooking}>
                   <CalendarIcon className="size-4" weight="duotone" aria-hidden="true" />
-                  Agendar consulta
+                  {BOOKING_CTA.primary}
                 </Button>
               </div>
               <p className="mt-3 text-center text-[11px] tracking-[0.04em] text-muted-foreground/80">
@@ -372,7 +377,7 @@ export function Header() {
 
           <div className="flex items-center justify-end gap-2 sm:gap-3">
             <Button size="sm" onClick={handleOpenBooking} className="hidden min-[430px]:inline-flex">
-              Agendar consulta
+              {BOOKING_CTA.short}
             </Button>
           </div>
         </div>

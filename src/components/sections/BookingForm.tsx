@@ -4,7 +4,7 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
 import { MeshBackground } from '@/components/ui/MeshBackground'
-import { SITE } from '@/lib/constants'
+import { BOOKING_CTA, SITE } from '@/lib/constants'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
 
 const BookingFormContent = lazy(() =>
@@ -28,8 +28,8 @@ export function BookingForm() {
           <SectionHeading
             align="center"
             eyebrow="Agendamento"
-            title="Vamos encontrar"
-            titleAccent="um horário que funcione"
+            title="Vamos marcar uma"
+            titleAccent="primeira conversa"
             description={
               <>
                 Preencha o formulário, em até{' '}
@@ -49,7 +49,7 @@ export function BookingForm() {
           <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button size="lg" className="gap-2" onClick={openBooking}>
               <CalendarIcon className="size-5" weight="duotone" aria-hidden="true" />
-              Abrir formulário de agendamento
+              {BOOKING_CTA.primary}
             </Button>
             <p className="text-center text-xs text-muted-foreground sm:text-left">
               O formulário abre sobre a página, você não sai do site.

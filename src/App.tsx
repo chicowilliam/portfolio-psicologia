@@ -11,6 +11,29 @@ import { Credentials } from '@/components/sections/Credentials'
 const About = lazy(() =>
   import('@/components/sections/About').then((module) => ({ default: module.About })),
 )
+const ForWho = lazy(() =>
+  import('@/components/sections/ForWho').then((module) => ({ default: module.ForWho })),
+)
+const ApproachPillars = lazy(() =>
+  import('@/components/sections/ApproachPillars').then((module) => ({
+    default: module.ApproachPillars,
+  })),
+)
+const ConsultorioGallery = lazy(() =>
+  import('@/components/sections/ConsultorioGallery').then((module) => ({
+    default: module.ConsultorioGallery,
+  })),
+)
+const OnlineAttendance = lazy(() =>
+  import('@/components/sections/OnlineAttendance').then((module) => ({
+    default: module.OnlineAttendance,
+  })),
+)
+const BlogPreview = lazy(() =>
+  import('@/components/sections/BlogPreview').then((module) => ({
+    default: module.BlogPreview,
+  })),
+)
 const Specialties = lazy(() =>
   import('@/components/sections/Specialties').then((module) => ({
     default: module.Specialties,
@@ -65,9 +88,19 @@ export default function App() {
         <Suspense fallback={<SectionFallback />}>
           <About />
           <SectionDivider />
+          <ForWho />
+          <SectionDivider />
+          <ApproachPillars />
+          <SectionDivider />
           <Specialties />
           <SectionDivider />
           <HowItWorks />
+          <SectionDivider />
+          <ConsultorioGallery />
+          <SectionDivider />
+          <OnlineAttendance />
+          <SectionDivider />
+          <BlogPreview />
           <SectionDivider />
           <FAQ />
           <SectionDivider />

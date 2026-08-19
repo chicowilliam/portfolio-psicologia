@@ -4,7 +4,7 @@ import { Dialog } from 'radix-ui'
 import { BookingFormContent } from '@/components/booking/BookingFormContent'
 import { useBookingDialog } from '@/components/providers/booking-dialog-context'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
-import { SITE } from '@/lib/constants'
+import { BOOKING_CTA, SITE } from '@/lib/constants'
 
 export function BookingDialog() {
   const { isOpen, closeBooking } = useBookingDialog()
@@ -34,7 +34,7 @@ export function BookingDialog() {
                     </span>
                   </div>
                   <Dialog.Title className="font-display text-xl font-semibold leading-tight text-foreground sm:text-2xl">
-                    Solicite seu horário de consulta
+                    {BOOKING_CTA.dialogTitle}
                   </Dialog.Title>
                   <Dialog.Description
                     id="booking-dialog-description"

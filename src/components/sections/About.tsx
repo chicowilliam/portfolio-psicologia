@@ -10,7 +10,7 @@ import { HouseLineIcon } from '@phosphor-icons/react/HouseLine'
 import { WhatsappLogoIcon } from '@phosphor-icons/react/WhatsappLogo'
 import { SealCheckIcon } from '@phosphor-icons/react/SealCheck'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
-import { SITE, TIMELINE, WHATSAPP_URL } from '@/lib/constants'
+import { BOOKING_CTA, SITE, TIMELINE, WHATSAPP_URL } from '@/lib/constants'
 import { POSE_B_PORTRAIT_IMAGES } from '@/lib/portrait-images'
 
 function TimelineConnector() {
@@ -123,7 +123,7 @@ export function About() {
                     Quer dar o primeiro passo hoje?
                   </p>
                   <Button size="md" className="w-full" onClick={() => openBooking()}>
-                    Agendar consulta
+                    {BOOKING_CTA.primary}
                   </Button>
                   {WHATSAPP_URL ? (
                     <Button

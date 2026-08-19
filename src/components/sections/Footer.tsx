@@ -4,7 +4,7 @@ import { LinkedinLogoIcon } from '@phosphor-icons/react/LinkedinLogo'
 import { PrivacyPolicyContent } from '@/components/PrivacyPolicyContent'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
-import { SITE } from '@/lib/constants'
+import { BOOKING_CTA, SITE } from '@/lib/constants'
 
 const Modal = lazy(() =>
   import('@/components/ui/Modal').then((module) => ({ default: module.Modal })),
@@ -12,10 +12,13 @@ const Modal = lazy(() =>
 
 const FOOTER_LINKS = [
   { label: 'Quem sou eu', href: '#sobre' },
+  { label: 'Para quem', href: '#para-quem' },
+  { label: 'Abordagem', href: '#abordagem' },
   { label: 'Especialidades', href: '#especialidades' },
   { label: 'Como funciona', href: '#como-funciona' },
+  { label: 'Conteúdo', href: '#conteudo' },
   { label: 'Dúvidas', href: '#duvidas' },
-  { label: 'Agendar consulta', href: '#agendamento' },
+  { label: BOOKING_CTA.primary, href: '#agendamento' },
   { label: 'Contato', href: '#contato' },
 ] as const
 

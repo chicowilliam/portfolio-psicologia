@@ -35,6 +35,44 @@ export interface Credential {
   href?: string
 }
 
+export interface ForWhoItem {
+  index: string
+  text: string
+}
+
+export interface ApproachPillar {
+  index: string
+  title: string
+  subtitle: string
+  description: string
+  benefit: string
+}
+
+export interface TrustSeal {
+  icon: string
+  label: string
+  value: string
+  note?: string
+}
+
+export interface ConsultorioPhoto {
+  id: string
+  alt: string
+  caption: string
+  placeholder: 'sala' | 'detalhe' | 'recepcao'
+}
+
+export interface BlogPost {
+  id: string
+  slug: string
+  category: string
+  title: string
+  excerpt: string
+  readMinutes: number
+  publishedAt: string
+  body: string[]
+}
+
 export type Modality = 'presencial' | 'online'
 
 export type TimePreference = 'manha' | 'tarde' | 'noite'
@@ -63,6 +101,18 @@ export interface SiteConfig {
     photoAlt: string
     welcomeLine: string
   }
+  brand: {
+    line: string
+    heroLead: string
+    heroAccent: string
+    manifesto: string
+  }
+  niche: {
+    eyebrow: string
+    title: string
+    titleAccent: string
+    description: string
+  }
   voice: {
     heroQuote: string
     aboutPullQuote: string
@@ -78,6 +128,14 @@ export interface SiteConfig {
     city: string
     schedule: string
     mapsQuery: string
+  }
+  online: {
+    ePsiUrl: string
+    ePsiRegistered: boolean
+    platform: string
+    tcleNote: string
+    syncNote: string
+    urgencyNote: string
   }
   crpVerifyUrl: string
   social: {

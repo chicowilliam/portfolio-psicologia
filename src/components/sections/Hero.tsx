@@ -4,7 +4,7 @@ import { CalendarIcon } from '@phosphor-icons/react/Calendar'
 import { Button } from '@/components/ui/Button'
 import { MeshBackground } from '@/components/ui/MeshBackground'
 import { LivingPortrait } from '@/components/ui/LivingPortrait'
-import { SITE } from '@/lib/constants'
+import { BOOKING_CTA, SITE } from '@/lib/constants'
 import { POSE_A_PORTRAIT_IMAGES } from '@/lib/portrait-images'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
@@ -30,21 +30,21 @@ export function Hero() {
           animate={prefersReducedMotion ? undefined : 'visible'}
         >
           <p className="welcome-line mb-2.5 text-sm font-medium text-accent sm:mb-3 sm:text-base">
-            {SITE.psychologist.welcomeLine}
+            {SITE.brand.line}
           </p>
           <p className="mb-4 text-[0.95rem] font-medium text-primary/90 sm:mb-5 sm:text-base">
             {SITE.psychologist.approach}
           </p>
 
           <h1 className="font-display text-[clamp(2.1rem,5.1vw,3.45rem)] font-semibold leading-[1.07] tracking-[-0.02em] text-foreground">
-            <span className="block text-[clamp(1.32rem,3vw,1.95rem)] font-medium text-primary">
-              {SITE.psychologist.headline}
+            <span className="block">{SITE.brand.heroLead}</span>
+            <span className="mt-2.5 block text-[clamp(1.32rem,3vw,1.95rem)] font-normal italic text-primary">
+              {SITE.brand.heroAccent}
             </span>
-            <span className="mt-2.5 block">{SITE.psychologist.name}</span>
           </h1>
 
           <p className="mt-2 text-base font-medium text-primary sm:mt-2.5 sm:text-lg">
-            {SITE.psychologist.title}
+            {SITE.psychologist.name} · {SITE.psychologist.title}
           </p>
 
           <p className="mt-4 max-w-[64ch] text-[1.02rem] leading-[1.72] text-muted-foreground sm:mt-5 sm:text-[1.1rem]">
@@ -58,7 +58,7 @@ export function Hero() {
               className="gap-2"
             >
               <CalendarIcon className="size-5" weight="duotone" aria-hidden="true" />
-              Agendar consulta
+              {BOOKING_CTA.primary}
             </Button>
             <Button
               variant="outline"

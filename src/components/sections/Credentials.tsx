@@ -2,13 +2,16 @@ import { memo } from 'react'
 import { CalendarIcon } from '@phosphor-icons/react/Calendar'
 import { GraduationCapIcon } from '@phosphor-icons/react/GraduationCap'
 import { HeartIcon } from '@phosphor-icons/react/Heart'
+import { LockIcon } from '@phosphor-icons/react/Lock'
+import { ScalesIcon } from '@phosphor-icons/react/Scales'
 import { SealCheckIcon } from '@phosphor-icons/react/SealCheck'
+import { UsersThreeIcon } from '@phosphor-icons/react/UsersThree'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { MeshBackground } from '@/components/ui/MeshBackground'
-import { CREDENTIALS, SITE } from '@/lib/constants'
+import { CREDENTIALS, SITE, TRUST_SEALS } from '@/lib/constants'
 import type { IconComponent } from '@/lib/icons'
-import type { Credential } from '@/types'
+import type { Credential, TrustSeal } from '@/types'
 
 const iconMap = {
   badge: SealCheckIcon,
@@ -17,8 +20,20 @@ const iconMap = {
   heart: HeartIcon,
 } as const
 
+const trustIconMap = {
+  supervision: UsersThreeIcon,
+  formation: GraduationCapIcon,
+  ethics: ScalesIcon,
+  privacy: LockIcon,
+} as const
+
 interface CredentialCellProps {
   credential: Credential
+  Icon: IconComponent
+}
+
+interface TrustSealCellProps {
+  seal: TrustSeal
   Icon: IconComponent
 }
 
@@ -28,11 +43,7 @@ const CredentialCell = memo(function CredentialCell({
 }: CredentialCellProps) {
   return (
     <article className="p-5 sm:p-6">
-      <Icon
-        className="size-6 text-primary"
-        weight="duotone"
-        aria-hidden="true"
-      />
+      <Icon className="size-6 text-primary" weight="duotone" aria-hidden="true" />
       <p className="mt-4 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
         {credential.label}
       </p>
@@ -50,6 +61,23 @@ const CredentialCell = memo(function CredentialCell({
           {credential.value}
         </p>
       )}
+    </article>
+  )
+})
+
+const TrustSealCell = memo(function TrustSealCell({ seal, Icon }: TrustSealCellProps) {
+  return (
+    <article className="flex gap-3 rounded-xl border border-border/70 bg-card/60 px-4 py-4">
+      <Icon className="mt-0.5 size-5 shrink-0 text-primary" weight="duotone" aria-hidden="true" />
+      <div>
+        <p className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">
+          {seal.label}
+        </p>
+        <p className="mt-1 font-display text-base font-semibold text-foreground">{seal.value}</p>
+        {seal.note ? (
+          <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{seal.note}</p>
+        ) : null}
+      </div>
     </article>
   )
 })
@@ -88,6 +116,16 @@ export function Credentials() {
                 )
               })}
             </div>
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {TRUST_SEALS.map((seal) => {
+              const Icon = trustIconMap[seal.icon as keyof typeof trustIconMap]
+
+              return <TrustSealCell key={seal.label} seal={seal} Icon={Icon} />
+            })}
           </div>
         </ScrollReveal>
       </div>
