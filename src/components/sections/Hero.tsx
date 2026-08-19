@@ -18,7 +18,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden px-4 pb-12 pt-6 sm:px-6 sm:pb-16 sm:pt-8 lg:px-8 lg:pb-20 lg:pt-10"
+      className="relative overflow-hidden px-4 pb-12 pt-5 sm:px-6 sm:pb-16 sm:pt-8 lg:px-8 lg:pb-20 lg:pt-10"
     >
       <MeshBackground variant="hero" />
 
@@ -29,26 +29,25 @@ export function Hero() {
           initial={prefersReducedMotion ? undefined : 'hidden'}
           animate={prefersReducedMotion ? undefined : 'visible'}
         >
-          <p className="welcome-line mb-3 text-sm font-medium text-accent sm:text-base">
+          <p className="welcome-line mb-2.5 text-sm font-medium text-accent sm:mb-3 sm:text-base">
             {SITE.psychologist.welcomeLine}
           </p>
-          <p className="mb-3 inline-flex w-fit items-center gap-2 rounded-full border border-primary/15 bg-primary/10 px-3.5 py-1.5 text-xs font-medium text-primary backdrop-blur-sm sm:mb-4 sm:px-4 sm:text-sm">
-            <span className="size-1.5 rounded-full bg-primary" />
+          <p className="mb-4 text-[0.95rem] font-medium text-primary/90 sm:mb-5 sm:text-base">
             {SITE.psychologist.approach}
           </p>
 
-          <h1 className="font-display text-[clamp(2rem,5vw,3.25rem)] font-semibold leading-[1.12] tracking-tight text-foreground">
-            <span className="block text-[clamp(1.35rem,3.2vw,2rem)] font-medium text-primary">
+          <h1 className="font-display text-[clamp(2.1rem,5.1vw,3.45rem)] font-semibold leading-[1.07] tracking-[-0.02em] text-foreground">
+            <span className="block text-[clamp(1.32rem,3vw,1.95rem)] font-medium text-primary">
               {SITE.psychologist.headline}
             </span>
-            <span className="mt-2 block">{SITE.psychologist.name}</span>
+            <span className="mt-2.5 block">{SITE.psychologist.name}</span>
           </h1>
 
-          <p className="mt-1.5 text-base text-primary sm:mt-2 sm:text-lg">
+          <p className="mt-2 text-base font-medium text-primary sm:mt-2.5 sm:text-lg">
             {SITE.psychologist.title}
           </p>
 
-          <p className="mt-4 max-w-lg text-base leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg">
+          <p className="mt-4 max-w-[64ch] text-[1.02rem] leading-[1.72] text-muted-foreground sm:mt-5 sm:text-[1.1rem]">
             {SITE.psychologist.tagline}
           </p>
 
@@ -72,7 +71,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <p className="mt-4 text-sm text-muted-foreground sm:mt-5">
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:mt-5">
             CRP{' '}
             <a
               href={SITE.crpVerifyUrl}
@@ -82,19 +81,20 @@ export function Hero() {
             >
               {SITE.psychologist.crp}
             </a>{' '}
-            · Atendimento presencial e online · {SITE.contact.neighborhood}
+            · <strong className="font-semibold text-foreground">Atendimento presencial e online</strong> ·{' '}
+            {SITE.contact.neighborhood}
           </p>
         </motion.div>
 
         <motion.div
-          className="relative mx-auto w-full max-w-[min(100%,22rem)] sm:max-w-sm lg:mx-0 lg:max-w-none lg:justify-self-end"
+          className="relative mx-auto w-full max-w-[min(100%,22rem)] overflow-hidden sm:max-w-sm sm:overflow-visible lg:mx-0 lg:max-w-none lg:justify-self-end"
           variants={prefersReducedMotion ? undefined : fadeInUp}
           initial={prefersReducedMotion ? undefined : 'hidden'}
           animate={prefersReducedMotion ? undefined : 'visible'}
           transition={prefersReducedMotion ? undefined : { delay: 0.12 }}
         >
           <svg
-            className="hero-mobile-sketch pointer-events-none absolute -left-3 -right-3 -top-3 z-0 h-[104%] w-[calc(100%+1.5rem)] sm:hidden"
+            className="hero-mobile-sketch pointer-events-none absolute inset-0 z-0 h-full w-full sm:hidden"
             viewBox="0 0 420 560"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

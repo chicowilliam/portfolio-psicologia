@@ -89,7 +89,7 @@ export function Header() {
       }}
       transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: easeOut }}
     >
-      <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6 lg:px-8">
         <a
           href="#inicio"
           onClick={(e) => {
@@ -101,7 +101,7 @@ export function Header() {
           <span className="font-display text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
             {SITE.psychologist.name}
           </span>
-          <span className="text-xs text-muted-foreground">
+          <span className="hidden text-xs text-muted-foreground min-[400px]:inline">
             CRP {SITE.psychologist.crp}
           </span>
         </a>
@@ -143,7 +143,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <Button size="sm" onClick={handleOpenBooking}>
+          <Button size="sm" onClick={handleOpenBooking} className="hidden min-[430px]:inline-flex">
             Agendar consulta
           </Button>
 
@@ -152,7 +152,7 @@ export function Header() {
               <button
                 type="button"
                 className={cn(
-                  'mobile-menu-trigger relative inline-flex size-11 items-center justify-center rounded-full transition-colors duration-200 lg:hidden',
+                  'mobile-menu-trigger relative inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-2.5 text-foreground transition-colors duration-200 lg:hidden',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                   isMobileOpen && 'mobile-menu-trigger-open',
                 )}
@@ -167,7 +167,7 @@ export function Header() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.18, ease: easeOut }}
-                      className="absolute inset-0 flex items-center justify-center"
+                      className="flex items-center justify-center"
                     >
                       <XIcon className="size-5" aria-hidden="true" />
                     </motion.span>
@@ -178,12 +178,15 @@ export function Header() {
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
                       transition={{ duration: 0.18, ease: easeOut }}
-                      className="absolute inset-0 flex items-center justify-center"
+                      className="flex items-center justify-center"
                     >
                       <ListIcon className="size-5" aria-hidden="true" />
                     </motion.span>
                   )}
                 </AnimatePresence>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.07em]">
+                  Menu
+                </span>
               </button>
             </Dialog.Trigger>
 

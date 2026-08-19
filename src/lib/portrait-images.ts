@@ -37,8 +37,8 @@ const poseBDirect = import.meta.glob('../assets/psicologa/pose-b/*.{webp,jpg,jpe
   import: 'default',
 }) as GlobModule
 
-/** Hero — mesma pose, fundo neutro para composição sobre gradiente mesh */
+/** Hero: mesma pose, fundo neutro para composição sobre gradiente mesh */
 export const POSE_A_PORTRAIT_IMAGES = pickSet(poseANeutro, poseADirect, poseADirect)
 
-/** Sobre — poses variadas, cena completa dentro do card */
+/** Sobre: poses variadas, cena completa dentro do card */
 export const POSE_B_PORTRAIT_IMAGES = pickSet(poseBCena, poseBDirect, poseBDirect)

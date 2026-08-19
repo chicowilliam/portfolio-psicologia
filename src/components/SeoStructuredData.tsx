@@ -22,7 +22,7 @@ export function SeoStructuredData() {
       {
         '@type': 'MedicalBusiness',
         '@id': `${SITE.url}/#business`,
-        name: `${SITE.psychologist.name} — ${SITE.psychologist.title}`,
+        name: `${SITE.psychologist.name}, ${SITE.psychologist.title}`,
         description: SITE.psychologist.tagline,
         url: SITE.url,
         image: `${SITE.url}/og-cover.svg`,

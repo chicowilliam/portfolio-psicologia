@@ -6,7 +6,7 @@ export function PrivacyPolicyContent() {
       <p>
         Esta Política de Privacidade descreve como tratamos os dados pessoais
         coletados por meio deste site, em conformidade com a Lei Geral de
-        Proteção de Dados (LGPD — Lei nº 13.709/2018).
+        Proteção de Dados (LGPD, Lei nº 13.709/2018).
       </p>
 
       <section>

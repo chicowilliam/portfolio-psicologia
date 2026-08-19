@@ -142,7 +142,7 @@ export function Footer() {
               O sigilo profissional é garantido pelo Código de Ética Profissional
               do Psicólogo (Resolução CFP nº 010/2005). As informações compartilhadas
               neste site não substituem avaliação clínica individual. Publicidade
-              conforme Resolução CFP nº 011/2018 — sem promessas de cura ou garantia
+              conforme Resolução CFP nº 011/2018, sem promessas de cura ou garantia
               de resultados.
             </p>
             <p className="mt-4 text-center text-xs text-primary-foreground/65">

@@ -45,18 +45,25 @@ export function About() {
   const { openBooking } = useBookingDialog()
 
   return (
-    <section id="sobre" className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <section id="sobre" className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
           <SectionHeading
             eyebrow="Sobre mim"
             title="Quem acompanha você"
             titleAccent="neste processo"
-            description="Formação, trajetória e a forma como conduzo cada sessão — com escuta, evidência e respeito ao seu tempo."
+            description={
+              <>
+                Formação, trajetória e a forma como conduzo cada sessão, com{' '}
+                <strong className="font-semibold text-foreground">escuta</strong>,{' '}
+                <strong className="font-semibold text-foreground">evidência</strong> e respeito
+                ao seu tempo.
+              </>
+            }
           />
         </ScrollReveal>
 
-        <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="mt-10 grid gap-10 sm:mt-12 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <ScrollReveal delay={0.05}>
             <div>
               <div className="paper-frame relative aspect-[4/5] overflow-hidden">
@@ -101,15 +108,15 @@ export function About() {
                 <div className="mt-3 space-y-2">
                   <p className="flex items-center gap-2 text-sm text-foreground">
                     <SealCheckIcon className="size-4 text-primary" weight="duotone" aria-hidden="true" />
-                    Registro profissional verificável
+                    <strong className="font-semibold text-foreground">Registro profissional verificável</strong>
                   </p>
                   <p className="flex items-center gap-2 text-sm text-foreground">
                     <CalendarIcon className="size-4 text-primary" weight="duotone" aria-hidden="true" />
-                    Mais de 10 anos de atuação clínica
+                    <strong className="font-semibold text-foreground">Mais de 10 anos de atuação clínica</strong>
                   </p>
                   <p className="flex items-center gap-2 text-sm text-foreground">
                     <HouseLineIcon className="size-4 text-primary" weight="duotone" aria-hidden="true" />
-                    Atendimento presencial e online
+                    <strong className="font-semibold text-foreground">Atendimento presencial e online</strong>
                   </p>
                 </div>
                 <a
@@ -151,7 +158,7 @@ export function About() {
                 className="mb-6"
               />
 
-              <p className="leading-relaxed text-muted-foreground">
+              <p className="max-w-[66ch] leading-[1.72] text-muted-foreground">
                 {SITE.psychologist.bio}
               </p>
 
@@ -162,7 +169,7 @@ export function About() {
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   Trabalho com {SITE.psychologist.approach}, integrando técnicas
                   validadas cientificamente com uma escuta empática e
-                  personalizada. Cada processo terapêutico é único — não existe
+                  personalizada. Cada processo terapêutico é único, não existe
                   receita pronta, mas sim um caminho construído em parceria.
                 </p>
               </GlassCard>

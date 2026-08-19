@@ -40,7 +40,7 @@ export function BookingDialog() {
                     id="booking-dialog-description"
                     className="mt-2 text-sm leading-relaxed text-muted-foreground"
                   >
-                    Preencha abaixo — em até {SITE.responseTimeHours} horas úteis respondo
+                    Preencha abaixo, em até {SITE.responseTimeHours} horas úteis respondo
                     pelo WhatsApp ou e-mail. É uma solicitação, não uma reserva automática.
                   </Dialog.Description>
                 </div>

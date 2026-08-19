@@ -7,7 +7,7 @@ export function FAQ() {
   return (
     <section
       id="duvidas"
-      className="bg-muted/30 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+      className="bg-muted/30 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <div className="mx-auto max-w-3xl">
         <ScrollReveal>
@@ -16,7 +16,12 @@ export function FAQ() {
             eyebrow="Perguntas frequentes"
             title="O que muita gente"
             titleAccent="quer saber antes de agendar"
-            description="Respostas diretas, sem rodeios — para você decidir com mais segurança."
+            description={
+              <>
+                Respostas diretas, sem rodeios, para você decidir com{' '}
+                <strong className="font-semibold text-foreground">mais segurança</strong>.
+              </>
+            }
           />
         </ScrollReveal>
 

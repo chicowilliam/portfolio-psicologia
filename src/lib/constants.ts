@@ -17,20 +17,20 @@ export const SITE: SiteConfig = {
     crp: '04/38921',
     approach: 'Terapia Cognitivo-Comportamental (TCC)',
     tagline:
-      'Um espaço seguro para você se escutar, compreender suas emoções e construir caminhos possíveis — no seu ritmo, sem pressa de “resolver tudo”.',
+      'Um espaço seguro para você se escutar, compreender suas emoções e construir caminhos possíveis, no seu ritmo, sem pressa de “resolver tudo”.',
     bio: 'Sou psicóloga clínica formada pela Universidade Federal de Minas Gerais (UFMG), com especialização em Terapia Cognitivo-Comportamental e experiência em atendimento adulto e adolescente. Acredito que a terapia é um processo de autoconhecimento e cuidado, não uma promessa de resultado rápido. Meu trabalho é oferecer escuta qualificada, baseada em evidências científicas, respeitando a singularidade de cada pessoa.',
     photoAlt:
       'Dra. Helena Vasconcelos, psicóloga clínica, em ambiente acolhedor do consultório',
-    welcomeLine: 'Olá — fico feliz que você esteja aqui.',
+    welcomeLine: 'Olá, fico feliz que você esteja aqui.',
   },
   voice: {
     heroQuote: 'Cuidar de si também é um ato de coragem.',
     aboutPullQuote:
-      'Na terapia, não buscamos perfeição — buscamos um lugar onde você possa ser inteira, com o que pesa e o que espera.',
+      'Na terapia, não buscamos perfeição. Buscamos um lugar onde você possa ser inteira, com o que pesa e o que espera.',
     credentialsNote:
       'Transparência faz parte do cuidado: você pode verificar meu registro e formação antes de agendar.',
     bookingReassurance:
-      'Levo alguns minutos para ler cada mensagem com atenção. Não é robô, não é reserva automática — é um primeiro contato humano.',
+      'Levo alguns minutos para ler cada mensagem com atenção. Não é robô, não é reserva automática. É um primeiro contato humano.',
     faqClosing:
       'Se ainda ficou alguma dúvida, escreva. Responder com clareza também faz parte do acolhimento.',
   },
@@ -39,9 +39,9 @@ export const SITE: SiteConfig = {
     phone: '+5531987654321',
     whatsapp: '5531987654321',
     whatsappDisplay: '(31) 98765-4321',
-    address: 'Rua dos Inconfidentes, 842 — Sala 304',
+    address: 'Rua dos Inconfidentes, 842, Sala 304',
     neighborhood: 'Savassi',
-    city: 'Belo Horizonte — MG',
+    city: 'Belo Horizonte, MG',
     schedule: 'Segunda a sexta, das 8h às 20h',
     mapsQuery: 'Rua dos Inconfidentes, 842, Savassi, Belo Horizonte, MG',
   },
@@ -76,7 +76,7 @@ export const CREDENTIALS: Credential[] = [
   {
     icon: 'graduation',
     label: 'Formação',
-    value: 'Graduação e especialização em TCC — UFMG',
+    value: 'Graduação e especialização em TCC, UFMG',
   },
   {
     icon: 'calendar',
@@ -99,7 +99,7 @@ export const TIMELINE: TimelineItem[] = [
   {
     year: '2014',
     title: 'Registro no CRP-MG',
-    description: `Início da atuação clínica — CRP ${SITE.psychologist.crp}`,
+    description: `Início da atuação clínica, CRP ${SITE.psychologist.crp}`,
   },
   {
     year: '2016',
@@ -174,7 +174,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     step: 2,
     title: 'Triagem inicial',
     description:
-      'Conversamos brevemente sobre modalidade, disponibilidade e como posso ajudar — sem necessidade de expor detalhes clínicos por mensagem.',
+      'Conversamos brevemente sobre modalidade, disponibilidade e como posso ajudar, sem necessidade de expor detalhes clínicos por mensagem.',
   },
   {
     step: 3,
@@ -231,7 +231,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: 'urgencia',
     question: 'Este site atende urgências ou crises?',
     answer:
-      'Não. Este canal é para agendamento e informações sobre psicoterapia e não substitui atendimento de urgência. Em situação de crise ou risco imediato, ligue 188 (CVV — Centro de Valorização da Vida), 192 (SAMU) ou dirija-se ao serviço de emergência mais próximo.',
+      'Não. Este canal é para agendamento e informações sobre psicoterapia e não substitui atendimento de urgência. Em situação de crise ou risco imediato, ligue 188 (CVV, Centro de Valorização da Vida), 192 (SAMU) ou dirija-se ao serviço de emergência mais próximo.',
   },
 ]
 

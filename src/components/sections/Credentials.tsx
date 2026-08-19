@@ -58,7 +58,7 @@ export function Credentials() {
   return (
     <section
       id="credenciais"
-      className="relative border-y border-border bg-muted/40 px-4 py-16 sm:px-6 lg:px-8 lg:py-20"
+      className="relative border-y border-border bg-muted/40 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
     >
       <MeshBackground variant="subtle" />
 

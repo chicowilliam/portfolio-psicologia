@@ -21,9 +21,7 @@ export function PullQuote({ quote, attribution, className }: PullQuoteProps) {
         {quote}
       </p>
       {attribution && (
-        <footer className="mt-3 text-sm text-muted-foreground">
-          — {attribution}
-        </footer>
+        <footer className="mt-3 text-sm text-muted-foreground">{attribution}</footer>
       )}
     </blockquote>
   )

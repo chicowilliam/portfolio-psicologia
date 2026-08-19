@@ -64,7 +64,7 @@ export function Specialties() {
   return (
     <section
       id="especialidades"
-      className="bg-muted/30 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+      className="bg-muted/30 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
@@ -73,11 +73,16 @@ export function Specialties() {
             eyebrow="Áreas de atuação"
             title="Demandas que acompanho"
             titleAccent="no consultório e online"
-            description="Cada pessoa traz uma história. Estas são algumas das vivências em que mais trabalho — sem que uma demanda defina quem você é."
+            description={
+              <>
+                Cada pessoa traz uma história. Estas são algumas das vivências em que mais
+                trabalho, <strong className="font-semibold text-foreground">sem que uma demanda defina quem você é</strong>.
+              </>
+            }
           />
         </ScrollReveal>
 
-        <ScrollRevealGroup className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ScrollRevealGroup className="mt-10 grid gap-4 sm:mt-12 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SPECIALTIES.map((specialty, index) => {
             const Icon = iconMap[specialty.icon as keyof typeof iconMap]
 

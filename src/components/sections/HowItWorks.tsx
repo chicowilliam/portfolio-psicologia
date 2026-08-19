@@ -26,7 +26,7 @@ const StepRow = memo(function StepRow({ step }: { step: ProcessStep }) {
 
 export function HowItWorks() {
   return (
-    <section id="como-funciona" className="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+    <section id="como-funciona" className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-3xl">
         <ScrollReveal>
           <SectionHeading
@@ -34,7 +34,13 @@ export function HowItWorks() {
             eyebrow="Como funciona"
             title="Do primeiro contato"
             titleAccent="ao acompanhamento contínuo"
-            description="Um caminho claro, sem burocracia excessiva — presencial na Savassi ou online, no mesmo cuidado."
+            description={
+              <>
+                Um caminho claro,{' '}
+                <strong className="font-semibold text-foreground">sem burocracia excessiva</strong>,
+                presencial na Savassi ou online, no mesmo cuidado.
+              </>
+            }
           />
         </ScrollReveal>
 
@@ -52,7 +58,7 @@ export function HowItWorks() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.08}>
-          <ol className="paper-card paper-note paper-ledger mt-10 list-none">
+          <ol className="paper-card paper-note paper-ledger mt-8 list-none sm:mt-10">
             {PROCESS_STEPS.map((step) => (
               <StepRow key={step.step} step={step} />
             ))}

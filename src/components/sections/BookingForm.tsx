@@ -19,7 +19,7 @@ export function BookingForm() {
   return (
     <section
       id="agendamento"
-      className="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+      className="relative overflow-hidden px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <MeshBackground variant="cta" />
 
@@ -30,7 +30,15 @@ export function BookingForm() {
             eyebrow="Agendamento"
             title="Vamos encontrar"
             titleAccent="um horário que funcione"
-            description={`Preencha o formulário — em até ${SITE.responseTimeHours} horas úteis respondo pelo WhatsApp ou e-mail. É uma solicitação, não uma reserva automática.`}
+            description={
+              <>
+                Preencha o formulário, em até{' '}
+                <strong className="font-semibold text-foreground">
+                  {SITE.responseTimeHours} horas úteis
+                </strong>{' '}
+                respondo pelo WhatsApp ou e-mail. É uma solicitação, não uma reserva automática.
+              </>
+            }
           />
           <p className="mx-auto mt-4 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
             {SITE.voice.bookingReassurance}
@@ -44,7 +52,7 @@ export function BookingForm() {
               Abrir formulário de agendamento
             </Button>
             <p className="text-center text-xs text-muted-foreground sm:text-left">
-              O formulário abre sobre a página — você não sai do site.
+              O formulário abre sobre a página, você não sai do site.
             </p>
           </div>
         </ScrollReveal>

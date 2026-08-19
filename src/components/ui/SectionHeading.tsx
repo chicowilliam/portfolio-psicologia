@@ -4,7 +4,7 @@ interface SectionHeadingProps {
   eyebrow?: string
   title: string
   titleAccent?: string
-  description?: string
+  description?: React.ReactNode
   align?: 'left' | 'center'
 }
 
@@ -25,21 +25,21 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="editorial-eyebrow mb-4">
+        <p className="editorial-eyebrow mb-3 sm:mb-4">
           <span className="editorial-eyebrow-line" aria-hidden="true" />
           <span>{eyebrow}</span>
         </p>
       )}
-      <h2 className="section-title font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold tracking-tight text-foreground">
+      <h2 className="section-title font-display text-[clamp(1.9rem,4.4vw,3.05rem)] font-semibold leading-[1.14] tracking-[-0.01em] text-foreground">
         {title}
         {titleAccent && (
-          <span className="mt-1 block font-display text-[clamp(1.35rem,3vw,1.75rem)] font-normal italic text-primary/90">
+          <span className="mt-1.5 block font-display text-[clamp(1.3rem,3.1vw,1.95rem)] font-normal italic text-primary/90">
             {titleAccent}
           </span>
         )}
       </h2>
       {description && (
-        <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+        <p className="mt-4 max-w-[66ch] text-[1.02rem] leading-[1.7] text-muted-foreground sm:mt-5 sm:text-[1.09rem]">
           {description}
         </p>
       )}

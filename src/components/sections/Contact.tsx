@@ -35,7 +35,7 @@ export function Contact() {
   return (
     <section
       id="contato"
-      className="relative border-t border-border bg-muted/30 px-4 py-16 sm:px-6 lg:px-8 lg:py-24"
+      className="relative border-t border-border bg-muted/30 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <MeshBackground variant="subtle" />
 
@@ -46,7 +46,15 @@ export function Contact() {
             eyebrow="Contato"
             title="O consultório e"
             titleAccent="como falar comigo"
-            description="Horários, localização e canais diretos — sem formulários intermediários se preferir conversar primeiro."
+            description={
+              <>
+                Horários, localização e canais diretos,{' '}
+                <strong className="font-semibold text-foreground">
+                  sem formulários intermediários
+                </strong>{' '}
+                se preferir conversar primeiro.
+              </>
+            }
           />
         </ScrollReveal>
 
@@ -79,7 +87,7 @@ export function Contact() {
                 <p className="mt-1 text-sm text-muted-foreground">
                   {SITE.contact.address}
                   <br />
-                  {SITE.contact.neighborhood} — {SITE.contact.city}
+                  {SITE.contact.neighborhood}, {SITE.contact.city}
                 </p>
                 <p className="mt-2 text-xs text-muted-foreground/80">
                   Prédio comercial com acesso por elevador. Entrada acessível mediante
@@ -137,7 +145,7 @@ export function Contact() {
             <div className="paper-frame">
               <div className="aspect-[4/3] w-full">
                 <iframe
-                  title={`Mapa do consultório — ${SITE.contact.neighborhood}, ${SITE.contact.city}`}
+                  title={`Mapa do consultório, ${SITE.contact.neighborhood}, ${SITE.contact.city}`}
                   src={MAPS_EMBED_URL}
                   className="size-full border-0"
                   loading="lazy"

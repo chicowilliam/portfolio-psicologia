@@ -70,10 +70,26 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    overflow-x: clip;
+    font-size: 1rem;
+    line-height: 1.62;
+    letter-spacing: 0.003em;
+    text-rendering: optimizeLegibility;
     scrollbar-gutter: stable;
     scrollbar-width: thin;
     scrollbar-color: color-mix(in srgb, var(--color-primary) 42%, var(--color-border))
       color-mix(in srgb, var(--color-muted) 88%, var(--color-background));
+  }
+
+  #root {
+    overflow-x: clip;
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      line-height: 1.68;
+      letter-spacing: 0.002em;
+    }
   }
 
   * {
@@ -141,13 +157,18 @@
     gap: 0.75rem;
     font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-primary);
   }
 
   .section-heading-center .editorial-eyebrow {
     justify-content: center;
+  }
+
+  .section-heading-center p {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .editorial-eyebrow-line {
@@ -322,9 +343,15 @@
     border-radius: 0.2rem 0.7rem 0.7rem 0.2rem;
     background: var(--color-card);
     padding: 0.45rem 0.95rem;
-    font-size: 0.875rem;
+    font-size: 0.82rem;
     color: var(--color-muted-foreground);
     box-shadow: 0 1px 0 color-mix(in srgb, var(--color-border) 70%, transparent);
+  }
+
+  @media (min-width: 768px) {
+    .paper-chip {
+      font-size: 0.875rem;
+    }
   }
 
   .paper-frame {
@@ -476,7 +503,7 @@
   }
 
   .site-header {
-    background: color-mix(in srgb, var(--color-background) 18%, transparent);
+    background: color-mix(in srgb, var(--color-background) 22%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -885,6 +912,7 @@
   .mobile-menu-trigger {
     border: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
     background: color-mix(in srgb, var(--color-card) 92%, var(--color-background));
+    color: var(--color-foreground);
     box-shadow: var(--shadow-soft);
   }
 
@@ -892,6 +920,13 @@
     border-color: color-mix(in srgb, var(--color-primary) 28%, var(--color-border));
     background: color-mix(in srgb, var(--color-primary) 8%, var(--color-card));
     color: var(--color-primary);
+  }
+
+  @media (max-width: 639px) {
+    .mobile-menu-trigger {
+      background: color-mix(in srgb, var(--color-card) 96%, var(--color-background));
+      border-color: color-mix(in srgb, var(--color-primary) 18%, var(--color-border));
+    }
   }
 }
 
