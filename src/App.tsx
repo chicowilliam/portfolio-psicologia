@@ -81,7 +81,7 @@ export default function App() {
 
       <main id="conteudo-principal" className="relative z-[1]">
         <Hero />
-        <SectionDivider variant="ink-to-mist" />
+        <SectionDivider variant="mist-to-blush" />
         <Credentials />
         <SectionDivider variant="mist-to-blush" />
         <Suspense fallback={<SectionFallback />}>

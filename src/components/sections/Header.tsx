@@ -52,11 +52,9 @@ function surfaceFromClassName(className: string, progress = 0.5): 'dark' | 'ligh
 }
 
 function resolveSurfaceAtHeader(): 'dark' | 'light' {
-  if (typeof document === 'undefined') return 'dark'
+  if (typeof document === 'undefined') return 'light'
 
-  // Top of the page is always the dark hero under the fixed header.
-  if (window.scrollY < 72) return 'dark'
-
+  // Site opens on pastel light bands — only booking CTA / footer go dark.
   const y = 36
   const bands = document.querySelectorAll<HTMLElement>(
     '.section-fade, .band-ink, .band-cta, .band-light, .band-light-alt, .band-mid',
@@ -93,8 +91,7 @@ function resolveSurfaceAtHeader(): 'dark' | 'light' {
     if (surface) return surface
   }
 
-  // Uncertain samples must stay dark — never fall back to light.
-  return 'dark'
+  return 'light'
 }
 
 function HamburgerIcon({ open }: { open: boolean }) {
@@ -286,7 +283,7 @@ function MobileMenu({
 export function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [overDark, setOverDark] = useState(true)
+  const [overDark, setOverDark] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const scrollTo = useScrollTo()
   const { openBooking } = useBookingDialog()
@@ -366,7 +363,7 @@ export function Header() {
       <motion.header
         className={cn(
           'site-header fixed inset-x-0 top-0 z-50',
-          !overDark && 'site-header--on-light',
+          overDark && 'site-header--on-dark',
         )}
         initial={false}
         data-surface={overDark ? 'dark' : 'light'}

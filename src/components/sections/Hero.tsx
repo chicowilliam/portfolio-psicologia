@@ -18,9 +18,9 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="band-ink relative overflow-hidden px-5 pb-12 pt-[4.75rem] sm:px-6 sm:pb-16 sm:pt-[5rem] lg:pb-20 lg:pl-8 lg:pr-0 lg:pt-[5.25rem]"
+      className="band-light relative overflow-hidden px-5 pb-12 pt-[4.75rem] sm:px-6 sm:pb-16 sm:pt-[5rem] lg:pb-20 lg:pl-8 lg:pr-0 lg:pt-[5.25rem]"
     >
-      <MeshBackground variant="hero" />
+      <MeshBackground variant="subtle" />
 
       <div className="relative mx-auto grid max-w-6xl items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-10 xl:gap-12">
         <motion.div
@@ -38,7 +38,7 @@ export function Hero() {
 
           <h1 className="font-display text-[clamp(2.1rem,5.1vw,3.45rem)] font-semibold leading-[1.07] tracking-[-0.02em] text-foreground">
             <span className="block">{SITE.brand.heroLead}</span>
-            <span className="mt-2.5 block text-[clamp(1.32rem,3vw,1.95rem)] font-normal italic text-primary-light">
+            <span className="mt-2.5 block text-[clamp(1.32rem,3vw,1.95rem)] font-normal italic text-primary">
               {SITE.brand.heroAccent}
             </span>
           </h1>
