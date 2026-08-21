@@ -284,7 +284,6 @@ export function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [overDark, setOverDark] = useState(false)
-  const prefersReducedMotion = useReducedMotion()
   const scrollTo = useScrollTo()
   const { openBooking } = useBookingDialog()
   const activeSection = useScrollSpy(SECTION_IDS)
