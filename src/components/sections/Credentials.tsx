@@ -66,7 +66,7 @@ const CredentialCell = memo(function CredentialCell({
 
 const TrustSealCell = memo(function TrustSealCell({ seal, Icon }: TrustSealCellProps) {
   return (
-    <article className="flex gap-3 border-t border-border/70 px-1 py-4 sm:px-2">
+    <article className="flex gap-3/70 px-1 py-4 sm:px-2">
       <Icon className="mt-0.5 size-5 shrink-0 text-primary" weight="duotone" aria-hidden="true" />
       <div>
         <p className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">
@@ -85,7 +85,7 @@ export function Credentials() {
   return (
     <section
       id="credenciais"
-      className="band-light relative border-y border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className="band-light relative px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
     >
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal>

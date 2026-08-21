@@ -1,23 +1,26 @@
-export function SectionDivider() {
+import { cn } from '@/lib/utils'
+
+export type SectionFadeVariant =
+  | 'ink-to-mist'
+  | 'mist-to-blush'
+  | 'blush-to-mist'
+  | 'mist-to-cta'
+  | 'cta-to-mist'
+  | 'mist-to-ink'
+
+interface SectionDividerProps {
+  variant?: SectionFadeVariant
+  className?: string
+}
+
+export function SectionDivider({
+  variant = 'mist-to-blush',
+  className,
+}: SectionDividerProps) {
   return (
     <div
-      className="section-divider mx-auto max-w-6xl px-4 sm:px-6 lg:px-8"
+      className={cn('section-fade', `section-fade--${variant}`, className)}
       aria-hidden="true"
-    >
-      <svg
-        viewBox="0 0 1200 48"
-        preserveAspectRatio="none"
-        className="h-8 w-full text-border/80 sm:h-10"
-        fill="none"
-      >
-        <path
-          d="M0 24C200 8 400 40 600 24s400-16 600 24"
-          stroke="currentColor"
-          strokeWidth="1"
-          strokeLinecap="round"
-        />
-        <circle cx="600" cy="24" r="3" className="fill-primary/45" />
-      </svg>
-    </div>
+    />
   )
 }

@@ -7,31 +7,38 @@
   --font-display: "Fraunces", Georgia, serif;
   --font-body: "Manrope", system-ui, sans-serif;
 
-  /* Light-first site base — dark reserved for hero / footer / CTA */
-  --color-background: #f2ebe3;
+  /* Wine family scale (dark → light), same temperature throughout */
+  --color-wine-ink: #120a0c;
+  --color-wine-deep: #1c1014;
+  --color-wine-rich: #5c2434;
+  --color-wine-rose: #c9a4ad;
+  --color-wine-blush: #e9d6db;
+  --color-wine-mist: #f4ebee;
+
+  --color-background: #f4ebee;
   --color-foreground: #3a2428;
-  --color-muted: #e8dfd4;
-  --color-muted-foreground: #5a524c;
-  --color-subtle: #7a716a;
+  --color-muted: #eadde0;
+  --color-muted-foreground: #6b555c;
+  --color-subtle: #8a7278;
   --color-primary: #7a2036;
-  --color-primary-foreground: #f3e9e6;
+  --color-primary-foreground: #f4ebee;
   --color-primary-light: #9a4058;
   --color-primary-hover: #a5364f;
-  --color-accent: #9a7040;
-  --color-accent-foreground: #f2ebe3;
-  --color-card: #faf6f0;
+  --color-accent: #a67a48;
+  --color-accent-foreground: #f4ebee;
+  --color-card: #faf4f6;
   --color-card-foreground: #3a2428;
-  --color-border: #d5c9bb;
+  --color-border: #d7c2c7;
   --color-ring: #a5364f;
   --color-ink: #120a0c;
   --color-surface-ink: #120a0c;
-  --color-surface-mid: #24181c;
-  --color-surface-light: #f2ebe3;
-  --color-surface-champagne: #ebe2d6;
+  --color-surface-mid: #1c1014;
+  --color-surface-light: #f4ebee;
+  --color-surface-champagne: #e9d6db;
   --color-success: #3d6b4a;
   --color-error: #a94444;
-  --color-glass: rgb(250 246 240 / 0.88);
-  --color-glass-border: rgb(58 36 40 / 0.1);
+  --color-glass: rgb(250 244 246 / 0.72);
+  --color-glass-border: rgb(58 36 40 / 0.08);
 
   --radius-sm: 0.375rem;
   --radius-md: 0.625rem;
@@ -39,34 +46,40 @@
   --radius-xl: 1.25rem;
   --radius-2xl: 1.75rem;
 
-  --shadow-soft: 0 6px 24px -10px rgb(58 36 40 / 0.14);
-  --shadow-card: 0 10px 28px -16px rgb(58 36 40 / 0.16);
-  --shadow-elevated: 0 18px 40px -18px rgb(58 36 40 / 0.2);
+  --shadow-soft: 0 6px 24px -10px rgb(58 36 40 / 0.12);
+  --shadow-card: 0 10px 28px -16px rgb(58 36 40 / 0.14);
+  --shadow-elevated: 0 18px 40px -18px rgb(58 36 40 / 0.18);
 }
 
 .dark {
-  --color-background: #f2ebe3;
+  --color-background: #f4ebee;
   --color-foreground: #3a2428;
-  --color-muted: #e8dfd4;
-  --color-muted-foreground: #5a524c;
-  --color-subtle: #7a716a;
+  --color-muted: #eadde0;
+  --color-muted-foreground: #6b555c;
+  --color-subtle: #8a7278;
   --color-primary: #7a2036;
-  --color-primary-foreground: #f3e9e6;
+  --color-primary-foreground: #f4ebee;
   --color-primary-light: #9a4058;
   --color-primary-hover: #a5364f;
-  --color-accent: #9a7040;
-  --color-accent-foreground: #f2ebe3;
-  --color-card: #faf6f0;
+  --color-accent: #a67a48;
+  --color-accent-foreground: #f4ebee;
+  --color-card: #faf4f6;
   --color-card-foreground: #3a2428;
-  --color-border: #d5c9bb;
+  --color-border: #d7c2c7;
   --color-ring: #a5364f;
   --color-ink: #120a0c;
   --color-surface-ink: #120a0c;
-  --color-surface-mid: #24181c;
-  --color-surface-light: #f2ebe3;
-  --color-surface-champagne: #ebe2d6;
-  --color-glass: rgb(250 246 240 / 0.88);
-  --color-glass-border: rgb(58 36 40 / 0.1);
+  --color-surface-mid: #1c1014;
+  --color-surface-light: #f4ebee;
+  --color-surface-champagne: #e9d6db;
+  --color-wine-ink: #120a0c;
+  --color-wine-deep: #1c1014;
+  --color-wine-rich: #5c2434;
+  --color-wine-rose: #c9a4ad;
+  --color-wine-blush: #e9d6db;
+  --color-wine-mist: #f4ebee;
+  --color-glass: rgb(250 244 246 / 0.72);
+  --color-glass-border: rgb(58 36 40 / 0.08);
 }
 
 @layer base {
@@ -236,17 +249,17 @@
   }
 
   .band-light {
-    background-color: var(--color-surface-light);
+    background-color: var(--color-wine-mist);
   }
 
   .band-light-alt {
-    background-color: var(--color-surface-champagne);
+    background-color: var(--color-wine-blush);
   }
 
   /* Dark frame: hero + footer only */
   .band-ink,
   .band-cta {
-    background-color: var(--color-surface-ink);
+    background-color: var(--color-wine-ink);
     color: #f3e9e6;
     --color-foreground: #f3e9e6;
     --color-muted: #2b1f22;
@@ -264,7 +277,7 @@
   }
 
   .band-cta {
-    background-color: #1a1013;
+    background-color: var(--color-wine-deep);
   }
 
   .band-ink::before,
@@ -291,9 +304,74 @@
     z-index: 1;
   }
 
-  /* Legacy mid maps to light champagne (no mid-page dark bands) */
+  /* Legacy mid maps to wine blush */
   .band-mid {
-    background-color: var(--color-surface-champagne);
+    background-color: var(--color-wine-blush);
+  }
+
+  /* Soft gradient bridges between section surfaces (no hard cuts) */
+  .section-fade {
+    display: block;
+    width: 100%;
+    height: clamp(9.5rem, 18vw, 13.5rem);
+    pointer-events: none;
+    margin: 0;
+    border: 0;
+  }
+
+  .section-fade--ink-to-mist {
+    background: linear-gradient(
+      to bottom,
+      var(--color-wine-ink) 0%,
+      color-mix(in srgb, var(--color-wine-ink) 55%, var(--color-wine-rich)) 28%,
+      color-mix(in srgb, var(--color-wine-rich) 35%, var(--color-wine-blush)) 62%,
+      var(--color-wine-mist) 100%
+    );
+  }
+
+  .section-fade--mist-to-blush {
+    background: linear-gradient(
+      to bottom,
+      var(--color-wine-mist),
+      var(--color-wine-blush)
+    );
+  }
+
+  .section-fade--blush-to-mist {
+    background: linear-gradient(
+      to bottom,
+      var(--color-wine-blush),
+      var(--color-wine-mist)
+    );
+  }
+
+  .section-fade--mist-to-cta {
+    background: linear-gradient(
+      to bottom,
+      var(--color-wine-mist) 0%,
+      color-mix(in srgb, var(--color-wine-blush) 55%, var(--color-wine-rich)) 40%,
+      color-mix(in srgb, var(--color-wine-rich) 50%, var(--color-wine-deep)) 72%,
+      var(--color-wine-deep) 100%
+    );
+  }
+
+  .section-fade--cta-to-mist {
+    background: linear-gradient(
+      to bottom,
+      var(--color-wine-deep) 0%,
+      color-mix(in srgb, var(--color-wine-rich) 45%, var(--color-wine-blush)) 48%,
+      var(--color-wine-mist) 100%
+    );
+  }
+
+  .section-fade--mist-to-ink {
+    background: linear-gradient(
+      to bottom,
+      var(--color-wine-mist) 0%,
+      color-mix(in srgb, var(--color-wine-blush) 40%, var(--color-wine-rich)) 42%,
+      color-mix(in srgb, var(--color-wine-rich) 55%, var(--color-wine-ink)) 74%,
+      var(--color-wine-ink) 100%
+    );
   }
 
   .credentials-ledger {
@@ -799,10 +877,30 @@
   }
 
   .site-header {
-    background: color-mix(in srgb, var(--color-background) 86%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-color: color-mix(in srgb, var(--color-border) 70%, transparent);
+    background: color-mix(in srgb, var(--color-wine-mist) 55%, transparent);
+    backdrop-filter: blur(18px) saturate(1.15);
+    -webkit-backdrop-filter: blur(18px) saturate(1.15);
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .site-header-nav-link {
+    position: relative;
+    border-radius: 9999px;
+    padding: 0.55rem 0.95rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color 0.22s ease, background-color 0.22s ease;
+  }
+
+  .site-header-nav-link[data-active='true'] {
+    color: var(--color-primary);
+  }
+
+  .site-header-nav-indicator {
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--color-primary) 9%, transparent);
   }
 
   .grain-overlay {
@@ -965,37 +1063,67 @@
     height: 100%;
   }
 
+  .ambient-drawing--on-light {
+    mix-blend-mode: multiply;
+  }
+
+  .ambient-drawing--on-dark {
+    mix-blend-mode: screen;
+  }
+
   .ambient-window {
-    opacity: 0.9;
+    opacity: 0.55;
   }
 
   .ambient-light-start {
-    stop-color: color-mix(in srgb, var(--color-accent) 22%, transparent);
+    stop-color: color-mix(in srgb, var(--color-wine-rose) 28%, transparent);
   }
 
   .ambient-light-end {
     stop-color: transparent;
   }
 
-  .ambient-stem {
-    stroke: color-mix(in srgb, var(--color-primary) 28%, transparent);
+  /* Dark wine strokes — visible on light/mist sections */
+  .ambient-drawing--on-light .ambient-stem {
+    stroke: color-mix(in srgb, var(--color-wine-rich) 55%, transparent);
     stroke-width: 1.35;
     stroke-linecap: round;
+    opacity: 0.55;
   }
 
-  .ambient-leaf ellipse {
-    fill: color-mix(in srgb, var(--color-primary-light) 22%, transparent);
-    stroke: color-mix(in srgb, var(--color-primary) 26%, transparent);
-    stroke-width: 1.1;
+  .ambient-drawing--on-light .ambient-leaf ellipse {
+    fill: color-mix(in srgb, var(--color-primary) 14%, transparent);
+    stroke: color-mix(in srgb, var(--color-wine-rich) 45%, transparent);
+    stroke-width: 1.05;
   }
 
-  .ambient-branch-right .ambient-leaf ellipse {
+  .ambient-drawing--on-light .ambient-branch-right .ambient-leaf ellipse {
+    fill: color-mix(in srgb, var(--color-accent) 12%, transparent);
+    stroke: color-mix(in srgb, var(--color-wine-rich) 40%, transparent);
+  }
+
+  /* Light rose/gold strokes — visible on dark hero/footer/cta */
+  .ambient-drawing--on-dark .ambient-stem {
+    stroke: color-mix(in srgb, var(--color-wine-rose) 70%, #f3e9e6);
+    stroke-width: 1.35;
+    stroke-linecap: round;
+    opacity: 0.38;
+  }
+
+  .ambient-drawing--on-dark .ambient-leaf ellipse {
+    fill: color-mix(in srgb, var(--color-wine-rose) 22%, transparent);
+    stroke: color-mix(in srgb, #f3e9e6 35%, var(--color-wine-rose));
+    stroke-width: 1.05;
+    opacity: 0.85;
+  }
+
+  .ambient-drawing--on-dark .ambient-branch-right .ambient-leaf ellipse {
     fill: color-mix(in srgb, var(--color-accent) 18%, transparent);
-    stroke: color-mix(in srgb, var(--color-accent) 32%, transparent);
+    stroke: color-mix(in srgb, #f0e0c8 40%, var(--color-accent));
   }
 
   .ambient-sprig {
-    opacity: 0.7;
+    opacity: 0.75;
   }
 
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
@@ -1031,11 +1159,11 @@
   }
 
   .pattern-dot {
-    fill: color-mix(in srgb, var(--color-primary) 22%, transparent);
+    fill: color-mix(in srgb, var(--color-wine-rich) 20%, transparent);
   }
 
   .pattern-dot-soft {
-    fill: color-mix(in srgb, var(--color-accent) 18%, transparent);
+    fill: color-mix(in srgb, var(--color-wine-rose) 24%, transparent);
   }
 
   .pattern-line {
@@ -1291,10 +1419,10 @@
 
   .mobile-menu-link {
     border: 1px solid transparent;
+    border-radius: 9999px;
     transition:
       background-color 0.22s ease,
       color 0.22s ease,
-      border-color 0.22s ease,
       transform 0.22s ease;
   }
 
@@ -1326,8 +1454,7 @@
 
   @media (hover: hover) and (pointer: fine) {
     .mobile-menu-link:hover {
-      background: color-mix(in srgb, var(--color-muted) 78%, var(--color-card));
-      border-color: color-mix(in srgb, var(--color-border) 68%, transparent);
+      background: color-mix(in srgb, var(--color-muted) 70%, transparent);
       transform: translateX(2px);
     }
 
@@ -1338,9 +1465,8 @@
   }
 
   .mobile-menu-link-active {
-    background: color-mix(in srgb, var(--color-primary) 9%, var(--color-card));
-    border-color: color-mix(in srgb, var(--color-primary) 24%, transparent);
-    box-shadow: inset 3px 0 0 var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    box-shadow: none;
   }
 
   .mobile-menu-link-active .mobile-menu-link-index {

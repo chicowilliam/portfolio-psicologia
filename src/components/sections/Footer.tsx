@@ -56,7 +56,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="band-ink relative border-t border-border px-5 py-12 pb-28 text-foreground sm:px-6 sm:pb-12 lg:px-8">
+      <footer className="band-ink relative px-5 py-12 pb-28 text-foreground sm:px-6 sm:pb-12 lg:px-8">
         <div className="grain-overlay absolute inset-0 opacity-[0.06]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-6xl">
@@ -138,7 +138,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="mt-10 border-t border-border pt-8">
+          <div className="mt-10 pt-8">
             <p className="mx-auto max-w-[72ch] text-center text-xs leading-[1.75] text-subtle">
               O sigilo profissional é garantido pelo Código de Ética Profissional
               do Psicólogo (Resolução CFP nº 010/2005). As informações compartilhadas

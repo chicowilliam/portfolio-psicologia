@@ -82,30 +82,32 @@ export default function App() {
 
       <main id="conteudo-principal">
         <Hero />
-        <SectionDivider />
+        <SectionDivider variant="ink-to-mist" />
         <Credentials />
-        <SectionDivider />
+        <SectionDivider variant="mist-to-blush" />
         <Suspense fallback={<SectionFallback />}>
           <About />
-          <SectionDivider />
+          <SectionDivider variant="blush-to-mist" />
           <ForWho />
-          <SectionDivider />
+          <SectionDivider variant="mist-to-blush" />
           <ApproachPillars />
-          <SectionDivider />
+          <SectionDivider variant="blush-to-mist" />
           <Specialties />
-          <SectionDivider />
+          <SectionDivider variant="mist-to-blush" />
           <HowItWorks />
-          <SectionDivider />
+          <SectionDivider variant="blush-to-mist" />
           <ConsultorioGallery />
-          <SectionDivider />
+          <SectionDivider variant="mist-to-blush" />
           <OnlineAttendance />
-          <SectionDivider />
+          <SectionDivider variant="blush-to-mist" />
           <BlogPreview />
-          <SectionDivider />
+          <SectionDivider variant="mist-to-blush" />
           <FAQ />
-          <SectionDivider />
+          <SectionDivider variant="mist-to-cta" />
           <BookingForm />
+          <SectionDivider variant="cta-to-mist" />
           <Contact />
+          <SectionDivider variant="mist-to-ink" />
         </Suspense>
       </main>
 

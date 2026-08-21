@@ -27,7 +27,7 @@ export function BlogPreview() {
     <>
       <section
         id="conteudo"
-        className="band-light-alt relative border-t border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+        className="band-light-alt relative px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
       >
         <div className="mx-auto max-w-6xl">
           <ScrollReveal>
@@ -65,7 +65,7 @@ export function BlogPreview() {
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">
                   {post.excerpt}
                 </p>
-                <div className="mt-4 flex items-center justify-between gap-3 border-t border-border/60 pt-4">
+                <div className="mt-4 flex items-center justify-between gap-3/60 pt-4">
                   <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                     <ClockIcon className="size-3.5" aria-hidden="true" />
                     {post.readMinutes} min · {formatDate(post.publishedAt)}

@@ -281,26 +281,25 @@ export function Header() {
   return (
     <>
       <motion.header
-        className="site-header fixed inset-x-0 top-0 z-50 border-b"
+        className="site-header fixed inset-x-0 top-0 z-50"
         initial={false}
         animate={{
           y: navHidden ? '-100%' : '0%',
           backgroundColor: scrolled
-            ? 'color-mix(in srgb, var(--color-background) 42%, transparent)'
-            : 'color-mix(in srgb, var(--color-background) 18%, transparent)',
-          borderColor: scrolled
-            ? 'color-mix(in srgb, var(--color-border) 40%, transparent)'
-            : 'transparent',
-          boxShadow: scrolled ? 'var(--shadow-soft)' : '0 0 0 0 transparent',
+            ? 'color-mix(in srgb, var(--color-wine-mist) 62%, transparent)'
+            : 'color-mix(in srgb, var(--color-wine-mist) 28%, transparent)',
+          boxShadow: scrolled
+            ? '0 8px 28px -18px rgb(58 36 40 / 0.18)'
+            : '0 0 0 0 transparent',
         }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: easeOut }}
       >
-        <div className="mx-auto grid min-h-16 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:flex lg:justify-between lg:gap-6 lg:px-8">
+        <div className="mx-auto grid min-h-16 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:flex lg:justify-between lg:gap-8 lg:px-8">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <button
               type="button"
               className={cn(
-                'mobile-menu-trigger relative inline-flex h-11 shrink-0 touch-manipulation items-center gap-2.5 rounded-[0.55rem_1rem_1rem_0.55rem] px-3 text-foreground transition-all duration-200 lg:hidden',
+                'mobile-menu-trigger relative inline-flex h-11 shrink-0 touch-manipulation items-center gap-2.5 rounded-full px-3 text-foreground transition-all duration-200 lg:hidden',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                 isMobileOpen && 'mobile-menu-trigger-open',
               )}
@@ -340,7 +339,7 @@ export function Header() {
           </div>
 
           <nav
-            className="hidden items-center justify-center gap-1 lg:flex"
+            className="hidden items-center justify-center gap-2 lg:flex xl:gap-3"
             aria-label="Navegação principal"
           >
             {NAV_LINKS.map((link) => {
@@ -355,8 +354,9 @@ export function Header() {
                     handleNavClick(link.href)
                   }}
                   aria-current={active ? 'page' : undefined}
+                  data-active={active ? 'true' : 'false'}
                   className={cn(
-                    'relative rounded-lg px-4 py-2.5 text-sm font-medium transition-colors duration-200',
+                    'site-header-nav-link',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
                     active ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
                   )}
@@ -364,7 +364,7 @@ export function Header() {
                   {active && (
                     <motion.span
                       layoutId="desktop-nav-indicator"
-                      className="absolute inset-0 rounded-lg bg-primary/10"
+                      className="site-header-nav-indicator absolute inset-0"
                       transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                       aria-hidden="true"
                     />
