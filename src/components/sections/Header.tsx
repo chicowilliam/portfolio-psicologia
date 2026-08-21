@@ -38,6 +38,36 @@ const navLinkVariants = {
   },
 }
 
+function resolveSurfaceAtHeader(): 'dark' | 'light' {
+  if (typeof document === 'undefined') return 'dark'
+
+  const x = Math.min(Math.max(window.innerWidth / 2, 8), window.innerWidth - 8)
+  const y = 28
+  const stack = document.elementsFromPoint(x, y)
+
+  for (const node of stack) {
+    if (!(node instanceof Element)) continue
+    if (node.closest('.site-header, [role="dialog"], .mobile-menu-root, .pattern-background, .grain-overlay')) continue
+
+    const fade = node.closest<HTMLElement>('.section-fade')
+    if (fade) {
+      const rect = fade.getBoundingClientRect()
+      const t = rect.height > 0 ? (y - rect.top) / rect.height : 0.5
+      const cls = fade.className
+      if (cls.includes('ink-to-mist')) return t < 0.48 ? 'dark' : 'light'
+      if (cls.includes('mist-to-ink')) return t > 0.52 ? 'dark' : 'light'
+      if (cls.includes('mist-to-cta')) return t > 0.42 ? 'dark' : 'light'
+      if (cls.includes('cta-to-mist')) return t < 0.55 ? 'dark' : 'light'
+      return 'light'
+    }
+
+    if (node.closest('.band-ink, .band-cta')) return 'dark'
+    if (node.closest('.band-light, .band-light-alt, .band-mid')) return 'light'
+  }
+
+  return 'light'
+}
+
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
     <span className="mobile-menu-burger" aria-hidden="true">
@@ -227,6 +257,7 @@ function MobileMenu({
 export function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [overDark, setOverDark] = useState(true)
   const prefersReducedMotion = useReducedMotion()
   const scrollTo = useScrollTo()
   const { openBooking, isOpen: isBookingOpen } = useBookingDialog()
@@ -245,6 +276,30 @@ export function Header() {
 
     observer.observe(hero)
     return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    let raf = 0
+
+    const sample = () => {
+      raf = 0
+      setOverDark(resolveSurfaceAtHeader() === 'dark')
+    }
+
+    const schedule = () => {
+      if (raf) return
+      raf = window.requestAnimationFrame(sample)
+    }
+
+    sample()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+
+    return () => {
+      if (raf) window.cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+    }
   }, [])
 
   useEffect(() => {
@@ -281,26 +336,21 @@ export function Header() {
   return (
     <>
       <motion.header
-        className="site-header fixed inset-x-0 top-0 z-50"
+        className={cn(
+          'site-header fixed inset-x-0 top-0 z-50',
+          overDark ? 'site-header--on-dark' : 'site-header--on-light',
+        )}
         initial={false}
-        animate={{
-          y: navHidden ? '-100%' : '0%',
-          backgroundColor: scrolled
-            ? 'color-mix(in srgb, var(--color-wine-mist) 62%, transparent)'
-            : 'color-mix(in srgb, var(--color-wine-mist) 28%, transparent)',
-          boxShadow: scrolled
-            ? '0 8px 28px -18px rgb(58 36 40 / 0.18)'
-            : '0 0 0 0 transparent',
-        }}
+        animate={{ y: navHidden ? '-100%' : '0%' }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: easeOut }}
       >
-        <div className="mx-auto grid min-h-16 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:flex lg:justify-between lg:gap-8 lg:px-8">
+        <div className="mx-auto grid min-h-16 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:flex lg:justify-between lg:gap-10 lg:px-8">
           <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <button
               type="button"
               className={cn(
-                'mobile-menu-trigger relative inline-flex h-11 shrink-0 touch-manipulation items-center gap-2.5 rounded-full px-3 text-foreground transition-all duration-200 lg:hidden',
-                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                'mobile-menu-trigger relative inline-flex h-11 shrink-0 touch-manipulation items-center gap-2.5 rounded-full px-3 transition-colors duration-300 lg:hidden',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                 isMobileOpen && 'mobile-menu-trigger-open',
               )}
               aria-label={isMobileOpen ? 'Fechar menu' : 'Abrir menu'}
@@ -321,7 +371,7 @@ export function Header() {
                 handleNavClick('#inicio')
               }}
               className={cn(
-                'group flex min-w-0 flex-col overflow-hidden transition-[opacity,max-width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                'group flex min-w-0 flex-col overflow-hidden transition-[opacity,max-width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                 scrolled
                   ? 'max-w-[11.5rem] opacity-100 sm:max-w-xs lg:max-w-none'
                   : 'pointer-events-none max-w-0 opacity-0',
@@ -329,17 +379,17 @@ export function Header() {
               aria-hidden={!scrolled}
               tabIndex={scrolled ? 0 : -1}
             >
-              <span className="truncate font-display text-base font-semibold text-foreground transition-colors group-hover:text-primary sm:text-lg">
+              <span className="site-header-brand truncate font-display text-base font-semibold transition-colors duration-300 sm:text-lg">
                 {SITE.psychologist.name}
               </span>
-              <span className="hidden truncate text-xs text-muted-foreground min-[400px]:inline">
+              <span className="site-header-brand-meta hidden truncate text-xs transition-colors duration-300 min-[400px]:inline">
                 CRP {SITE.psychologist.crp}
               </span>
             </a>
           </div>
 
           <nav
-            className="hidden items-center justify-center gap-2 lg:flex xl:gap-3"
+            className="hidden items-center justify-center gap-3 lg:flex xl:gap-4"
             aria-label="Navegação principal"
           >
             {NAV_LINKS.map((link) => {
@@ -357,8 +407,7 @@ export function Header() {
                   data-active={active ? 'true' : 'false'}
                   className={cn(
                     'site-header-nav-link',
-                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-                    active ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
                   )}
                 >
                   {active && (

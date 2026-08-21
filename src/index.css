@@ -249,17 +249,17 @@
   }
 
   .band-light {
-    background-color: var(--color-wine-mist);
+    background-color: color-mix(in srgb, var(--color-wine-mist) 90%, transparent);
   }
 
   .band-light-alt {
-    background-color: var(--color-wine-blush);
+    background-color: color-mix(in srgb, var(--color-wine-blush) 90%, transparent);
   }
 
   /* Dark frame: hero + footer only */
   .band-ink,
   .band-cta {
-    background-color: var(--color-wine-ink);
+    background-color: color-mix(in srgb, var(--color-wine-ink) 93%, transparent);
     color: #f3e9e6;
     --color-foreground: #f3e9e6;
     --color-muted: #2b1f22;
@@ -277,7 +277,7 @@
   }
 
   .band-cta {
-    background-color: var(--color-wine-deep);
+    background-color: color-mix(in srgb, var(--color-wine-deep) 93%, transparent);
   }
 
   .band-ink::before,
@@ -306,7 +306,7 @@
 
   /* Legacy mid maps to wine blush */
   .band-mid {
-    background-color: var(--color-wine-blush);
+    background-color: color-mix(in srgb, var(--color-wine-blush) 90%, transparent);
   }
 
   /* Soft gradient bridges between section surfaces (no hard cuts) */
@@ -877,34 +877,177 @@
   }
 
   .site-header {
-    background: color-mix(in srgb, var(--color-wine-mist) 55%, transparent);
-    backdrop-filter: blur(18px) saturate(1.15);
-    -webkit-backdrop-filter: blur(18px) saturate(1.15);
-    border-color: transparent;
+    backdrop-filter: blur(18px) saturate(1.12);
+    -webkit-backdrop-filter: blur(18px) saturate(1.12);
+    border: 0;
     box-shadow: none;
+    transition:
+      background-color 0.45s ease,
+      color 0.35s ease,
+      box-shadow 0.45s ease;
+  }
+
+  .site-header--on-dark {
+    background: color-mix(in srgb, var(--color-wine-ink) 68%, transparent);
+    color: #f3e9e6;
+  }
+
+  .site-header--on-light {
+    background: color-mix(in srgb, var(--color-wine-mist) 58%, transparent);
+    color: var(--color-foreground);
+  }
+
+  .site-header--on-dark .mobile-menu-trigger,
+  .site-header--on-dark .site-header-brand {
+    color: #f3e9e6;
+  }
+
+  .site-header--on-dark .site-header-brand-meta,
+  .site-header--on-dark .mobile-menu-trigger-label {
+    color: color-mix(in srgb, #f3e9e6 72%, transparent);
+  }
+
+  .site-header--on-light .mobile-menu-trigger,
+  .site-header--on-light .site-header-brand {
+    color: var(--color-foreground);
+  }
+
+  .site-header--on-light .site-header-brand-meta,
+  .site-header--on-light .mobile-menu-trigger-label {
+    color: var(--color-muted-foreground);
   }
 
   .site-header-nav-link {
     position: relative;
     border-radius: 9999px;
-    padding: 0.55rem 0.95rem;
+    padding: 0.6rem 1.05rem;
     font-size: 0.875rem;
     font-weight: 500;
     letter-spacing: 0.01em;
-    transition: color 0.22s ease, background-color 0.22s ease;
+    transition: color 0.3s ease;
   }
 
-  .site-header-nav-link[data-active='true'] {
+  .site-header--on-dark .site-header-nav-link {
+    color: color-mix(in srgb, #f3e9e6 78%, transparent);
+  }
+
+  .site-header--on-dark .site-header-nav-link:hover,
+  .site-header--on-dark .site-header-nav-link[data-active='true'] {
+    color: #ffffff;
+  }
+
+  .site-header--on-light .site-header-nav-link {
+    color: var(--color-muted-foreground);
+  }
+
+  .site-header--on-light .site-header-nav-link:hover,
+  .site-header--on-light .site-header-nav-link[data-active='true'] {
     color: var(--color-primary);
   }
 
   .site-header-nav-indicator {
     border-radius: 9999px;
+  }
+
+  .site-header--on-dark .site-header-nav-indicator {
+    background: color-mix(in srgb, #ffffff 14%, transparent);
+  }
+
+  .site-header--on-light .site-header-nav-indicator {
     background: color-mix(in srgb, var(--color-primary) 9%, transparent);
   }
 
+  .pattern-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .pattern-background-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ambient-drawing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .ambient-drawing--on-light {
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+  }
+
+  .ambient-drawing--on-dark {
+    mix-blend-mode: screen;
+    opacity: 0.95;
+  }
+
+  .ambient-window {
+    opacity: 0.4;
+  }
+
+  .ambient-light-start {
+    stop-color: color-mix(in srgb, var(--color-wine-rose) 28%, transparent);
+  }
+
+  .ambient-light-end {
+    stop-color: transparent;
+  }
+
+  /* Dark wine strokes — readable on mist/blush */
+  .ambient-drawing--on-light .ambient-stem {
+    stroke: #5c2434;
+    stroke-opacity: 0.26;
+    stroke-width: 1.45;
+    stroke-linecap: round;
+  }
+
+  .ambient-drawing--on-light .ambient-leaf ellipse {
+    fill: color-mix(in srgb, #5c2434 12%, transparent);
+    stroke: #5c2434;
+    stroke-opacity: 0.22;
+    stroke-width: 1.05;
+  }
+
+  .ambient-drawing--on-light .ambient-branch-right .ambient-leaf ellipse {
+    fill: color-mix(in srgb, #7a2036 10%, transparent);
+    stroke: #7a2036;
+    stroke-opacity: 0.2;
+  }
+
+  /* Light rose strokes — readable on ink/cta */
+  .ambient-drawing--on-dark .ambient-stem {
+    stroke: #f0dce1;
+    stroke-opacity: 0.22;
+    stroke-width: 1.45;
+    stroke-linecap: round;
+  }
+
+  .ambient-drawing--on-dark .ambient-leaf ellipse {
+    fill: color-mix(in srgb, #f0dce1 14%, transparent);
+    stroke: #f0dce1;
+    stroke-opacity: 0.2;
+    stroke-width: 1.05;
+  }
+
+  .ambient-drawing--on-dark .ambient-branch-right .ambient-leaf ellipse {
+    fill: color-mix(in srgb, #e8c9a0 12%, transparent);
+    stroke: #e8c9a0;
+    stroke-opacity: 0.18;
+  }
+
+  .ambient-sprig {
+    opacity: 0.85;
+  }
+
   .grain-overlay {
-    opacity: 0.025;
+    opacity: 0.03;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
     background-size: 180px 180px;
@@ -1050,80 +1193,6 @@
 
   .dialog-sheet[data-state='closed'] {
     animation: dialog-sheet-out 0.24s ease-in forwards;
-  }
-
-  .pattern-background {
-    isolation: isolate;
-  }
-
-  .ambient-drawing {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  .ambient-drawing--on-light {
-    mix-blend-mode: multiply;
-  }
-
-  .ambient-drawing--on-dark {
-    mix-blend-mode: screen;
-  }
-
-  .ambient-window {
-    opacity: 0.55;
-  }
-
-  .ambient-light-start {
-    stop-color: color-mix(in srgb, var(--color-wine-rose) 28%, transparent);
-  }
-
-  .ambient-light-end {
-    stop-color: transparent;
-  }
-
-  /* Dark wine strokes — visible on light/mist sections */
-  .ambient-drawing--on-light .ambient-stem {
-    stroke: color-mix(in srgb, var(--color-wine-rich) 55%, transparent);
-    stroke-width: 1.35;
-    stroke-linecap: round;
-    opacity: 0.55;
-  }
-
-  .ambient-drawing--on-light .ambient-leaf ellipse {
-    fill: color-mix(in srgb, var(--color-primary) 14%, transparent);
-    stroke: color-mix(in srgb, var(--color-wine-rich) 45%, transparent);
-    stroke-width: 1.05;
-  }
-
-  .ambient-drawing--on-light .ambient-branch-right .ambient-leaf ellipse {
-    fill: color-mix(in srgb, var(--color-accent) 12%, transparent);
-    stroke: color-mix(in srgb, var(--color-wine-rich) 40%, transparent);
-  }
-
-  /* Light rose/gold strokes — visible on dark hero/footer/cta */
-  .ambient-drawing--on-dark .ambient-stem {
-    stroke: color-mix(in srgb, var(--color-wine-rose) 70%, #f3e9e6);
-    stroke-width: 1.35;
-    stroke-linecap: round;
-    opacity: 0.38;
-  }
-
-  .ambient-drawing--on-dark .ambient-leaf ellipse {
-    fill: color-mix(in srgb, var(--color-wine-rose) 22%, transparent);
-    stroke: color-mix(in srgb, #f3e9e6 35%, var(--color-wine-rose));
-    stroke-width: 1.05;
-    opacity: 0.85;
-  }
-
-  .ambient-drawing--on-dark .ambient-branch-right .ambient-leaf ellipse {
-    fill: color-mix(in srgb, var(--color-accent) 18%, transparent);
-    stroke: color-mix(in srgb, #f0e0c8 40%, var(--color-accent));
-  }
-
-  .ambient-sprig {
-    opacity: 0.75;
   }
 
   @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {

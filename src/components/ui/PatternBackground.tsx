@@ -100,7 +100,7 @@ function AmbientBranches({ className }: { className: string }) {
 
 export function PatternBackground() {
   return (
-    <div className="pattern-background pointer-events-none fixed inset-0 -z-10" aria-hidden="true">
+    <div className="pattern-background pointer-events-none fixed inset-0" aria-hidden="true">
       <svg
         className="pattern-background-svg h-full w-full"
         xmlns="http://www.w3.org/2000/svg"

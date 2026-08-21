@@ -80,7 +80,7 @@ export default function App() {
       <Header />
       <div className="h-16" aria-hidden="true" />
 
-      <main id="conteudo-principal">
+      <main id="conteudo-principal" className="relative z-[1]">
         <Hero />
         <SectionDivider variant="ink-to-mist" />
         <Credentials />
@@ -112,7 +112,9 @@ export default function App() {
       </main>
 
       <Suspense fallback={null}>
-        <Footer />
+        <div className="relative z-[1]">
+          <Footer />
+        </div>
       </Suspense>
 
       <EmergencyNotice />
