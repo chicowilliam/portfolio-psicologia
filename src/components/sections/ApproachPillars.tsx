@@ -6,7 +6,7 @@ export function ApproachPillars() {
   return (
     <section
       id="abordagem"
-      className="band-mid px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+      className="band-light px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>

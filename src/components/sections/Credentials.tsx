@@ -85,7 +85,7 @@ export function Credentials() {
   return (
     <section
       id="credenciais"
-      className="band-mid relative border-y border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className="band-light relative border-y border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
     >
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal>

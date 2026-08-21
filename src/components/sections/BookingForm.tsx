@@ -19,7 +19,7 @@ export function BookingForm() {
   return (
     <section
       id="agendamento"
-      className="band-mid relative overflow-hidden px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+      className="band-cta relative overflow-hidden px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <MeshBackground variant="cta" />
 

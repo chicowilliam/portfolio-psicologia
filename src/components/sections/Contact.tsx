@@ -35,7 +35,7 @@ export function Contact() {
   return (
     <section
       id="contato"
-      className="band-mid relative border-t border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+      className="band-light relative border-t border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <MeshBackground variant="subtle" />
 
