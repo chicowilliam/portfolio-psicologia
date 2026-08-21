@@ -13,17 +13,12 @@ export function SeoStructuredData() {
         url: SITE.url,
         image: `${SITE.url}/og-cover.svg`,
         knowsAbout: ['Terapia Cognitivo-Comportamental', 'Psicologia clínica'],
-        identifier: {
-          '@type': 'PropertyValue',
-          name: 'CRP',
-          value: SITE.psychologist.crp,
-        },
       },
       {
         '@type': 'MedicalBusiness',
         '@id': `${SITE.url}/#business`,
         name: `${SITE.psychologist.name}, ${SITE.psychologist.title}`,
-        description: SITE.psychologist.tagline,
+        description: SITE.brand.heroBody,
         url: SITE.url,
         image: `${SITE.url}/og-cover.svg`,
         ...(SITE.contact.phone ? { telephone: SITE.contact.phone } : {}),
@@ -36,7 +31,6 @@ export function SeoStructuredData() {
           addressCountry: 'BR',
         },
         openingHours: 'Mo-Fr 08:00-20:00',
-        priceRange: '$$',
       },
       {
         '@type': 'FAQPage',

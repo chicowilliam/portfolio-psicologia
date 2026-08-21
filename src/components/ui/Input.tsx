@@ -31,7 +31,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             className={cn(
-              'w-full rounded-xl border border-border bg-card py-3 text-[0.98rem] leading-relaxed text-foreground sm:text-[1rem]',
+              'w-full rounded-sm border border-border bg-card py-3 text-base leading-relaxed text-foreground',
               Icon ? 'pl-11 pr-4' : 'px-4',
               'placeholder:text-muted-foreground/70',
               'transition-colors duration-200',

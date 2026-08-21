@@ -55,7 +55,8 @@ export function BookingDialog() {
                 </Dialog.Close>
               </div>
               <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                {SITE.voice.bookingReassurance}
+                Levo alguns minutos para ler cada mensagem com atenção. Não é robô,
+                não é reserva automática.
               </p>
             </div>
 

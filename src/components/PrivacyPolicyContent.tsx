@@ -14,9 +14,9 @@ export function PrivacyPolicyContent() {
           1. Controladora dos dados
         </h3>
         <p>
-          {SITE.psychologist.name}, {SITE.psychologist.title}, CRP{' '}
-          {SITE.psychologist.crp}, com consultório em {SITE.contact.address},{' '}
-          {SITE.contact.neighborhood}, {SITE.contact.city}.
+          {SITE.psychologist.name}, {SITE.psychologist.title}, com consultório em{' '}
+          {SITE.contact.address}, {SITE.contact.neighborhood}, {SITE.contact.city}.{' '}
+          {SITE.conceptualNotice}
         </p>
       </section>
 
