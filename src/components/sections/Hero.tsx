@@ -18,7 +18,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="band-ink relative overflow-hidden px-5 pb-12 pt-5 sm:px-6 sm:pb-16 sm:pt-8 lg:pb-20 lg:pl-8 lg:pr-0 lg:pt-10"
+      className="band-ink relative overflow-hidden px-5 pb-12 pt-[4.75rem] sm:px-6 sm:pb-16 sm:pt-[5rem] lg:pb-20 lg:pl-8 lg:pr-0 lg:pt-[5.25rem]"
     >
       <MeshBackground variant="hero" />
 

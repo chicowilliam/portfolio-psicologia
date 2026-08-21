@@ -8,7 +8,6 @@ import { BOOKING_CTA, NAV_LINKS, SITE } from '@/lib/constants'
 import { useBookingDialog } from '@/components/providers/BookingDialogProvider'
 import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
-import { useHideOnScroll } from '@/hooks/useHideOnScroll'
 import { useScrollTo } from '@/hooks/useScrollTo'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { easeOut, staggerContainer } from '@/lib/motion'
@@ -38,34 +37,64 @@ const navLinkVariants = {
   },
 }
 
+function surfaceFromClassName(className: string, progress = 0.5): 'dark' | 'light' | null {
+  if (className.includes('section-fade')) {
+    if (className.includes('ink-to-mist')) return progress < 0.48 ? 'dark' : 'light'
+    if (className.includes('mist-to-ink')) return progress > 0.52 ? 'dark' : 'light'
+    if (className.includes('mist-to-cta')) return progress > 0.42 ? 'dark' : 'light'
+    if (className.includes('cta-to-mist')) return progress < 0.55 ? 'dark' : 'light'
+    return 'light'
+  }
+
+  if (/(?:^|\s)(?:band-ink|band-cta)(?:\s|$)/.test(className)) return 'dark'
+  if (/(?:^|\s)(?:band-light|band-light-alt|band-mid)(?:\s|$)/.test(className)) return 'light'
+  return null
+}
+
 function resolveSurfaceAtHeader(): 'dark' | 'light' {
   if (typeof document === 'undefined') return 'dark'
 
+  // Top of the page is always the dark hero under the fixed header.
+  if (window.scrollY < 72) return 'dark'
+
+  const y = 36
+  const bands = document.querySelectorAll<HTMLElement>(
+    '.section-fade, .band-ink, .band-cta, .band-light, .band-light-alt, .band-mid',
+  )
+
+  for (const el of bands) {
+    const rect = el.getBoundingClientRect()
+    if (rect.bottom <= y || rect.top >= y + 1) continue
+    const progress = rect.height > 0 ? (y - rect.top) / rect.height : 0.5
+    const surface = surfaceFromClassName(el.className, progress)
+    if (surface) return surface
+  }
+
   const x = Math.min(Math.max(window.innerWidth / 2, 8), window.innerWidth - 8)
-  const y = 28
   const stack = document.elementsFromPoint(x, y)
 
   for (const node of stack) {
     if (!(node instanceof Element)) continue
-    if (node.closest('.site-header, [role="dialog"], .mobile-menu-root, .pattern-background, .grain-overlay')) continue
-
-    const fade = node.closest<HTMLElement>('.section-fade')
-    if (fade) {
-      const rect = fade.getBoundingClientRect()
-      const t = rect.height > 0 ? (y - rect.top) / rect.height : 0.5
-      const cls = fade.className
-      if (cls.includes('ink-to-mist')) return t < 0.48 ? 'dark' : 'light'
-      if (cls.includes('mist-to-ink')) return t > 0.52 ? 'dark' : 'light'
-      if (cls.includes('mist-to-cta')) return t > 0.42 ? 'dark' : 'light'
-      if (cls.includes('cta-to-mist')) return t < 0.55 ? 'dark' : 'light'
-      return 'light'
+    if (
+      node.closest(
+        '.site-header, [role="dialog"], .mobile-menu-root, .pattern-background, .grain-overlay',
+      )
+    ) {
+      continue
     }
 
-    if (node.closest('.band-ink, .band-cta')) return 'dark'
-    if (node.closest('.band-light, .band-light-alt, .band-mid')) return 'light'
+    const host = node.closest<HTMLElement>(
+      '.section-fade, .band-ink, .band-cta, .band-light, .band-light-alt, .band-mid',
+    )
+    if (!host) continue
+    const rect = host.getBoundingClientRect()
+    const progress = rect.height > 0 ? (y - rect.top) / rect.height : 0.5
+    const surface = surfaceFromClassName(host.className, progress)
+    if (surface) return surface
   }
 
-  return 'light'
+  // Uncertain samples must stay dark — never fall back to light.
+  return 'dark'
 }
 
 function HamburgerIcon({ open }: { open: boolean }) {
@@ -260,9 +289,8 @@ export function Header() {
   const [overDark, setOverDark] = useState(true)
   const prefersReducedMotion = useReducedMotion()
   const scrollTo = useScrollTo()
-  const { openBooking, isOpen: isBookingOpen } = useBookingDialog()
+  const { openBooking } = useBookingDialog()
   const activeSection = useScrollSpy(SECTION_IDS)
-  const navHidden = useHideOnScroll(isMobileOpen || isBookingOpen)
   useBodyScrollLock(isMobileOpen)
 
   useEffect(() => {
@@ -338,14 +366,13 @@ export function Header() {
       <motion.header
         className={cn(
           'site-header fixed inset-x-0 top-0 z-50',
-          overDark ? 'site-header--on-dark' : 'site-header--on-light',
+          !overDark && 'site-header--on-light',
         )}
         initial={false}
-        animate={{ y: navHidden ? '-100%' : '0%' }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: easeOut }}
+        data-surface={overDark ? 'dark' : 'light'}
       >
-        <div className="mx-auto grid min-h-16 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:flex lg:justify-between lg:gap-10 lg:px-8">
-          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+        <div className="site-header-inner">
+          <div className="site-header-start">
             <button
               type="button"
               className={cn(
@@ -371,28 +398,20 @@ export function Header() {
                 handleNavClick('#inicio')
               }}
               className={cn(
-                'group flex min-w-0 flex-col overflow-hidden transition-[opacity,max-width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-                scrolled
-                  ? 'max-w-[11.5rem] opacity-100 sm:max-w-xs lg:max-w-none'
-                  : 'pointer-events-none max-w-0 opacity-0',
+                'group min-w-0 transition-opacity duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                scrolled ? 'opacity-100' : 'pointer-events-none opacity-0',
               )}
               aria-hidden={!scrolled}
               tabIndex={scrolled ? 0 : -1}
             >
-              <span className="site-header-brand truncate font-display text-base font-semibold transition-colors duration-300 sm:text-lg">
+              <span className="site-header-brand block truncate font-display text-[0.95rem] font-semibold leading-tight tracking-[-0.01em] transition-colors duration-300 sm:text-base">
                 {SITE.psychologist.name}
-              </span>
-              <span className="site-header-brand-meta hidden truncate text-xs transition-colors duration-300 min-[400px]:inline">
-                CRP {SITE.psychologist.crp}
               </span>
             </a>
           </div>
 
-          <nav
-            className="hidden items-center justify-center gap-3 lg:flex xl:gap-4"
-            aria-label="Navegação principal"
-          >
-            {NAV_LINKS.map((link) => {
+          <nav className="site-header-nav" aria-label="Navegação principal">
+            {NAV_LINKS.filter((link) => link.href !== '#inicio').map((link) => {
               const active = isLinkActive(link.href)
 
               return (
@@ -424,8 +443,12 @@ export function Header() {
             })}
           </nav>
 
-          <div className="flex items-center justify-end gap-2 sm:gap-3">
-            <Button size="sm" onClick={handleOpenBooking} className="hidden min-[430px]:inline-flex">
+          <div className="site-header-end">
+            <Button
+              size="sm"
+              onClick={handleOpenBooking}
+              className="site-header-cta hidden min-[430px]:inline-flex"
+            >
               {BOOKING_CTA.short}
             </Button>
           </div>
