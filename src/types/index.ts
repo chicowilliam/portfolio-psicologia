@@ -7,6 +7,13 @@ export interface Specialty {
   id: string
   title: string
   description: string
+  icon: string
+}
+
+export interface TimelineItem {
+  year: string
+  title: string
+  description: string
 }
 
 export interface ProcessStep {
@@ -21,15 +28,31 @@ export interface FAQItem {
   answer: string
 }
 
-export interface ArriveItem {
+export interface Credential {
+  icon: string
+  label: string
+  value: string
+  href?: string
+}
+
+export interface ForWhoItem {
   index: string
   text: string
 }
 
-export interface Principle {
+export interface ApproachPillar {
   index: string
   title: string
+  subtitle: string
   description: string
+  benefit: string
+}
+
+export interface TrustSeal {
+  icon: string
+  label: string
+  value: string
+  note?: string
 }
 
 export interface ConsultorioPhoto {
@@ -38,7 +61,19 @@ export interface ConsultorioPhoto {
   caption: string
 }
 
+export interface BlogPost {
+  id: string
+  slug: string
+  category: string
+  title: string
+  excerpt: string
+  readMinutes: number
+  publishedAt: string
+  body: string[]
+}
+
 export type Modality = 'presencial' | 'online'
+
 export type TimePreference = 'manha' | 'tarde' | 'noite'
 
 export interface BookingFormData {
@@ -56,19 +91,33 @@ export interface SiteConfig {
   url: string
   psychologist: {
     name: string
-    shortName: string
     title: string
+    headline: string
+    crp: string
     approach: string
+    tagline: string
     bio: string
-    quote: string
     photoAlt: string
+    welcomeLine: string
   }
   brand: {
-    identification: string
-    heroTitle: string
-    heroBody: string
-    heroCta: string
-    heroPractical: string
+    line: string
+    heroLead: string
+    heroAccent: string
+    manifesto: string
+  }
+  niche: {
+    eyebrow: string
+    title: string
+    titleAccent: string
+    description: string
+  }
+  voice: {
+    heroQuote: string
+    aboutPullQuote: string
+    credentialsNote: string
+    bookingReassurance: string
+    faqClosing: string
   }
   contact: {
     email: string
@@ -79,6 +128,15 @@ export interface SiteConfig {
     schedule: string
     mapsQuery: string
   }
+  online: {
+    ePsiUrl: string
+    ePsiRegistered: boolean
+    platform: string
+    tcleNote: string
+    syncNote: string
+    urgencyNote: string
+  }
+  crpVerifyUrl: string
   social: {
     instagram: string
     linkedin: string
@@ -88,5 +146,4 @@ export interface SiteConfig {
     samu: string
   }
   responseTimeHours: number
-  conceptualNotice: string
 }

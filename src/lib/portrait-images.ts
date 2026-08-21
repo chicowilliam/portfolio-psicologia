@@ -17,28 +17,28 @@ function pickSet(
   return sortGlobUrls(rootFallback)
 }
 
-const poseANeutro = import.meta.glob('../assets/psicologa/pose-a/neutro/*.{webp,jpg,jpeg}', {
+const poseANeutro = import.meta.glob('../assets/psicologa/pose-a/neutro/*.{webp,jpg,jpeg,png}', {
   eager: true,
   import: 'default',
 }) as GlobModule
 
-const poseADirect = import.meta.glob('../assets/psicologa/pose-a/*.{webp,jpg,jpeg}', {
+const poseADirect = import.meta.glob('../assets/psicologa/pose-a/*.{webp,jpg,jpeg,png}', {
   eager: true,
   import: 'default',
 }) as GlobModule
 
-const poseBCena = import.meta.glob('../assets/psicologa/pose-b/cena/*.{webp,jpg,jpeg}', {
+const poseBCena = import.meta.glob('../assets/psicologa/pose-b/cena/*.{webp,jpg,jpeg,png}', {
   eager: true,
   import: 'default',
 }) as GlobModule
 
-const poseBDirect = import.meta.glob('../assets/psicologa/pose-b/*.{webp,jpg,jpeg}', {
+const poseBDirect = import.meta.glob('../assets/psicologa/pose-b/*.{webp,jpg,jpeg,png}', {
   eager: true,
   import: 'default',
 }) as GlobModule
 
-/** Hero: pose editorial em fundo neutro */
+/** Hero: mesma pose, fundo neutro para composição sobre gradiente mesh */
 export const POSE_A_PORTRAIT_IMAGES = pickSet(poseANeutro, poseADirect, poseADirect)
 
-/** Sobre: segunda pose / cena */
+/** Sobre: poses variadas, cena completa dentro do card */
 export const POSE_B_PORTRAIT_IMAGES = pickSet(poseBCena, poseBDirect, poseBDirect)

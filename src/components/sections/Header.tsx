@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from '@/lib/motion-react'
 import { createPortal } from 'react-dom'
-import { ListIcon } from '@phosphor-icons/react/List'
+import { CalendarIcon } from '@phosphor-icons/react/Calendar'
 import { XIcon } from '@phosphor-icons/react/X'
 import { Button } from '@/components/ui/Button'
 import { BOOKING_CTA, NAV_LINKS, SITE } from '@/lib/constants'
@@ -10,29 +10,75 @@ import { useBodyScrollLock } from '@/hooks/useBodyScrollLock'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { useHideOnScroll } from '@/hooks/useHideOnScroll'
 import { useScrollTo } from '@/hooks/useScrollTo'
-import { easeOut } from '@/lib/motion'
+import { useScrollSpy } from '@/hooks/useScrollSpy'
+import { easeOut, staggerContainer } from '@/lib/motion'
+import { cn } from '@/lib/utils'
+
+const SECTION_IDS = [
+  'inicio',
+  'sobre',
+  'para-quem',
+  'abordagem',
+  'especialidades',
+  'como-funciona',
+  'consultorio',
+  'atendimento-online',
+  'conteudo',
+  'duvidas',
+  'agendamento',
+  'contato',
+]
+
+const navLinkVariants = {
+  hidden: { opacity: 0, x: -14 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.38, ease: easeOut },
+  },
+}
+
+function HamburgerIcon({ open }: { open: boolean }) {
+  return (
+    <span className="mobile-menu-burger" aria-hidden="true">
+      <span
+        className={cn('mobile-menu-burger-line mobile-menu-burger-line-top', open && 'is-open')}
+      />
+      <span
+        className={cn('mobile-menu-burger-line mobile-menu-burger-line-mid', open && 'is-open')}
+      />
+      <span
+        className={cn('mobile-menu-burger-line mobile-menu-burger-line-bot', open && 'is-open')}
+      />
+    </span>
+  )
+}
 
 function MobileMenu({
   isOpen,
   onClose,
   onNavClick,
   onOpenBooking,
+  isLinkActive,
 }: {
   isOpen: boolean
   onClose: () => void
   onNavClick: (href: string) => void
   onOpenBooking: () => void
+  isLinkActive: (href: string) => boolean
 }) {
   const prefersReducedMotion = useReducedMotion()
   const panelRef = useFocusTrap(isOpen)
 
   useEffect(() => {
-    if (!isOpen) return
-    function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose()
+    function handleEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') onClose()
     }
-    document.addEventListener('keydown', onKey)
-    return () => document.removeEventListener('keydown', onKey)
+
+    if (!isOpen) return
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
   }, [isOpen, onClose])
 
   if (typeof document === 'undefined') return null
@@ -40,59 +86,135 @@ function MobileMenu({
   return createPortal(
     <AnimatePresence>
       {isOpen ? (
-        <div className="fixed inset-0 z-[120] lg:hidden">
+        <div className="mobile-menu-root fixed inset-0 z-[120] lg:hidden" aria-hidden={false}>
           <motion.button
             type="button"
-            className="mobile-menu-overlay absolute inset-0"
+            className="mobile-menu-overlay dialog-overlay absolute inset-0"
             aria-label="Fechar menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.22, ease: easeOut }}
             onClick={onClose}
           />
+
           <motion.aside
             ref={panelRef}
             role="dialog"
             aria-modal="true"
-            aria-label="Menu de navegação"
-            className="mobile-menu-panel absolute inset-y-0 left-0 flex w-[min(100%,20rem)] flex-col"
+            aria-labelledby="mobile-menu-title"
+            aria-describedby="mobile-menu-description"
+            className={cn(
+              'mobile-menu-panel dialog-panel absolute inset-y-0 left-0 flex w-[min(100%,22.5rem)] flex-col outline-none',
+              prefersReducedMotion && 'dialog-panel-reduced',
+            )}
             data-lenis-prevent
             initial={prefersReducedMotion ? false : { x: '-100%' }}
             animate={{ x: 0 }}
             exit={prefersReducedMotion ? undefined : { x: '-100%' }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.34, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <p className="font-display text-lg text-foreground">{SITE.psychologist.shortName}</p>
-              <button
-                type="button"
-                onClick={onClose}
-                className="inline-flex size-11 items-center justify-center text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                aria-label="Fechar menu"
-              >
-                <XIcon className="size-5" />
-              </button>
-            </div>
-            <nav className="flex flex-1 flex-col gap-1 px-3 py-4" aria-label="Navegação mobile">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    onNavClick(link.href)
-                  }}
-                  className="flex min-h-11 items-center px-3 text-[1.05rem] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            <div className="mobile-menu-glow" aria-hidden="true" />
+            <div className="mobile-menu-grain" aria-hidden="true" />
+
+            <div className="mobile-menu-header px-5 pb-6 pt-7">
+              <p className="mobile-menu-eyebrow">Explorar o site</p>
+              <div className="mt-3 flex items-start justify-between gap-4">
+                <div className="min-w-0 pr-2">
+                  <h2
+                    id="mobile-menu-title"
+                    className="font-display text-[1.35rem] font-semibold leading-[1.15] tracking-[-0.01em] text-foreground"
+                  >
+                    {SITE.psychologist.name}
+                  </h2>
+                  <p id="mobile-menu-description" className="mt-1.5 text-sm text-muted-foreground">
+                    {SITE.psychologist.title}
+                  </p>
+                  <span className="paper-chip mt-3 text-xs text-primary">
+                    CRP {SITE.psychologist.crp}
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="mobile-menu-close inline-flex size-10 shrink-0 items-center justify-center rounded-full text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  aria-label="Fechar menu"
                 >
-                  {link.label}
-                </a>
-              ))}
-            </nav>
-            <div className="border-t border-border p-4">
-              <Button className="w-full" onClick={onOpenBooking}>
-                {BOOKING_CTA.nav}
-              </Button>
+                  <XIcon className="size-4" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+
+            <motion.nav
+              className="mobile-menu-nav flex flex-1 flex-col gap-1 overflow-y-auto px-3 py-4"
+              aria-label="Navegação mobile"
+              variants={prefersReducedMotion ? undefined : staggerContainer(0.04)}
+              initial="hidden"
+              animate="visible"
+            >
+              {NAV_LINKS.map((link, index) => {
+                const active = isLinkActive(link.href)
+
+                return (
+                  <motion.div
+                    key={link.href}
+                    variants={prefersReducedMotion ? undefined : navLinkVariants}
+                  >
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault()
+                        onNavClick(link.href)
+                      }}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'mobile-menu-link group/link relative flex min-h-[3.25rem] items-center gap-3 rounded-[0.65rem_1.1rem_1.1rem_0.65rem] px-3.5 py-2.5',
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card',
+                        active && 'mobile-menu-link-active',
+                      )}
+                    >
+                      <span className="mobile-menu-link-index" aria-hidden="true">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <span
+                        className={cn(
+                          'mobile-menu-link-label font-medium',
+                          active ? 'font-semibold text-primary' : 'text-foreground/88',
+                        )}
+                      >
+                        {link.label}
+                      </span>
+                      <span
+                        className={cn(
+                          'mobile-menu-link-chevron ml-auto text-primary/50 transition-transform duration-200',
+                          active && 'text-primary',
+                        )}
+                        aria-hidden="true"
+                      >
+                        →
+                      </span>
+                    </a>
+                  </motion.div>
+                )
+              })}
+            </motion.nav>
+
+            <div className="mobile-menu-footer px-4 py-5">
+              <div className="mobile-menu-footer-card glass-quote rounded-[0.75rem_1.25rem_1.25rem_0.75rem] p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.08em] text-primary">
+                  Pronto para começar?
+                </p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                  Solicite um horário e receba retorno em até {SITE.responseTimeHours}h úteis.
+                </p>
+                <Button className="mt-4 w-full gap-2" onClick={onOpenBooking}>
+                  <CalendarIcon className="size-4" weight="duotone" aria-hidden="true" />
+                  {BOOKING_CTA.primary}
+                </Button>
+              </div>
+              <p className="mt-3 text-center text-[11px] tracking-[0.04em] text-muted-foreground/80">
+                Presencial · Online · {SITE.contact.neighborhood}
+              </p>
             </div>
           </motion.aside>
         </div>
@@ -104,18 +226,36 @@ function MobileMenu({
 
 export function Header() {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const scrollTo = useScrollTo()
   const { openBooking, isOpen: isBookingOpen } = useBookingDialog()
+  const activeSection = useScrollSpy(SECTION_IDS)
   const navHidden = useHideOnScroll(isMobileOpen || isBookingOpen)
   useBodyScrollLock(isMobileOpen)
 
   useEffect(() => {
-    function onResize() {
-      if (window.matchMedia('(min-width: 1024px)').matches) setIsMobileOpen(false)
+    const hero = document.getElementById('inicio')
+    if (!hero) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setScrolled(!entry.isIntersecting),
+      { threshold: 0, rootMargin: '-72px 0px 0px 0px' },
+    )
+
+    observer.observe(hero)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        setIsMobileOpen(false)
+      }
     }
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   const closeMobileMenu = useCallback(() => setIsMobileOpen(false), [])
@@ -126,61 +266,118 @@ export function Header() {
   }
 
   function handleNavClick(href: string) {
+    if (href === '#agendamento') {
+      handleOpenBooking()
+      return
+    }
     scrollTo(href)
     setIsMobileOpen(false)
+  }
+
+  function isLinkActive(href: string) {
+    return activeSection === href.replace('#', '')
   }
 
   return (
     <>
       <motion.header
-        className="site-header fixed inset-x-0 top-0 z-50"
+        className="site-header fixed inset-x-0 top-0 z-50 border-b"
         initial={false}
-        animate={{ y: navHidden ? '-100%' : '0%' }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.28, ease: easeOut }}
+        animate={{
+          y: navHidden ? '-100%' : '0%',
+          backgroundColor: scrolled
+            ? 'color-mix(in srgb, var(--color-background) 42%, transparent)'
+            : 'color-mix(in srgb, var(--color-background) 18%, transparent)',
+          borderColor: scrolled
+            ? 'color-mix(in srgb, var(--color-border) 40%, transparent)'
+            : 'transparent',
+          boxShadow: scrolled ? 'var(--shadow-soft)' : '0 0 0 0 transparent',
+        }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: easeOut }}
       >
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-5 sm:h-16 sm:px-6 lg:px-8">
-          <div className="flex min-w-0 items-center gap-2">
+        <div className="mx-auto grid min-h-16 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:flex lg:justify-between lg:gap-6 lg:px-8">
+          <div className="flex min-w-0 items-center gap-2 sm:gap-3">
             <button
               type="button"
-              className="inline-flex size-11 touch-manipulation items-center justify-center text-foreground lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className={cn(
+                'mobile-menu-trigger relative inline-flex h-11 shrink-0 touch-manipulation items-center gap-2.5 rounded-[0.55rem_1rem_1rem_0.55rem] px-3 text-foreground transition-all duration-200 lg:hidden',
+                'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                isMobileOpen && 'mobile-menu-trigger-open',
+              )}
               aria-label={isMobileOpen ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={isMobileOpen}
-              onClick={() => setIsMobileOpen((o) => !o)}
+              aria-controls="mobile-menu-title"
+              onClick={() => setIsMobileOpen((open) => !open)}
             >
-              {isMobileOpen ? <XIcon className="size-5" /> : <ListIcon className="size-5" />}
+              <HamburgerIcon open={isMobileOpen} />
+              <span className="mobile-menu-trigger-label text-[11px] font-semibold uppercase tracking-[0.1em]">
+                Menu
+              </span>
             </button>
+
             <a
               href="#inicio"
               onClick={(e) => {
                 e.preventDefault()
                 handleNavClick('#inicio')
               }}
-              className="truncate font-display text-[1.15rem] text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:text-xl"
+              className={cn(
+                'group flex min-w-0 flex-col overflow-hidden transition-[opacity,max-width] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                scrolled
+                  ? 'max-w-[11.5rem] opacity-100 sm:max-w-xs lg:max-w-none'
+                  : 'pointer-events-none max-w-0 opacity-0',
+              )}
+              aria-hidden={!scrolled}
+              tabIndex={scrolled ? 0 : -1}
             >
-              {SITE.psychologist.shortName}
+              <span className="truncate font-display text-base font-semibold text-foreground transition-colors group-hover:text-primary sm:text-lg">
+                {SITE.psychologist.name}
+              </span>
+              <span className="hidden truncate text-xs text-muted-foreground min-[400px]:inline">
+                CRP {SITE.psychologist.crp}
+              </span>
             </a>
           </div>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Navegação principal">
-            {NAV_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault()
-                  handleNavClick(link.href)
-                }}
-                className="px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {link.label}
-              </a>
-            ))}
+          <nav
+            className="hidden items-center justify-center gap-1 lg:flex"
+            aria-label="Navegação principal"
+          >
+            {NAV_LINKS.map((link) => {
+              const active = isLinkActive(link.href)
+
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavClick(link.href)
+                  }}
+                  aria-current={active ? 'page' : undefined}
+                  className={cn(
+                    'relative rounded-lg px-4 py-2.5 text-sm font-medium transition-colors duration-200',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+                    active ? 'text-primary' : 'text-muted-foreground hover:text-foreground',
+                  )}
+                >
+                  {active && (
+                    <motion.span
+                      layoutId="desktop-nav-indicator"
+                      className="absolute inset-0 rounded-lg bg-primary/10"
+                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      aria-hidden="true"
+                    />
+                  )}
+                  <span className="relative z-10">{link.label}</span>
+                </a>
+              )
+            })}
           </nav>
 
-          <div className="flex items-center">
-            <Button size="sm" onClick={handleOpenBooking}>
-              <span className="lg:hidden">{BOOKING_CTA.short}</span>
-              <span className="hidden lg:inline">{BOOKING_CTA.nav}</span>
+          <div className="flex items-center justify-end gap-2 sm:gap-3">
+            <Button size="sm" onClick={handleOpenBooking} className="hidden min-[430px]:inline-flex">
+              {BOOKING_CTA.short}
             </Button>
           </div>
         </div>
@@ -191,6 +388,7 @@ export function Header() {
         onClose={closeMobileMenu}
         onNavClick={handleNavClick}
         onOpenBooking={handleOpenBooking}
+        isLinkActive={isLinkActive}
       />
     </>
   )

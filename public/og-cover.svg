@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
-  <rect width="1200" height="630" fill="#EEE7DC"/>
-  <path d="M40 520 C 220 400, 340 560, 520 470 C 680 390, 780 540, 960 450" stroke="#A7654D" stroke-width="1.5" fill="none" opacity="0.45"/>
-  <text x="80" y="270" fill="#1D1815" font-family="Georgia, serif" font-size="58">Helena Vasconcelos</text>
-  <text x="80" y="340" fill="#7A3045" font-family="system-ui, sans-serif" font-size="30" font-weight="500">Psicologia clínica · TCC</text>
-  <text x="80" y="410" fill="#5C534C" font-family="system-ui, sans-serif" font-size="24">Você não precisa estar em crise para começar a se escutar.</text>
-  <text x="80" y="520" fill="#8A7F76" font-family="system-ui, sans-serif" font-size="20">Projeto conceitual de portfólio</text>
+  <rect width="1200" height="630" fill="#170f11"/>
+  <circle cx="980" cy="120" r="220" fill="#7a2036" opacity="0.35"/>
+  <circle cx="180" cy="520" r="260" fill="#c98a93" opacity="0.12"/>
+  <text x="80" y="280" fill="#f3e9e6" font-family="Georgia, serif" font-size="56" font-weight="600">Dra. Helena Vasconcelos</text>
+  <text x="80" y="350" fill="#c98a93" font-family="system-ui, sans-serif" font-size="34" font-weight="500">Psicóloga Clínica · TCC</text>
+  <text x="80" y="410" fill="#cdb9b6" font-family="system-ui, sans-serif" font-size="26">Belo Horizonte · Presencial e online</text>
+  <text x="80" y="520" fill="#93807e" font-family="system-ui, sans-serif" font-size="22">CRP 04/38921</text>
 </svg>

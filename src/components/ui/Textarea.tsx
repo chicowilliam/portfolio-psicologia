@@ -37,7 +37,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             ref={ref}
             id={textareaId}
             className={cn(
-              'min-h-28 w-full resize-y rounded-sm border border-border bg-card py-3 text-base leading-relaxed text-foreground',
+              'min-h-28 w-full resize-y rounded-xl border border-border bg-card py-3 text-[0.98rem] leading-relaxed text-foreground sm:text-[1rem]',
               Icon ? 'pl-11 pr-4' : 'px-4',
               'placeholder:text-muted-foreground/70',
               'transition-colors duration-200',
