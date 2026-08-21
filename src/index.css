@@ -248,19 +248,13 @@
     isolation: isolate;
   }
 
-  .band-light {
-    /* Soft pastel, slightly translucent so ambient branches show through */
+  .band-light,
+  .band-light-alt,
+  .band-mid {
+    /* One continuous pastel plane — no hard band seams between light sections */
     background-color: color-mix(
       in srgb,
-      color-mix(in srgb, var(--color-wine-mist) 55%, var(--color-wine-blush)) 84%,
-      transparent
-    );
-  }
-
-  .band-light-alt {
-    background-color: color-mix(
-      in srgb,
-      color-mix(in srgb, var(--color-wine-blush) 82%, var(--color-wine-mist)) 84%,
+      color-mix(in srgb, var(--color-wine-mist) 58%, var(--color-wine-blush)) 78%,
       transparent
     );
   }
@@ -313,16 +307,16 @@
     z-index: 1;
   }
 
-  /* Legacy mid maps to wine blush */
+  /* Legacy mid maps to shared light pastel */
   .band-mid {
-    background-color: color-mix(in srgb, var(--color-wine-blush) 90%, transparent);
+    /* color shared with .band-light above */
   }
 
-  /* Soft gradient bridges between section surfaces (no hard cuts) */
+  /* Soft gradient bridges only where light meets dark frames */
   .section-fade {
     display: block;
     width: 100%;
-    height: clamp(9.5rem, 18vw, 13.5rem);
+    height: clamp(4.5rem, 9vw, 7rem);
     pointer-events: none;
     margin: 0;
     border: 0;
@@ -384,12 +378,13 @@
   }
 
   .credentials-ledger {
-    border-top: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
-    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 85%, transparent);
+    border-top: none;
+    border-bottom: none;
   }
 
   .credentials-ledger .paper-ledger-grid > * {
     background: transparent;
+    border: none;
   }
 
   .pillar-card {
@@ -662,7 +657,7 @@
   }
 
   .paper-ledger-grid > * {
-    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+    border-bottom: none;
   }
 
   .paper-ledger-grid > *:last-child {
@@ -672,10 +667,11 @@
   @media (min-width: 640px) {
     .paper-ledger-grid.cols-2 {
       grid-template-columns: 1fr 1fr;
+      column-gap: 1.25rem;
     }
 
     .paper-ledger-grid.cols-2 > *:nth-child(odd) {
-      border-right: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+      border-right: none;
     }
 
     .paper-ledger-grid.cols-2 > *:nth-last-child(-n + 2) {
@@ -686,15 +682,16 @@
   @media (min-width: 1024px) {
     .paper-ledger-grid.cols-4 {
       grid-template-columns: repeat(4, 1fr);
+      column-gap: 1.5rem;
     }
 
     .paper-ledger-grid.cols-4 > * {
       border-bottom: none;
-      border-right: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+      border-right: none;
     }
 
     .paper-ledger-grid.cols-4 > *:nth-child(odd) {
-      border-right: 1px solid color-mix(in srgb, var(--color-border) 72%, transparent);
+      border-right: none;
     }
 
     .paper-ledger-grid.cols-4 > *:last-child {
@@ -1291,16 +1288,17 @@
   }
 
   @media (max-width: 767px) {
-    .mesh-blob-3 {
-      display: none;
-    }
-
     .mesh-blob-1 {
-      opacity: 0.2;
+      opacity: 0.32;
     }
 
     .mesh-blob-2 {
-      opacity: 0.18;
+      opacity: 0.28;
+    }
+
+    .mesh-blob-3 {
+      display: block;
+      opacity: 0.22;
     }
   }
 
@@ -1381,35 +1379,55 @@
   }
 
   @media (max-width: 767px) {
+    .mesh-blob-3 {
+      display: block;
+      opacity: 0.22;
+    }
+
+    .mesh-blob-1 {
+      opacity: 0.32;
+    }
+
+    .mesh-blob-2 {
+      opacity: 0.28;
+    }
+
+    .ambient-drawing--on-light {
+      opacity: 1;
+    }
+
     .ambient-drawing--on-light .ambient-stem {
-      stroke-opacity: 0.42;
-      stroke-width: 1.7;
+      stroke-opacity: 0.52;
+      stroke-width: 1.85;
     }
 
     .ambient-drawing--on-light .ambient-leaf ellipse {
-      fill: color-mix(in srgb, #5c2434 18%, transparent);
-      stroke-opacity: 0.36;
+      fill: color-mix(in srgb, #5c2434 22%, transparent);
+      stroke-opacity: 0.44;
+      stroke-width: 1.2;
     }
 
     .ambient-drawing--on-light .ambient-branch-right .ambient-leaf ellipse {
-      fill: color-mix(in srgb, #7a2036 16%, transparent);
-      stroke-opacity: 0.34;
+      fill: color-mix(in srgb, #7a2036 20%, transparent);
+      stroke-opacity: 0.42;
     }
 
     .ambient-branch-left {
-      transform: translate(-6%, 2%) scale(1.18);
+      transform: translate(-12%, 0%) scale(1.35);
       transform-origin: left top;
       opacity: 1;
     }
 
     .ambient-branch-right {
-      transform: translate(8%, 4%) scale(1.12);
+      transform: translate(14%, 6%) scale(1.28);
       transform-origin: right top;
-      opacity: 0.92;
+      opacity: 1;
     }
 
     .ambient-sprig {
-      opacity: 0.8;
+      opacity: 0.95;
+      transform: scale(1.2);
+      transform-origin: top center;
     }
 
     .ambient-window {
@@ -1417,7 +1435,7 @@
     }
 
     .hero-mobile-sketch {
-      opacity: 0.38;
+      opacity: 0.48;
     }
   }
 

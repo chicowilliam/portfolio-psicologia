@@ -81,26 +81,16 @@ export default function App() {
 
       <main id="conteudo-principal" className="relative z-[1]">
         <Hero />
-        <SectionDivider variant="mist-to-blush" />
         <Credentials />
-        <SectionDivider variant="mist-to-blush" />
         <Suspense fallback={<SectionFallback />}>
           <About />
-          <SectionDivider variant="blush-to-mist" />
           <ForWho />
-          <SectionDivider variant="mist-to-blush" />
           <ApproachPillars />
-          <SectionDivider variant="blush-to-mist" />
           <Specialties />
-          <SectionDivider variant="mist-to-blush" />
           <HowItWorks />
-          <SectionDivider variant="blush-to-mist" />
           <ConsultorioGallery />
-          <SectionDivider variant="mist-to-blush" />
           <OnlineAttendance />
-          <SectionDivider variant="blush-to-mist" />
           <BlogPreview />
-          <SectionDivider variant="mist-to-blush" />
           <FAQ />
           <SectionDivider variant="mist-to-cta" />
           <BookingForm />
