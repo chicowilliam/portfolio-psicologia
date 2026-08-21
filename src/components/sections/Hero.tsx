@@ -18,13 +18,13 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative overflow-hidden px-4 pb-12 pt-5 sm:px-6 sm:pb-16 sm:pt-8 lg:px-8 lg:pb-20 lg:pt-10"
+      className="band-ink relative overflow-hidden px-5 pb-12 pt-5 sm:px-6 sm:pb-16 sm:pt-8 lg:pb-20 lg:pl-8 lg:pr-0 lg:pt-10"
     >
       <MeshBackground variant="hero" />
 
-      <div className="relative mx-auto grid max-w-6xl items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.92fr)] lg:gap-12 xl:gap-14">
+      <div className="relative mx-auto grid max-w-6xl items-start gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] lg:gap-10 xl:gap-12">
         <motion.div
-          className="flex flex-col justify-center lg:min-h-0 lg:py-1"
+          className="flex flex-col justify-center lg:min-h-0 lg:py-1 lg:pr-4"
           variants={prefersReducedMotion ? undefined : fadeInUp}
           initial={prefersReducedMotion ? undefined : 'hidden'}
           animate={prefersReducedMotion ? undefined : 'visible'}
@@ -117,11 +117,7 @@ export function Hero() {
             <path className="hero-mobile-sketch-leaf-soft" d="M318 370 C 346 356, 370 388, 338 410 C 314 424, 290 396, 318 370 Z" />
           </svg>
 
-          <div className="paper-frame relative aspect-[4/5] max-h-[min(68vh,34rem)] w-full lg:max-h-[min(72vh,36rem)]">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-primary-light/15 to-accent/10" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_12%,rgba(255,255,255,0.42),transparent_38%)]" />
-            <div className="absolute inset-0 ring-1 ring-inset ring-white/35" aria-hidden="true" />
-
+          <div className="portrait-bleed relative aspect-[4/5] max-h-[min(68vh,34rem)] w-full lg:max-h-[min(78vh,40rem)] lg:min-h-[28rem]">
             <LivingPortrait
               images={POSE_A_PORTRAIT_IMAGES}
               ariaLabel={`Foto de ${SITE.psychologist.name}, ${SITE.psychologist.title.toLowerCase()}`}
@@ -131,7 +127,7 @@ export function Hero() {
               className="absolute inset-0"
             />
 
-            <div className="glass-quote absolute bottom-4 left-4 right-4 rounded-xl p-3 shadow-soft sm:bottom-6 sm:left-6 sm:right-6 sm:rounded-2xl sm:p-4">
+            <div className="glass-quote absolute bottom-4 left-4 right-4 rounded-xl p-3 shadow-soft sm:bottom-6 sm:left-6 sm:right-8 sm:rounded-2xl sm:p-4 lg:right-10">
               <p className="font-display text-xs font-medium italic leading-snug text-foreground sm:text-sm">
                 &ldquo;{SITE.voice.heroQuote}&rdquo;
               </p>

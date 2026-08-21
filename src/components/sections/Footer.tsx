@@ -56,7 +56,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="relative border-t border-border bg-ink px-4 py-12 pb-28 text-foreground sm:px-6 sm:pb-12 lg:px-8">
+      <footer className="band-ink relative border-t border-border px-5 py-12 pb-28 text-foreground sm:px-6 sm:pb-12 lg:px-8">
         <div className="grain-overlay absolute inset-0 opacity-[0.06]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-6xl">

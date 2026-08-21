@@ -1,13 +1,12 @@
 import { ScrollReveal, ScrollRevealGroup } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { GlassCard } from '@/components/ui/GlassCard'
 import { APPROACH_PILLARS } from '@/lib/constants'
 
 export function ApproachPillars() {
   return (
     <section
       id="abordagem"
-      className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+      className="band-mid px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
@@ -25,27 +24,25 @@ export function ApproachPillars() {
           />
         </ScrollReveal>
 
-        <ScrollRevealGroup className="mt-10 grid gap-5 sm:mt-12 lg:grid-cols-3 lg:gap-6">
+        <ScrollRevealGroup className="mt-10 grid gap-8 sm:mt-12 lg:grid-cols-3 lg:gap-10">
           {APPROACH_PILLARS.map((pillar) => (
-            <GlassCard
-              key={pillar.index}
-              as="article"
-              variant="note"
-              className="flex h-full flex-col px-6 py-7"
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.1em] text-accent">
-                {pillar.index} · {pillar.subtitle}
+            <article key={pillar.index} className="pillar-card">
+              <span className="pillar-card-number" aria-hidden="true">
+                {pillar.index}
               </span>
-              <h3 className="mt-3 font-display text-xl font-semibold text-foreground">
+              <span className="relative text-xs font-semibold uppercase tracking-[0.1em] text-accent">
+                {pillar.subtitle}
+              </span>
+              <h3 className="relative mt-3 max-w-[14ch] font-display text-xl font-semibold text-foreground sm:text-2xl">
                 {pillar.title}
               </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+              <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">
                 {pillar.description}
               </p>
-              <p className="mt-4 border-t border-border/60 pt-4 text-sm leading-relaxed text-foreground/88">
+              <p className="relative mt-5 border-t border-border/60 pt-4 text-sm leading-relaxed text-foreground/88">
                 <strong className="font-medium text-primary">Na prática:</strong> {pillar.benefit}
               </p>
-            </GlassCard>
+            </article>
           ))}
         </ScrollRevealGroup>
       </div>

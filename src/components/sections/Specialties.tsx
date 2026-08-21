@@ -1,70 +1,15 @@
-import { memo } from 'react'
-import { HandshakeIcon } from '@phosphor-icons/react/Handshake'
-import { HeartIcon } from '@phosphor-icons/react/Heart'
-import { SparkleIcon } from '@phosphor-icons/react/Sparkle'
-import { SunIcon } from '@phosphor-icons/react/Sun'
-import { UsersIcon } from '@phosphor-icons/react/Users'
-import { WindIcon } from '@phosphor-icons/react/Wind'
+import { useState } from 'react'
 import { ScrollReveal, ScrollRevealGroup } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { GlassCard } from '@/components/ui/GlassCard'
 import { SPECIALTIES } from '@/lib/constants'
-import type { IconComponent } from '@/lib/icons'
-import type { Specialty } from '@/types'
-
-const iconMap = {
-  wind: WindIcon,
-  'heart-handshake': HandshakeIcon,
-  users: UsersIcon,
-  heart: HeartIcon,
-  sparkles: SparkleIcon,
-  sun: SunIcon,
-} as const
-
-const tones = ['sage', 'linen', 'mist', 'clay', 'ink', 'leaf'] as const
-
-interface SpecialtyCardProps {
-  specialty: Specialty
-  Icon: IconComponent
-  tone: (typeof tones)[number]
-}
-
-const SpecialtyCard = memo(function SpecialtyCard({
-  specialty,
-  Icon,
-  tone,
-}: SpecialtyCardProps) {
-  return (
-    <GlassCard
-      as="article"
-      variant="note"
-      data-tone={tone}
-      className="group h-full px-5 py-6 pr-6 sm:px-6"
-    >
-      <div className="flex items-start gap-3">
-        <Icon
-          className="mt-0.5 size-6 shrink-0 text-primary"
-          weight="duotone"
-          aria-hidden="true"
-        />
-        <div>
-          <h3 className="font-display text-xl font-semibold text-foreground">
-            {specialty.title}
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            {specialty.description}
-          </p>
-        </div>
-      </div>
-    </GlassCard>
-  )
-})
 
 export function Specialties() {
+  const [openId, setOpenId] = useState<string | null>(null)
+
   return (
     <section
       id="especialidades"
-      className="bg-muted/30 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+      className="band-mid px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
     >
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
@@ -76,23 +21,38 @@ export function Specialties() {
             description={
               <>
                 Cada pessoa traz uma história. Estas são algumas das vivências em que mais
-                trabalho, <strong className="font-semibold text-foreground">sem que uma demanda defina quem você é</strong>.
+                trabalho,{' '}
+                <strong className="font-semibold text-foreground">
+                  sem que uma demanda defina quem você é
+                </strong>
+                .
               </>
             }
           />
         </ScrollReveal>
 
-        <ScrollRevealGroup className="mt-10 grid gap-4 sm:mt-12 sm:gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SPECIALTIES.map((specialty, index) => {
-            const Icon = iconMap[specialty.icon as keyof typeof iconMap]
+        <ScrollRevealGroup className="mt-10 flex flex-wrap justify-center gap-3 sm:mt-12 sm:gap-4">
+          {SPECIALTIES.map((specialty) => {
+            const isOpen = openId === specialty.id
 
             return (
-              <SpecialtyCard
+              <button
                 key={specialty.id}
-                specialty={specialty}
-                Icon={Icon}
-                tone={tones[index % tones.length]}
-              />
+                type="button"
+                aria-expanded={isOpen}
+                data-open={isOpen ? 'true' : 'false'}
+                onClick={() => setOpenId(isOpen ? null : specialty.id)}
+                className="specialty-chip w-full max-w-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:w-auto sm:min-w-[14rem] sm:max-w-[20rem]"
+              >
+                <span className="font-display text-lg font-semibold text-foreground sm:text-xl">
+                  {specialty.title}
+                </span>
+                <span className="specialty-chip-body w-full">
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {specialty.description}
+                  </p>
+                </span>
+              </button>
             )
           })}
         </ScrollRevealGroup>

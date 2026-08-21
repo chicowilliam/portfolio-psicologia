@@ -35,7 +35,7 @@ export function ConsultorioGallery() {
   return (
     <section
       id="consultorio"
-      className="relative border-y border-border bg-muted/25 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className="band-mid relative border-y border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
     >
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>

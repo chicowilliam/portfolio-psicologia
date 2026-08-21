@@ -45,7 +45,7 @@ export function About() {
   const { openBooking } = useBookingDialog()
 
   return (
-    <section id="sobre" className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+    <section id="sobre" className="band-light px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
       <div className="mx-auto max-w-6xl">
         <ScrollReveal>
           <SectionHeading
@@ -66,7 +66,7 @@ export function About() {
         <div className="mt-10 grid gap-10 sm:mt-12 sm:gap-12 lg:grid-cols-2 lg:gap-16">
           <ScrollReveal delay={0.05}>
             <div>
-              <div className="paper-frame relative aspect-[4/5] overflow-hidden">
+              <div className="portrait-asymmetric relative aspect-[4/5] overflow-hidden">
                 <LivingPortrait
                   images={POSE_B_PORTRAIT_IMAGES}
                   ariaLabel={SITE.psychologist.photoAlt}
@@ -74,17 +74,11 @@ export function About() {
                   imageClassName="object-[center_22%] sm:object-[center_18%]"
                   className="absolute inset-0"
                 />
-                <div
-                  className="absolute inset-0 bg-[radial-gradient(circle_at_22%_14%,rgba(255,255,255,0.36),transparent_42%)]"
-                  aria-hidden="true"
-                />
-                <div className="absolute inset-0 ring-1 ring-inset ring-white/30" aria-hidden="true" />
 
-                <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-white/55 bg-background/82 px-3 py-1 text-[11px] font-medium text-primary shadow-soft backdrop-blur-sm sm:left-6 sm:top-6">
+                <div className="absolute left-4 top-4 inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card/90 px-3 py-1 text-[11px] font-medium text-primary shadow-soft sm:left-6 sm:top-6">
                   <HouseLineIcon className="size-3" aria-hidden="true" />
                   Consultório em {SITE.contact.neighborhood}
                 </div>
-
               </div>
 
               <GlassCard

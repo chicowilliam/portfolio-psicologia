@@ -8,7 +8,6 @@ import { SealCheckIcon } from '@phosphor-icons/react/SealCheck'
 import { UsersThreeIcon } from '@phosphor-icons/react/UsersThree'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
-import { MeshBackground } from '@/components/ui/MeshBackground'
 import { CREDENTIALS, SITE, TRUST_SEALS } from '@/lib/constants'
 import type { IconComponent } from '@/lib/icons'
 import type { Credential, TrustSeal } from '@/types'
@@ -42,7 +41,7 @@ const CredentialCell = memo(function CredentialCell({
   Icon,
 }: CredentialCellProps) {
   return (
-    <article className="p-5 sm:p-6">
+    <article className="px-1 py-5 sm:px-4 sm:py-6">
       <Icon className="size-6 text-primary" weight="duotone" aria-hidden="true" />
       <p className="mt-4 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
         {credential.label}
@@ -67,7 +66,7 @@ const CredentialCell = memo(function CredentialCell({
 
 const TrustSealCell = memo(function TrustSealCell({ seal, Icon }: TrustSealCellProps) {
   return (
-    <article className="flex gap-3 rounded-xl border border-border/70 bg-card/60 px-4 py-4">
+    <article className="flex gap-3 border-t border-border/70 px-1 py-4 sm:px-2">
       <Icon className="mt-0.5 size-5 shrink-0 text-primary" weight="duotone" aria-hidden="true" />
       <div>
         <p className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">
@@ -86,10 +85,8 @@ export function Credentials() {
   return (
     <section
       id="credenciais"
-      className="relative border-y border-border bg-muted/40 px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
+      className="band-mid relative border-y border-border px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-20"
     >
-      <MeshBackground variant="subtle" />
-
       <div className="relative mx-auto max-w-6xl">
         <ScrollReveal>
           <SectionHeading
@@ -102,7 +99,7 @@ export function Credentials() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.06}>
-          <div className="paper-card paper-ledger mt-12">
+          <div className="credentials-ledger mt-12">
             <div className="paper-ledger-grid cols-2 cols-4 grid">
               {CREDENTIALS.map((credential) => {
                 const Icon = iconMap[credential.icon as keyof typeof iconMap]
@@ -120,7 +117,7 @@ export function Credentials() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.1}>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-8 grid gap-1 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4">
             {TRUST_SEALS.map((seal) => {
               const Icon = trustIconMap[seal.icon as keyof typeof trustIconMap]
 

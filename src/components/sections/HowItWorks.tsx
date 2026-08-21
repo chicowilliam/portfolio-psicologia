@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { MapPinIcon } from '@phosphor-icons/react/MapPin'
 import { MonitorIcon } from '@phosphor-icons/react/Monitor'
+import { motion, useReducedMotion } from '@/lib/motion-react'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { PROCESS_STEPS } from '@/lib/constants'
@@ -8,25 +9,41 @@ import type { ProcessStep } from '@/types'
 
 const StepRow = memo(function StepRow({ step }: { step: ProcessStep }) {
   return (
-    <li className="paper-ledger-row grid gap-3 py-5 pr-5 sm:grid-cols-[4.5rem_1fr] sm:items-baseline sm:gap-6 sm:py-6 sm:pr-7">
-      <p className="step-badge">
+    <li className="process-step">
+      <span className="process-step-marker" aria-hidden="true">
         {String(step.step).padStart(2, '0')}
-      </p>
-      <div>
-        <h3 className="font-display text-lg font-semibold text-foreground">
-          {step.title}
-        </h3>
-        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-          {step.description}
-        </p>
+      </span>
+      <div className="pt-1">
+        <h3 className="font-display text-lg font-semibold text-foreground">{step.title}</h3>
+        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{step.description}</p>
       </div>
     </li>
   )
 })
 
+function ProcessConnector() {
+  const prefersReducedMotion = useReducedMotion()
+
+  if (prefersReducedMotion) return null
+
+  return (
+    <motion.div
+      className="process-timeline-line"
+      initial={{ height: 0 }}
+      whileInView={{ height: 'calc(100% - 1rem)' }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 1.05, ease: [0.22, 1, 0.36, 1] }}
+      aria-hidden="true"
+    />
+  )
+}
+
 export function HowItWorks() {
   return (
-    <section id="como-funciona" className="px-4 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
+    <section
+      id="como-funciona"
+      className="band-mid px-5 py-14 sm:px-6 sm:py-16 lg:px-8 lg:py-24"
+    >
       <div className="mx-auto max-w-3xl">
         <ScrollReveal>
           <SectionHeading
@@ -58,7 +75,8 @@ export function HowItWorks() {
         </ScrollReveal>
 
         <ScrollReveal delay={0.08}>
-          <ol className="paper-card paper-note paper-ledger mt-8 list-none sm:mt-10">
+          <ol className="process-timeline relative mt-10 list-none sm:mt-12">
+            <ProcessConnector />
             {PROCESS_STEPS.map((step) => (
               <StepRow key={step.step} step={step} />
             ))}
