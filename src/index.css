@@ -970,14 +970,33 @@
     }
   }
 
-  .site-header .mobile-menu-trigger,
+  .site-header .mobile-menu-trigger {
+    color: var(--color-wine-ink);
+    background: color-mix(in srgb, #f3e9e6 94%, white);
+    border-color: color-mix(in srgb, #f3e9e6 55%, transparent);
+    box-shadow: none;
+  }
+
   .site-header .site-header-brand {
     color: #f3e9e6;
   }
 
-  .site-header .site-header-brand-meta,
   .site-header .mobile-menu-trigger-label {
+    color: color-mix(in srgb, var(--color-wine-ink) 82%, transparent);
+  }
+
+  .site-header .site-header-brand-meta {
     color: color-mix(in srgb, #f3e9e6 72%, transparent);
+  }
+
+  .site-header .mobile-menu-trigger-open {
+    color: var(--color-wine-ink);
+    background: #ffffff;
+    border-color: color-mix(in srgb, var(--color-primary) 28%, #f3e9e6);
+  }
+
+  .site-header .mobile-menu-trigger-open .mobile-menu-trigger-label {
+    color: var(--color-wine-ink);
   }
 
   .site-header-nav-link {
@@ -1042,14 +1061,32 @@
     box-shadow: 0 1px 0 color-mix(in srgb, var(--color-wine-ink) 8%, transparent);
   }
 
-  .site-header--on-light .mobile-menu-trigger,
+  .site-header--on-light .mobile-menu-trigger {
+    color: var(--color-foreground);
+    background: color-mix(in srgb, var(--color-card) 88%, var(--color-wine-mist));
+    border-color: color-mix(in srgb, var(--color-primary) 18%, var(--color-border));
+  }
+
   .site-header--on-light .site-header-brand {
     color: var(--color-foreground);
   }
 
-  .site-header--on-light .site-header-brand-meta,
   .site-header--on-light .mobile-menu-trigger-label {
     color: var(--color-muted-foreground);
+  }
+
+  .site-header--on-light .site-header-brand-meta {
+    color: var(--color-muted-foreground);
+  }
+
+  .site-header--on-light .mobile-menu-trigger-open {
+    color: var(--color-primary);
+    background: color-mix(in srgb, var(--color-primary) 10%, var(--color-card));
+    border-color: color-mix(in srgb, var(--color-primary) 32%, var(--color-border));
+  }
+
+  .site-header--on-light .mobile-menu-trigger-open .mobile-menu-trigger-label {
+    color: var(--color-primary);
   }
 
   .site-header--on-light .site-header-nav-link {
@@ -1732,7 +1769,6 @@
 
   @media (max-width: 639px) {
     .mobile-menu-trigger {
-      background: color-mix(in srgb, var(--color-card) 94%, var(--color-background));
       border-color: color-mix(in srgb, var(--color-primary) 16%, var(--color-border));
     }
   }
