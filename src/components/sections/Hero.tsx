@@ -38,7 +38,7 @@ export function Hero() {
 
           <h1 className="font-display text-[clamp(2.1rem,5.1vw,3.45rem)] font-semibold leading-[1.07] tracking-[-0.02em] text-foreground">
             <span className="block">{SITE.brand.heroLead}</span>
-            <span className="mt-2.5 block text-[clamp(1.32rem,3vw,1.95rem)] font-normal italic text-primary">
+            <span className="mt-2.5 block text-[clamp(1.32rem,3vw,1.95rem)] font-normal italic text-primary-light">
               {SITE.brand.heroAccent}
             </span>
           </h1>

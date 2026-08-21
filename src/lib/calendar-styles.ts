@@ -50,7 +50,7 @@ export function getCalendarClassNames(options?: { mobile?: boolean }) {
     ),
     selected: cn(
       defaults.selected,
-      '[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary/90',
+      '[&>button]:bg-primary [&>button]:text-primary-foreground [&>button]:hover:bg-primary-hover',
     ),
     today: cn(defaults.today, '[&>button]:border [&>button]:border-primary/40'),
     outside: cn(defaults.outside, 'text-muted-foreground/40'),

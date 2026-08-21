@@ -33,7 +33,7 @@ export function SectionHeading({
       <h2 className="section-title font-display text-[clamp(1.9rem,4.4vw,3.05rem)] font-semibold leading-[1.14] tracking-[-0.01em] text-foreground">
         {title}
         {titleAccent && (
-          <span className="mt-1.5 block font-display text-[clamp(1.3rem,3.1vw,1.95rem)] font-normal italic text-primary/90">
+          <span className="mt-1.5 block font-display text-[clamp(1.3rem,3.1vw,1.95rem)] font-normal italic text-primary-light">
             {titleAccent}
           </span>
         )}

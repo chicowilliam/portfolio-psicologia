@@ -56,7 +56,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="relative border-t border-border bg-foreground px-4 py-12 pb-28 text-primary-foreground sm:px-6 sm:pb-12 lg:px-8">
+      <footer className="relative border-t border-border bg-ink px-4 py-12 pb-28 text-foreground sm:px-6 sm:pb-12 lg:px-8">
         <div className="grain-overlay absolute inset-0 opacity-[0.06]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-6xl">
@@ -65,21 +65,21 @@ export function Footer() {
               <p className="font-display text-[1.38rem] font-semibold leading-tight tracking-[-0.01em]">
                 {SITE.psychologist.name}
               </p>
-              <p className="mt-1 text-sm leading-relaxed text-primary-foreground/75">
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                 {SITE.psychologist.title}
               </p>
               <a
                 href={SITE.crpVerifyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-4 inline-flex rounded-lg bg-primary-foreground/10 px-3 py-1.5 text-sm font-semibold transition-colors hover:bg-primary-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light"
+                className="mt-4 inline-flex rounded-lg bg-foreground/10 px-3 py-1.5 text-sm font-semibold transition-colors hover:bg-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-hover"
               >
                 CRP {SITE.psychologist.crp}
               </a>
             </div>
 
             <div>
-              <h3 className="text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-primary-foreground/75">
+              <h3 className="text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
                 Navegação
               </h3>
               <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm sm:grid-cols-1">
@@ -88,7 +88,7 @@ export function Footer() {
                     <a
                       href={link.href}
                       onClick={(e) => handleAnchor(e, link.href)}
-                      className="transition-colors hover:text-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light"
+                      className="transition-colors hover:text-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-hover"
                     >
                       {link.label}
                     </a>
@@ -98,7 +98,7 @@ export function Footer() {
                   <button
                     type="button"
                     onClick={() => setShowPrivacyModal(true)}
-                    className="transition-colors hover:text-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light"
+                    className="transition-colors hover:text-primary-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-hover"
                   >
                     Política de Privacidade
                   </button>
@@ -107,7 +107,7 @@ export function Footer() {
             </div>
 
             <div>
-              <h3 className="text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-primary-foreground/75">
+              <h3 className="text-[0.78rem] font-semibold uppercase tracking-[0.1em] text-muted-foreground">
                 {socialLinks.length > 0 ? 'Redes sociais' : 'Contato'}
               </h3>
               {socialLinks.length > 0 ? (
@@ -118,7 +118,7 @@ export function Footer() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex size-10 items-center justify-center rounded-xl bg-primary-foreground/10 transition-colors hover:bg-primary-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-light"
+                      className="flex size-10 items-center justify-center rounded-xl bg-foreground/10 transition-colors hover:bg-foreground/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-hover"
                       aria-label={label}
                     >
                       <Icon className="size-5" weight="duotone" aria-hidden="true" />
@@ -126,7 +126,7 @@ export function Footer() {
                   ))}
                 </div>
               ) : (
-                <p className="mt-4 text-sm text-primary-foreground/75">
+                <p className="mt-4 text-sm text-muted-foreground">
                   <a
                     href={`mailto:${SITE.contact.email}`}
                     className="transition-colors hover:text-primary-light hover:underline"
@@ -138,15 +138,15 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="mt-10 border-t border-primary-foreground/10 pt-8">
-            <p className="mx-auto max-w-[72ch] text-center text-xs leading-[1.75] text-primary-foreground/70">
+          <div className="mt-10 border-t border-border pt-8">
+            <p className="mx-auto max-w-[72ch] text-center text-xs leading-[1.75] text-subtle">
               O sigilo profissional é garantido pelo Código de Ética Profissional
               do Psicólogo (Resolução CFP nº 010/2005). As informações compartilhadas
               neste site não substituem avaliação clínica individual. Publicidade
               conforme Resolução CFP nº 011/2018, sem promessas de cura ou garantia
               de resultados.
             </p>
-            <p className="mt-4 text-center text-xs text-primary-foreground/65">
+            <p className="mt-4 text-center text-xs text-subtle">
               © {new Date().getFullYear()} {SITE.psychologist.name}. Todos os direitos reservados.
             </p>
           </div>
